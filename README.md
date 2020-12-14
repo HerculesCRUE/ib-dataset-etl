@@ -15,7 +15,7 @@
 
 # Proyecto ETL
 
-Para la incorporaciÃ³n del proyecto ETL se precisa realizar la siguiente serie de acciones.
+Para la incorporación del proyecto ETL se precisa realizar la siguiente serie de acciones.
 
 ## Base de datos
 

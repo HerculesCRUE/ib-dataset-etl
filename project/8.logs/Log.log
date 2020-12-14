@@ -1,3 +1,4 @@
-2020/05/12 06:19:17 - CheckConnectionsAndControl - Using run configuration [Pentaho local]
-2020/05/12 06:19:21 - main_load - Using run configuration [Pentaho local]
-2020/05/12 06:20:25 - 9.1.finalize_succeeded - Using run configuration [Pentaho local]
+2020/12/09 12:16:32 - CheckConnectionsAndControl - Using run configuration [Pentaho local]
+2020/12/09 12:16:36 - Plain - Using run configuration [Pentaho local]
+2020/12/09 12:17:05 - Linked - Using run configuration [Pentaho local]
+2020/12/09 12:17:27 - 9.1.finalize_succeeded - Using run configuration [Pentaho local]

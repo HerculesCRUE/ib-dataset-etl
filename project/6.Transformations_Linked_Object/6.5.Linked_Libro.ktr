@@ -1,11 +1,11 @@
 <transformation>
   <info>
-    <name>GrupoInvestigacion</name>
+    <name>6.5.Linked_Libro</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <directory>/2.extract</directory>
+    <directory>/6.Transformations_Linked_Object</directory>
     <parameters>
     </parameters>
     <log>
@@ -422,40 +422,27 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
-      <slaveserver>
-        <name>prueba</name>
-        <hostname>hostname</hostname>
-        <port>8080</port>
-        <webAppName/>
-        <username>cluster</username>
-        <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-        <proxy_hostname/>
-        <proxy_port/>
-        <non_proxy_hosts/>
-        <master>Y</master>
-        <sslMode>Y</sslMode>
-      </slaveserver>
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2020/04/29 14:32:42.239</created_date>
+    <created_date>2020/11/05 14:55:32.651</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2020/04/29 17:19:20.789</modified_date>
-    <key_for_session_key/>
+    <modified_date>2020/12/09 11:44:45.218</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>Database_Source</name>
-    <server>${HostnameSource}</server>
+    <name>Database_Target</name>
+    <server>${HostnameTarget}</server>
     <type>MARIADB</type>
     <access>Native</access>
-    <database>${DatabaseSource}</database>
-    <port>${PortSource}</port>
-    <username>${UserSource}</username>
-    <password>${PwdSource}</password>
+    <database>${DatabaseTarget}</database>
+    <port>${PortTarget}</port>
+    <username>${UserTarget}</username>
+    <password>${PwdTarget}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -474,7 +461,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${PortSource}</attribute>
+        <attribute>${PortTarget}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -500,28 +487,126 @@
   </connection>
   <order>
     <hop>
-      <from>GrupoInvestigacion</from>
-      <to>JSON output</to>
+      <from>Add constants</from>
+      <to>Estructura Objeto</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Kafka producer</from>
-      <to>Dummy (do nothing)</to>
+      <from>Estructura Objeto</from>
+      <to>Select values 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>JSON output</from>
+      <from>Group by 2</from>
+      <to>Add constants</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>AutorLibro</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Libro</from>
       <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Select values</from>
-      <to>Kafka producer</to>
+      <to>Sort idPatente</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>Sort idPatente 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 3</from>
+      <to>Kafka producer 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort idPatente</from>
+      <to>Union Patente Inventor</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort idPatente 2</from>
+      <to>Union Patente Inventor</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Union Patente Inventor</from>
+      <to>Group by 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>GrupoInvestigacion</name>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>parent_entity</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Libro</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Persona</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>pers</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1201</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>AutorLibro</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -531,18 +616,17 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_Source</connection>
+    <connection>Database_Target</connection>
     <sql>SELECT
-  ENTITY_ID
-, accionEntidad
+  id
+, idPersona
+, idLibro
 , version
-, codUnidadAdm
-, descripcion
-, excelencia
+, idEjecucion
+, operation
 , fechaCreacion
-, fechaDesaparicion
-, idGrupoInvestigacion
-FROM asio_jobs.GrupoInvestigacion
+, fechaModificacion
+FROM Rel_AutorLibro
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -554,11 +638,11 @@ FROM asio_jobs.GrupoInvestigacion
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>ENTITY_ID</name>
-        <length>255</length>
+        <name>id</name>
+        <length>50</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>ENTITY_ID</comments>
+        <origin>AutorLibro</origin>
+        <comments>id</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -571,17 +655,17 @@ FROM asio_jobs.GrupoInvestigacion
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Paris</date_format_timezone>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>accionEntidad</name>
-        <length>255</length>
+        <name>idPersona</name>
+        <length>50</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>accionEntidad</comments>
+        <origin>AutorLibro</origin>
+        <comments>idPersona</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -594,16 +678,39 @@ FROM asio_jobs.GrupoInvestigacion
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Paris</date_format_timezone>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>idLibro</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>AutorLibro</origin>
+        <comments>idLibro</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>version</name>
-        <length>15</length>
+        <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>AutorLibro</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -617,17 +724,40 @@ FROM asio_jobs.GrupoInvestigacion
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Paris</date_format_timezone>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>idEjecucion</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>AutorLibro</origin>
+        <comments>idEjecucion</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>codUnidadAdm</name>
-        <length>255</length>
+        <name>operation</name>
+        <length>50</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>codUnidadAdm</comments>
+        <origin>AutorLibro</origin>
+        <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -640,62 +770,16 @@ FROM asio_jobs.GrupoInvestigacion
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Paris</date_format_timezone>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>descripcion</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>descripcion</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Paris</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>excelencia</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>excelencia</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Paris</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
+        <type>Timestamp</type>
         <storagetype>normal</storagetype>
         <name>fechaCreacion</name>
-        <length>255</length>
+        <length>0</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>AutorLibro</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -709,17 +793,17 @@ FROM asio_jobs.GrupoInvestigacion
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Paris</date_format_timezone>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Timestamp</type>
         <storagetype>normal</storagetype>
-        <name>fechaDesaparicion</name>
-        <length>255</length>
+        <name>fechaModificacion</name>
+        <length>0</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>fechaDesaparicion</comments>
+        <origin>AutorLibro</origin>
+        <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -732,30 +816,7 @@ FROM asio_jobs.GrupoInvestigacion
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Paris</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>idGrupoInvestigacion</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>idGrupoInvestigacion</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Paris</date_format_timezone>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
     </row-meta>
@@ -768,77 +829,82 @@ FROM asio_jobs.GrupoInvestigacion
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>224</yloc>
+      <xloc>273</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>JSON output</name>
-    <type>JsonOutput</type>
+    <name>Estructura Objeto</name>
+    <type>ScriptValueMod</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <outputValue>outputValue</outputValue>
-    <jsonBloc>GrupoInvestigacion</jsonBloc>
-    <nrRowsInBloc>1</nrRowsInBloc>
-    <operation_type>outputvalue</operation_type>
-    <compatibility_mode>N</compatibility_mode>
-    <encoding>UTF-8</encoding>
-    <addtoresult>N</addtoresult>
-    <file>
-      <name/>
-      <extention>js</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      <servlet_output>N</servlet_output>
-    </file>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+//Variables
+parent_id  = idLibro;
+child_id_1 = idPersona;
+//child_id_2 = idTercero;
+
+json = {};
+split_child_1 = [];
+split_child_2 = [];
+
+Child_1 = [];
+Child_2 = []; 
+
+
+//splitting the data
+split_child_1   = child_id_1.split('|');
+
+json.className = classname_1;
+json.fieldName = fieldname_1;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_1)){
+	Child_1 = []
+	} else {
+		for(i=0; i&lt;split_child_1.length; i++){
+    		child=split_child_1[i];
+    		Child_1.push(child);
+		}
+	}
+
+json.ids = Child_1;
+
+
+
+ // JSON Stringify the data object
+JsonOutput = JSON.stringify(json);
+
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput + ']}}}';
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
     <fields>
       <field>
-        <name>ENTITY_ID</name>
-        <element>ENTITY_ID</element>
-      </field>
-      <field>
-        <name>accionEntidad</name>
-        <element>accionEntidad</element>
-      </field>
-      <field>
-        <name>version</name>
-        <element>version</element>
-      </field>
-      <field>
-        <name>codUnidadAdm</name>
-        <element>codUnidadAdm</element>
-      </field>
-      <field>
-        <name>descripcion</name>
-        <element>descripcion</element>
-      </field>
-      <field>
-        <name>excelencia</name>
-        <element>excelencia</element>
-      </field>
-      <field>
-        <name>fechaCreacion</name>
-        <element>fechaCreacion</element>
-      </field>
-      <field>
-        <name>fechaDesaparicion</name>
-        <element>fechaDesaparicion</element>
-      </field>
-      <field>
-        <name>idGrupoInvestigacion</name>
-        <element>idGrupoInvestigacion</element>
+        <name>pojo</name>
+        <rename>pojo</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
       </field>
     </fields>
     <attributes/>
@@ -850,16 +916,68 @@ FROM asio_jobs.GrupoInvestigacion
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>224</yloc>
+      <xloc>1361</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Kafka producer</name>
+    <name>Group by 2</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>idLibro</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>idPersona</aggregate>
+        <subject>idPersona</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
+      </field>
+      <field>
+        <aggregate>operation</aggregate>
+        <subject>operation</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1057</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Kafka producer 2</name>
     <type>KafkaProducerOutput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -869,10 +987,10 @@ FROM asio_jobs.GrupoInvestigacion
     <connectionType>DIRECT</connectionType>
     <directBootstrapServers>${HostnameKafka}:${PortKafka}</directBootstrapServers>
     <clusterName>localhost:29092</clusterName>
-    <topic>${TopicKafkaPojos}</topic>
-    <clientId/>
-    <keyField/>
-    <messageField>outputValue</messageField>
+    <topic>${TopicKafkaNestedObjects}</topic>
+    <clientId>0</clientId>
+    <keyField>KeyKafka</keyField>
+    <messageField>pojo</messageField>
     <advancedConfig>
       <option property="compression.type" value="none"/>
       <option property="ssl.key.password" value=""/>
@@ -881,7 +999,15 @@ FROM asio_jobs.GrupoInvestigacion
       <option property="ssl.truststore.location" value=""/>
       <option property="ssl.truststore.password" value=""/>
     </advancedConfig>
-    <attributes/>
+    <attributes>
+      <group>
+        <name>sparkTuningParameters</name>
+        <attribute>
+          <key>typeJan</key>
+          <value>kssddfaaaa</value>
+        </attribute>
+      </group>
+    </attributes>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -890,14 +1016,14 @@ FROM asio_jobs.GrupoInvestigacion
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>224</yloc>
+      <xloc>1665</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Dummy (do nothing)</name>
-    <type>Dummy</type>
+    <name>Libro</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -906,6 +1032,211 @@ FROM asio_jobs.GrupoInvestigacion
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <connection>Database_Target</connection>
+    <sql>SELECT
+  id
+, version
+, operation
+, idEjecucion
+, fechaCreacion
+, fechaModificacion
+, titulo
+, coautoria
+FROM Libro
+where version = ${version}
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>Articulo</origin>
+        <comments>id</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>version</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Articulo</origin>
+        <comments>version</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>operation</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>Articulo</origin>
+        <comments>operation</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>idEjecucion</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Articulo</origin>
+        <comments>idEjecucion</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fechaCreacion</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>Articulo</origin>
+        <comments>fechaCreacion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fechaModificacion</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>Articulo</origin>
+        <comments>fechaModificacion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>titulo</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>Articulo</origin>
+        <comments>titulo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>coautoria</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>Articulo</origin>
+        <comments>coautoria</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -915,8 +1246,8 @@ FROM asio_jobs.GrupoInvestigacion
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>224</yloc>
+      <xloc>273</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -933,8 +1264,29 @@ FROM asio_jobs.GrupoInvestigacion
     </partitioning>
     <fields>
       <field>
-        <name>outputValue</name>
-        <rename/>
+        <name>id</name>
+        <rename>idLibro</rename>
+      </field>
+      <field>
+        <name>version</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>idEjecucion</name>
+      </field>
+      <field>
+        <name>fechaCreacion</name>
+      </field>
+      <field>
+        <name>fechaModificacion</name>
+      </field>
+      <field>
+        <name>titulo</name>
+      </field>
+      <field>
+        <name>coautoria</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -947,8 +1299,209 @@ FROM asio_jobs.GrupoInvestigacion
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>224</yloc>
+      <xloc>417</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+      </field>
+      <field>
+        <name>idPersona</name>
+      </field>
+      <field>
+        <name>idLibro</name>
+      </field>
+      <field>
+        <name>version</name>
+      </field>
+      <field>
+        <name>idEjecucion</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>fechaCreacion</name>
+      </field>
+      <field>
+        <name>fechaModificacion</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>pojo</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1489</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort idPatente</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>idLibro</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>545</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort idPatente 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>idLibro</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>545</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Union Patente Inventor</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>Sort idPatente</step1>
+    <step2>Sort idPatente 2</step2>
+    <keys_1>
+      <key>idLibro</key>
+    </keys_1>
+    <keys_2>
+      <key>idLibro</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>849</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

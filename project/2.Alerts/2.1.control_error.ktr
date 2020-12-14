@@ -1,12 +1,12 @@
 <transformation>
   <info>
-    <name>6.1.control_error</name>
+    <name>2.1.control_error</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>/6.alerts</directory>
+    <directory>/2.Alerts</directory>
     <parameters>
       <parameter>
         <name>mensaje</name>
@@ -452,7 +452,7 @@
     <created_user>-</created_user>
     <created_date>2019/10/14 11:09:14.160</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2020/04/23 18:08:09.999</modified_date>
+    <modified_date>2020/11/23 10:31:29.996</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -556,7 +556,7 @@ del job que llama a esta transformacion. </note>
     <trans_object_id/>
     <trans_name>control_error</trans_name>
     <filename/>
-    <directory_path>/5.subtransformations</directory_path>
+    <directory_path>/7.Subtransformations</directory_path>
     <mappings>
       <input>
         <mapping>
