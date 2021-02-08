@@ -16,8 +16,8 @@
 CREATE DATABASE IF NOT EXISTS `etl` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `etl`;
 
--- Volcando estructura para tabla etl.Articulo
-CREATE TABLE IF NOT EXISTS `Articulo` (
+-- Volcando estructura para tabla etl.Article
+CREATE TABLE IF NOT EXISTS `Article` (
   `id` int(11) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `operation` varchar(50) DEFAULT NULL,
@@ -29,9 +29,83 @@ CREATE TABLE IF NOT EXISTS `Articulo` (
   `Año` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.Articulo: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `Articulo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Articulo` ENABLE KEYS */;
+-- Volcando datos para la tabla etl.Article: ~985 rows (aproximadamente)
+/*!40000 ALTER TABLE `Article` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Article` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Book
+CREATE TABLE IF NOT EXISTS `Book` (
+  `id` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `coautoria` varchar(50) DEFAULT NULL,
+  `Año` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla etl.Book: ~642 rows (aproximadamente)
+/*!40000 ALTER TABLE `Book` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Book` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.BookChapter
+CREATE TABLE IF NOT EXISTS `BookChapter` (
+  `id` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `numero` varchar(50) DEFAULT NULL,
+  `pagInicio` int(11) DEFAULT NULL,
+  `pagFin` int(11) DEFAULT NULL,
+  `capvLibrIsbn` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.BookChapter: ~999 rows (aproximadamente)
+/*!40000 ALTER TABLE `BookChapter` DISABLE KEYS */;
+/*!40000 ALTER TABLE `BookChapter` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.BookSection
+CREATE TABLE IF NOT EXISTS `BookSection` (
+  `id` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `numeroPrologo` varchar(50) DEFAULT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `participacion` varchar(50) DEFAULT NULL,
+  `numeroPagina` varchar(50) DEFAULT NULL,
+  `numCapitulos` int(11) DEFAULT NULL,
+  `pagFin` int(11) DEFAULT NULL,
+  `capvLibrIsbn` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.BookSection: ~49 rows (aproximadamente)
+/*!40000 ALTER TABLE `BookSection` DISABLE KEYS */;
+/*!40000 ALTER TABLE `BookSection` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Conference
+CREATE TABLE IF NOT EXISTS `Conference` (
+  `id` int(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `lugarCelebracion` varchar(255) DEFAULT NULL,
+  `fechaCelebracion` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Conference: ~636 rows (aproximadamente)
+/*!40000 ALTER TABLE `Conference` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Conference` ENABLE KEYS */;
 
 -- Volcando estructura para tabla etl.ControlCarga
 CREATE TABLE IF NOT EXISTS `ControlCarga` (
@@ -60,9 +134,9 @@ CREATE TABLE IF NOT EXISTS `ControlEjecucion` (
   KEY `CONTROL_PROCESO_FK` (`IdVersion`),
   CONSTRAINT `CONTROL_PROCESO_FK` FOREIGN KEY (`IdVersion`) REFERENCES `ControlVersion` (`Id`),
   CONSTRAINT `RUN_PROCESS_FK` FOREIGN KEY (`IdEstado`) REFERENCES `ControlEjecucionEstado` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.ControlEjecucion: ~101 rows (aproximadamente)
+-- Volcando datos para la tabla etl.ControlEjecucion: ~109 rows (aproximadamente)
 /*!40000 ALTER TABLE `ControlEjecucion` DISABLE KEYS */;
 INSERT INTO `ControlEjecucion` (`Id`, `FechaInicio`, `FechaFin`, `IdEstado`, `IdVersion`) VALUES
 	(87, '2020-10-30 14:07:20', NULL, 1, 3),
@@ -165,7 +239,35 @@ INSERT INTO `ControlEjecucion` (`Id`, `FechaInicio`, `FechaFin`, `IdEstado`, `Id
 	(184, '2020-12-10 12:48:15', '2020-12-10 12:51:31', 3, 3),
 	(185, '2020-12-10 12:55:43', '2020-12-10 12:59:33', 3, 3),
 	(186, '2020-12-10 12:56:52', '2020-12-10 13:00:38', 3, 3),
-	(187, '2020-12-10 13:09:02', '2020-12-10 13:12:32', 2, 3);
+	(187, '2020-12-10 13:09:02', '2020-12-10 13:12:32', 2, 3),
+	(188, '2020-12-17 18:44:17', '2020-12-17 18:44:25', 3, 3),
+	(189, '2020-12-17 18:45:43', '2020-12-17 18:45:54', 3, 3),
+	(190, '2020-12-17 18:46:15', '2020-12-17 18:46:26', 3, 3),
+	(191, '2020-12-17 18:46:55', '2020-12-17 18:47:06', 3, 3),
+	(192, '2020-12-17 18:48:04', '2020-12-17 18:48:15', 3, 3),
+	(193, '2020-12-17 18:56:27', '2020-12-17 18:59:41', 2, 3),
+	(194, '2020-12-18 11:27:59', '2020-12-18 11:31:27', 2, 3),
+	(195, '2021-01-04 10:23:16', '2021-01-04 10:23:24', 3, 3),
+	(196, '2021-01-04 10:23:50', '2021-01-04 10:23:58', 3, 3),
+	(197, '2021-01-04 10:27:01', '2021-01-04 10:27:09', 3, 3),
+	(198, '2021-01-04 10:42:02', '2021-01-04 10:42:28', 3, 3),
+	(199, '2021-01-04 13:49:22', '2021-01-04 13:53:10', 2, 3),
+	(200, '2021-01-05 13:10:51', NULL, 1, 3),
+	(201, '2021-01-07 13:51:29', NULL, 1, 3),
+	(202, '2021-01-08 09:39:00', NULL, 1, 3),
+	(203, '2021-01-12 09:12:05', '2021-01-12 09:35:49', 2, 3),
+	(204, '2021-01-19 09:05:32', NULL, 1, 3),
+	(205, '2021-01-19 09:07:48', '2021-01-19 09:15:41', 2, 3),
+	(206, '2021-01-21 10:03:57', '2021-01-21 10:10:27', 2, 3),
+	(207, '2021-01-21 12:43:53', NULL, 1, 3),
+	(208, '2021-01-21 12:48:07', NULL, 1, 3),
+	(209, '2021-01-27 14:13:09', '2021-01-27 14:21:49', 2, 3),
+	(210, '2021-01-28 13:26:59', '2021-01-28 13:34:43', 2, 3),
+	(211, '2021-01-28 16:08:13', NULL, 1, 3),
+	(212, '2021-01-28 16:39:07', NULL, 1, 3),
+	(213, '2021-02-01 09:32:37', NULL, 1, 3),
+	(214, '2021-02-01 09:36:28', NULL, 1, 3),
+	(215, '2021-02-02 09:11:57', NULL, 1, 3);
 /*!40000 ALTER TABLE `ControlEjecucion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla etl.ControlEjecucionEstado
@@ -211,9 +313,9 @@ CREATE TABLE IF NOT EXISTS `ControlErrores` (
   KEY `CONTROL_ERRORS_FK_1` (`IdTipoError`),
   CONSTRAINT `CONTROL_ERRORS_FK` FOREIGN KEY (`IdEjecucion`) REFERENCES `ControlEjecucion` (`Id`),
   CONSTRAINT `CONTROL_ERRORS_FK_1` FOREIGN KEY (`IdTipoError`) REFERENCES `ControlTipoError` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.ControlErrores: ~77 rows (aproximadamente)
+-- Volcando datos para la tabla etl.ControlErrores: ~119 rows (aproximadamente)
 /*!40000 ALTER TABLE `ControlErrores` DISABLE KEYS */;
 INSERT INTO `ControlErrores` (`Id`, `Fecha`, `IdEjecucion`, `IdTipoError`, `Mensaje`) VALUES
 	(1, '2020-11-20 13:51:31', 121, 5, 'Han habido errores en la carga de los Proyectos'),
@@ -298,7 +400,63 @@ INSERT INTO `ControlErrores` (`Id`, `Fecha`, `IdEjecucion`, `IdTipoError`, `Mens
 	(80, '2020-12-10 13:00:36', 186, 5, 'Han habido errores en la carga de los Proyectos'),
 	(81, '2020-12-10 13:02:20', 186, 5, 'Han habido errores en la carga de los Proyectos'),
 	(82, '2020-12-10 13:05:09', 186, 5, 'Han habido errores en la carga de los Proyectos'),
-	(83, '2020-12-10 13:09:10', 187, 5, 'Han habido errores en la carga de los Proyectos');
+	(83, '2020-12-10 13:09:10', 187, 5, 'Han habido errores en la carga de los Proyectos'),
+	(84, '2020-12-17 18:45:52', 189, 5, 'Han habido errores en la carga de los Proyectos'),
+	(85, '2020-12-17 18:46:24', 190, 5, 'Han habido errores en la carga de los Proyectos'),
+	(86, '2020-12-17 18:47:04', 191, 5, 'Han habido errores en la carga de los Proyectos'),
+	(87, '2020-12-17 18:47:28', 191, 5, 'Han habido errores en la carga de los Proyectos'),
+	(88, '2020-12-17 18:47:35', 191, 5, 'Han habido errores en la carga de los Proyectos'),
+	(89, '2020-12-17 18:48:13', 192, 5, 'Han habido errores en la carga de los Proyectos'),
+	(90, '2020-12-17 18:49:44', 191, 5, 'Han habido errores en la carga de los Proyectos'),
+	(91, '2020-12-17 18:50:07', 191, 5, 'Han habido errores en la carga de los Proyectos'),
+	(92, '2020-12-17 18:50:45', 191, 5, 'Han habido errores en la carga de los Proyectos'),
+	(93, '2020-12-17 18:55:03', 191, 5, 'Han habido errores en la carga de los Proyectos'),
+	(94, '2020-12-17 18:55:22', 191, 5, 'Han habido errores en la carga de los Proyectos'),
+	(95, '2020-12-17 18:56:35', 193, 5, 'Han habido errores en la carga de los Proyectos'),
+	(96, '2020-12-18 11:28:07', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(97, '2020-12-18 11:59:14', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(98, '2020-12-18 11:59:15', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(99, '2020-12-18 11:59:35', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(100, '2020-12-18 13:01:38', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(101, '2020-12-18 13:01:39', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(102, '2020-12-18 13:02:14', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(103, '2020-12-18 13:02:15', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(104, '2020-12-18 13:02:41', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(105, '2020-12-18 13:02:42', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(106, '2020-12-18 13:04:16', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(107, '2020-12-18 13:04:17', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(108, '2020-12-18 13:04:38', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(109, '2020-12-18 13:04:39', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(110, '2020-12-18 13:05:00', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(111, '2020-12-18 13:11:29', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(112, '2020-12-18 13:12:08', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(113, '2020-12-18 13:13:19', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(114, '2020-12-18 13:13:35', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(115, '2020-12-18 13:14:08', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(116, '2020-12-18 13:15:46', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(117, '2020-12-18 13:31:40', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(118, '2020-12-18 13:31:56', 194, 5, 'Han habido errores en la carga de los Proyectos'),
+	(119, '2021-01-04 10:42:26', 198, 5, 'Han habido errores en la carga de los Proyectos'),
+	(120, '2021-01-21 12:44:28', 207, 5, 'Han habido errores en la carga de los Proyectos'),
+	(121, '2021-01-21 12:53:39', 208, 5, 'Han habido errores en la carga de los Proyectos'),
+	(122, '2021-01-21 12:59:54', 208, 5, 'Han habido errores en la carga de los Proyectos'),
+	(123, '2021-01-21 13:00:20', 208, 5, 'Han habido errores en la carga de los Proyectos'),
+	(124, '2021-01-21 13:03:36', 208, 5, 'Han habido errores en la carga de los Proyectos'),
+	(125, '2021-01-27 14:14:25', 209, 5, 'Han habido errores en la carga de los Proyectos'),
+	(126, '2021-01-27 14:21:44', 209, 5, 'Han habido errores en la carga de los Proyectos'),
+	(127, '2021-01-28 13:28:40', 210, 5, 'Han habido errores en la carga de los Proyectos'),
+	(128, '2021-01-28 13:34:37', 210, 5, 'Han habido errores en la carga de los Proyectos'),
+	(129, '2021-01-28 16:09:12', 211, 5, 'Han habido errores en la carga de los Proyectos'),
+	(130, '2021-01-28 16:13:04', 211, 5, 'Han habido errores en la carga de los Proyectos'),
+	(131, '2021-01-28 16:39:22', 212, 5, 'Han habido errores en la carga de los Proyectos'),
+	(132, '2021-01-28 16:39:37', 212, 5, 'Han habido errores en la carga de los Proyectos'),
+	(133, '2021-01-28 16:40:56', 212, 5, 'Han habido errores en la carga de los Proyectos'),
+	(134, '2021-01-28 16:42:59', 212, 5, 'Han habido errores en la carga de los Proyectos'),
+	(135, '2021-01-28 16:45:10', 212, 5, 'Han habido errores en la carga de los Proyectos'),
+	(136, '2021-01-28 16:46:25', 212, 5, 'Han habido errores en la carga de los Proyectos'),
+	(137, '2021-02-01 09:41:26', 214, 5, 'Han habido errores en la carga de los Proyectos'),
+	(138, '2021-02-02 09:13:21', 215, 5, 'Han habido errores en la carga de los Proyectos'),
+	(139, '2021-02-02 09:18:45', 215, 5, 'Han habido errores en la carga de los Proyectos');
 /*!40000 ALTER TABLE `ControlErrores` ENABLE KEYS */;
 
 -- Volcando estructura para tabla etl.ControlTipoError
@@ -333,10 +491,77 @@ INSERT INTO `ControlVersion` (`Id`, `Fecha`, `Nombre`, `Descripcion`) VALUES
 	(3, '2020-10-30 14:07:19', '1.0', 'Proyecto ETL Version 1.0. Aplicacion ETL: Pentaho Data Integration. Version de la aplicacion:9.0');
 /*!40000 ALTER TABLE `ControlVersion` ENABLE KEYS */;
 
+-- Volcando estructura para tabla etl.DoctoralThesis
+CREATE TABLE IF NOT EXISTS `DoctoralThesis` (
+  `id` int(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `codigo` int(11) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `universidad` varchar(50) DEFAULT NULL,
+  `premio` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.DoctoralThesis: ~622 rows (aproximadamente)
+/*!40000 ALTER TABLE `DoctoralThesis` DISABLE KEYS */;
+/*!40000 ALTER TABLE `DoctoralThesis` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Dossier
+CREATE TABLE IF NOT EXISTS `Dossier` (
+  `id` int(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Dossier: ~1.158 rows (aproximadamente)
+/*!40000 ALTER TABLE `Dossier` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Dossier` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.EditorRole
+CREATE TABLE IF NOT EXISTS `EditorRole` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `version` bigint(20) NOT NULL,
+  `operation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fechaCreacion` datetime NOT NULL,
+  `fechaModificacion` datetime NOT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.EditorRole: ~456 rows (aproximadamente)
+/*!40000 ALTER TABLE `EditorRole` DISABLE KEYS */;
+/*!40000 ALTER TABLE `EditorRole` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.EmploymentContract
+CREATE TABLE IF NOT EXISTS `EmploymentContract` (
+  `id` varchar(50) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `attachment` varchar(50) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.EmploymentContract: ~5.143 rows (aproximadamente)
+/*!40000 ALTER TABLE `EmploymentContract` DISABLE KEYS */;
+/*!40000 ALTER TABLE `EmploymentContract` ENABLE KEYS */;
+
 -- Volcando estructura para tabla etl.EmpresaExplotacionPatente
 CREATE TABLE IF NOT EXISTS `EmpresaExplotacionPatente` (
   `id` int(11) DEFAULT NULL,
-  `idPatente` int(11) DEFAULT NULL,
   `numero` int(11) DEFAULT NULL,
   `observaciones` varchar(50) DEFAULT NULL,
   `fechaInicioPeriodo` datetime DEFAULT NULL,
@@ -344,15 +569,63 @@ CREATE TABLE IF NOT EXISTS `EmpresaExplotacionPatente` (
   `fechaCreacion` datetime DEFAULT NULL,
   `fechaModificacion` datetime DEFAULT NULL,
   `operation` varchar(50) DEFAULT NULL,
-  `idEjecucion` int(11) DEFAULT NULL
+  `idEjecucion` int(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.EmpresaExplotacionPatente: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla etl.EmpresaExplotacionPatente: ~36 rows (aproximadamente)
 /*!40000 ALTER TABLE `EmpresaExplotacionPatente` DISABLE KEYS */;
 /*!40000 ALTER TABLE `EmpresaExplotacionPatente` ENABLE KEYS */;
 
--- Volcando estructura para tabla etl.FacturaProyecto
-CREATE TABLE IF NOT EXISTS `FacturaProyecto` (
+-- Volcando estructura para tabla etl.Exhibit
+CREATE TABLE IF NOT EXISTS `Exhibit` (
+  `id` int(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `lugarCelebracion` varchar(255) DEFAULT NULL,
+  `fechaCelebracion` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Exhibit: ~718 rows (aproximadamente)
+/*!40000 ALTER TABLE `Exhibit` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Exhibit` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Funding
+CREATE TABLE IF NOT EXISTS `Funding` (
+  `codigo` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `descripcion` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Funding: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `Funding` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Funding` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.FundingSource
+CREATE TABLE IF NOT EXISTS `FundingSource` (
+  `codigo` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.FundingSource: ~11 rows (aproximadamente)
+/*!40000 ALTER TABLE `FundingSource` DISABLE KEYS */;
+/*!40000 ALTER TABLE `FundingSource` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Invoice
+CREATE TABLE IF NOT EXISTS `Invoice` (
   `id` varchar(50) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `operation` varchar(50) DEFAULT NULL,
@@ -363,66 +636,29 @@ CREATE TABLE IF NOT EXISTS `FacturaProyecto` (
   `IdEjecucion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.FacturaProyecto: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `FacturaProyecto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `FacturaProyecto` ENABLE KEYS */;
+-- Volcando datos para la tabla etl.Invoice: ~1.000 rows (aproximadamente)
+/*!40000 ALTER TABLE `Invoice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Invoice` ENABLE KEYS */;
 
--- Volcando estructura para tabla etl.FinanciacionProyecto
-CREATE TABLE IF NOT EXISTS `FinanciacionProyecto` (
-  `id` varchar(50) NOT NULL,
-  `idProyecto` varchar(50) DEFAULT NULL,
-  `codTipoFinanciacion` varchar(50) DEFAULT NULL,
-  `tipoFinanciacion` varchar(50) DEFAULT NULL,
-  `codTipoFuente` varchar(50) DEFAULT NULL,
-  `tipoFuente` varchar(50) DEFAULT NULL,
-  `idEjecucion` int(11) DEFAULT NULL,
+-- Volcando estructura para tabla etl.MasterThesis
+CREATE TABLE IF NOT EXISTS `MasterThesis` (
+  `id` int(11) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `fechaCreacion` datetime DEFAULT NULL,
   `fechaModificacion` datetime DEFAULT NULL,
   `operation` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Volcando datos para la tabla etl.FinanciacionProyecto: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `FinanciacionProyecto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `FinanciacionProyecto` ENABLE KEYS */;
-
--- Volcando estructura para tabla etl.GrupoInvestigacion
-CREATE TABLE IF NOT EXISTS `GrupoInvestigacion` (
-  `id` varchar(15) NOT NULL,
-  `version` int(11) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  `idUniversidad` int(11) NOT NULL,
   `idEjecucion` int(11) DEFAULT NULL,
-  `fechaCreacion` datetime DEFAULT NULL,
-  `fechaModificacion` datetime DEFAULT NULL,
-  `operation` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Volcando datos para la tabla etl.GrupoInvestigacion: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `GrupoInvestigacion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `GrupoInvestigacion` ENABLE KEYS */;
-
--- Volcando estructura para tabla etl.Libro
-CREATE TABLE IF NOT EXISTS `Libro` (
-  `id` varchar(50) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
-  `operation` varchar(50) DEFAULT NULL,
-  `idEjecucion` int(11) DEFAULT NULL,
-  `fechaCreacion` datetime DEFAULT NULL,
-  `fechaModificacion` datetime DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
   `titulo` varchar(255) DEFAULT NULL,
-  `coautoria` varchar(50) DEFAULT NULL,
-  `Año` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `universidad` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla etl.Libro: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `Libro` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Libro` ENABLE KEYS */;
+-- Volcando datos para la tabla etl.MasterThesis: ~193 rows (aproximadamente)
+/*!40000 ALTER TABLE `MasterThesis` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MasterThesis` ENABLE KEYS */;
 
--- Volcando estructura para tabla etl.Patente
-CREATE TABLE IF NOT EXISTS `Patente` (
+-- Volcando estructura para tabla etl.Patent
+CREATE TABLE IF NOT EXISTS `Patent` (
   `id` int(11) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `idEjecucion` int(11) DEFAULT NULL,
@@ -435,12 +671,32 @@ CREATE TABLE IF NOT EXISTS `Patente` (
   `tipo` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.Patente: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `Patente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Patente` ENABLE KEYS */;
+-- Volcando datos para la tabla etl.Patent: ~142 rows (aproximadamente)
+/*!40000 ALTER TABLE `Patent` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Patent` ENABLE KEYS */;
 
--- Volcando estructura para tabla etl.Persona
-CREATE TABLE IF NOT EXISTS `Persona` (
+-- Volcando estructura para tabla etl.PatentExpense
+CREATE TABLE IF NOT EXISTS `PatentExpense` (
+  `operation` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `observaciones` varchar(255) DEFAULT NULL,
+  `id` varchar(255) DEFAULT NULL,
+  `codTipoMoneda` varchar(50) DEFAULT NULL,
+  `idPatente` int(11) DEFAULT NULL,
+  `currency` varchar(50) DEFAULT NULL,
+  `importe` int(11) DEFAULT NULL,
+  `fechaPago` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.PatentExpense: ~1.196 rows (aproximadamente)
+/*!40000 ALTER TABLE `PatentExpense` DISABLE KEYS */;
+/*!40000 ALTER TABLE `PatentExpense` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Person
+CREATE TABLE IF NOT EXISTS `Person` (
   `id` int(11) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `idEjecucion` int(11) DEFAULT NULL,
@@ -453,12 +709,12 @@ CREATE TABLE IF NOT EXISTS `Persona` (
   `depNombre` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla etl.Persona: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `Persona` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Persona` ENABLE KEYS */;
+-- Volcando datos para la tabla etl.Person: ~2.517 rows (aproximadamente)
+/*!40000 ALTER TABLE `Person` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Person` ENABLE KEYS */;
 
--- Volcando estructura para tabla etl.Proyecto
-CREATE TABLE IF NOT EXISTS `Proyecto` (
+-- Volcando estructura para tabla etl.Project
+CREATE TABLE IF NOT EXISTS `Project` (
   `id` varchar(50) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
@@ -472,9 +728,65 @@ CREATE TABLE IF NOT EXISTS `Proyecto` (
   `fechaInicio` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.Proyecto: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `Proyecto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Proyecto` ENABLE KEYS */;
+-- Volcando datos para la tabla etl.Project: ~1.377 rows (aproximadamente)
+/*!40000 ALTER TABLE `Project` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Project` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.ProjectContract
+CREATE TABLE IF NOT EXISTS `ProjectContract` (
+  `id` varchar(50) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `attachment` varchar(50) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.ProjectContract: ~1.060 rows (aproximadamente)
+/*!40000 ALTER TABLE `ProjectContract` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ProjectContract` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.ProjectExpense
+CREATE TABLE IF NOT EXISTS `ProjectExpense` (
+  `idDocumento` varchar(50) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `tipoGasto` varchar(255) DEFAULT NULL,
+  `idTipoGasto` int(11) DEFAULT NULL,
+  `importe` varchar(50) DEFAULT NULL,
+  `idProyecto` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.ProjectExpense: ~1.000 rows (aproximadamente)
+/*!40000 ALTER TABLE `ProjectExpense` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ProjectExpense` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.ProyectoCooperacionInternacional
+CREATE TABLE IF NOT EXISTS `ProyectoCooperacionInternacional` (
+  `id` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `tipo` varchar(15) DEFAULT NULL,
+  `idOrigenProyecto` varchar(15) DEFAULT NULL,
+  `idEjecucion` varchar(50) DEFAULT NULL,
+  `fechaFin` datetime DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `fechaInicio` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.ProyectoCooperacionInternacional: ~241 rows (aproximadamente)
+/*!40000 ALTER TABLE `ProyectoCooperacionInternacional` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ProyectoCooperacionInternacional` ENABLE KEYS */;
 
 -- Volcando estructura para tabla etl.Rel_AutorArticulo
 CREATE TABLE IF NOT EXISTS `Rel_AutorArticulo` (
@@ -489,9 +801,79 @@ CREATE TABLE IF NOT EXISTS `Rel_AutorArticulo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.Rel_AutorArticulo: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla etl.Rel_AutorArticulo: ~80.954 rows (aproximadamente)
 /*!40000 ALTER TABLE `Rel_AutorArticulo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Rel_AutorArticulo` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_AutorCapituloLibro
+CREATE TABLE IF NOT EXISTS `Rel_AutorCapituloLibro` (
+  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `version` bigint(20) NOT NULL,
+  `operation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `acapCapvNumero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `acapLibrIsbn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `acapOrden` bigint(20) NOT NULL,
+  `idPersona` bigint(20) NOT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Rel_AutorCapituloLibro: ~35.932 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_AutorCapituloLibro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_AutorCapituloLibro` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_AutorCongreso
+CREATE TABLE IF NOT EXISTS `Rel_AutorCongreso` (
+  `id` varchar(50) NOT NULL,
+  `version` varchar(50) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idPersona` int(11) DEFAULT NULL,
+  `congNumero` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Rel_AutorCongreso: ~94.380 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_AutorCongreso` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_AutorCongreso` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_AutorDiseño
+CREATE TABLE IF NOT EXISTS `Rel_AutorDiseño` (
+  `id` varchar(50) NOT NULL,
+  `version` varchar(50) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idPersona` int(11) DEFAULT NULL,
+  `diseCodigo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Rel_AutorDiseño: ~1.355 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_AutorDiseño` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_AutorDiseño` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_AutorExposicion
+CREATE TABLE IF NOT EXISTS `Rel_AutorExposicion` (
+  `id` varchar(50) NOT NULL,
+  `version` varchar(50) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idPersona` int(11) DEFAULT NULL,
+  `expoNumero` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Rel_AutorExposicion: ~2.183 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_AutorExposicion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_AutorExposicion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla etl.Rel_AutorLibro
 CREATE TABLE IF NOT EXISTS `Rel_AutorLibro` (
@@ -506,9 +888,27 @@ CREATE TABLE IF NOT EXISTS `Rel_AutorLibro` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla etl.Rel_AutorLibro: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla etl.Rel_AutorLibro: ~8.869 rows (aproximadamente)
 /*!40000 ALTER TABLE `Rel_AutorLibro` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Rel_AutorLibro` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_AutorPrologoLibro
+CREATE TABLE IF NOT EXISTS `Rel_AutorPrologoLibro` (
+  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `version` bigint(20) NOT NULL,
+  `operation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `aproLibrIsbn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `aproOrden` bigint(20) NOT NULL,
+  `idPersona` bigint(20) NOT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Rel_AutorPrologoLibro: ~55 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_AutorPrologoLibro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_AutorPrologoLibro` ENABLE KEYS */;
 
 -- Volcando estructura para tabla etl.Rel_DatosEquipoInvestigacion
 CREATE TABLE IF NOT EXISTS `Rel_DatosEquipoInvestigacion` (
@@ -525,9 +925,61 @@ CREATE TABLE IF NOT EXISTS `Rel_DatosEquipoInvestigacion` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla etl.Rel_DatosEquipoInvestigacion: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla etl.Rel_DatosEquipoInvestigacion: ~221 rows (aproximadamente)
 /*!40000 ALTER TABLE `Rel_DatosEquipoInvestigacion` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Rel_DatosEquipoInvestigacion` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_DirectorTesinaExterna
+CREATE TABLE IF NOT EXISTS `Rel_DirectorTesinaExterna` (
+  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `version` bigint(20) NOT NULL,
+  `operation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tesinaCodigo` bigint(20) NOT NULL,
+  `idPersona` bigint(20) NOT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Rel_DirectorTesinaExterna: ~218 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_DirectorTesinaExterna` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_DirectorTesinaExterna` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_DirectorTesisExterna
+CREATE TABLE IF NOT EXISTS `Rel_DirectorTesisExterna` (
+  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `version` bigint(20) NOT NULL,
+  `operation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `direTesiCodigo` bigint(20) NOT NULL,
+  `idPersona` bigint(20) NOT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Volcando datos para la tabla etl.Rel_DirectorTesisExterna: ~694 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_DirectorTesisExterna` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_DirectorTesisExterna` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_EditorLibro
+CREATE TABLE IF NOT EXISTS `Rel_EditorLibro` (
+  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `version` bigint(20) NOT NULL,
+  `operation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `alibLibrIsbn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `alibOrden` bigint(20) NOT NULL,
+  `idPersona` bigint(20) NOT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Rel_EditorLibro: ~1.877 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_EditorLibro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_EditorLibro` ENABLE KEYS */;
 
 -- Volcando estructura para tabla etl.Rel_EquipoProyecto
 CREATE TABLE IF NOT EXISTS `Rel_EquipoProyecto` (
@@ -543,9 +995,46 @@ CREATE TABLE IF NOT EXISTS `Rel_EquipoProyecto` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla etl.Rel_EquipoProyecto: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla etl.Rel_EquipoProyecto: ~19.509 rows (aproximadamente)
 /*!40000 ALTER TABLE `Rel_EquipoProyecto` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Rel_EquipoProyecto` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_FinanciacionProyecto
+CREATE TABLE IF NOT EXISTS `Rel_FinanciacionProyecto` (
+  `id` varchar(50) NOT NULL,
+  `idProyecto` varchar(50) DEFAULT NULL,
+  `codTipoFinanciacion` varchar(50) DEFAULT NULL,
+  `tipoFinanciacion` varchar(50) DEFAULT NULL,
+  `codTipoFuente` varchar(50) DEFAULT NULL,
+  `tipoFuente` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla etl.Rel_FinanciacionProyecto: ~48 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_FinanciacionProyecto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_FinanciacionProyecto` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_GastoProyecto
+CREATE TABLE IF NOT EXISTS `Rel_GastoProyecto` (
+  `id` varchar(50) NOT NULL,
+  `version` varchar(50) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idPersona` int(11) DEFAULT NULL,
+  `diseCodigo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Rel_GastoProyecto: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_GastoProyecto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_GastoProyecto` ENABLE KEYS */;
 
 -- Volcando estructura para tabla etl.Rel_InventorPatente
 CREATE TABLE IF NOT EXISTS `Rel_InventorPatente` (
@@ -561,9 +1050,26 @@ CREATE TABLE IF NOT EXISTS `Rel_InventorPatente` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.Rel_InventorPatente: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla etl.Rel_InventorPatente: ~459 rows (aproximadamente)
 /*!40000 ALTER TABLE `Rel_InventorPatente` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Rel_InventorPatente` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.Rel_InvestigadorProyectoCooperacionInternacional
+CREATE TABLE IF NOT EXISTS `Rel_InvestigadorProyectoCooperacionInternacional` (
+  `id` varchar(50) NOT NULL,
+  `version` varchar(50) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idPersona` int(11) DEFAULT NULL,
+  `proyecto` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.Rel_InvestigadorProyectoCooperacionInternacional: ~607 rows (aproximadamente)
+/*!40000 ALTER TABLE `Rel_InvestigadorProyectoCooperacionInternacional` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Rel_InvestigadorProyectoCooperacionInternacional` ENABLE KEYS */;
 
 -- Volcando estructura para tabla etl.Rel_RelacionOrigenProyecto
 CREATE TABLE IF NOT EXISTS `Rel_RelacionOrigenProyecto` (
@@ -579,12 +1085,60 @@ CREATE TABLE IF NOT EXISTS `Rel_RelacionOrigenProyecto` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla etl.Rel_RelacionOrigenProyecto: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla etl.Rel_RelacionOrigenProyecto: ~9.221 rows (aproximadamente)
 /*!40000 ALTER TABLE `Rel_RelacionOrigenProyecto` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Rel_RelacionOrigenProyecto` ENABLE KEYS */;
 
--- Volcando estructura para tabla etl.Universidad
-CREATE TABLE IF NOT EXISTS `Universidad` (
+-- Volcando estructura para tabla etl.ResearchAccreditation
+CREATE TABLE IF NOT EXISTS `ResearchAccreditation` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `version` int(11) NOT NULL DEFAULT 0,
+  `operation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tinaFecha` datetime DEFAULT NULL,
+  `tinaTitulo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.ResearchAccreditation: ~2.840 rows (aproximadamente)
+/*!40000 ALTER TABLE `ResearchAccreditation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ResearchAccreditation` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.ResearchField
+CREATE TABLE IF NOT EXISTS `ResearchField` (
+  `id` varchar(50) DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- Volcando datos para la tabla etl.ResearchField: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `ResearchField` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ResearchField` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.ResearchGroup
+CREATE TABLE IF NOT EXISTS `ResearchGroup` (
+  `id` varchar(15) NOT NULL,
+  `version` int(11) DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `idEjecucion` int(11) DEFAULT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `operation` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla etl.ResearchGroup: ~370 rows (aproximadamente)
+/*!40000 ALTER TABLE `ResearchGroup` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ResearchGroup` ENABLE KEYS */;
+
+-- Volcando estructura para tabla etl.University
+CREATE TABLE IF NOT EXISTS `University` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   `idEjecucion` int(11) DEFAULT NULL,
@@ -593,9 +1147,9 @@ CREATE TABLE IF NOT EXISTS `Universidad` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla etl.Universidad: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `Universidad` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Universidad` ENABLE KEYS */;
+-- Volcando datos para la tabla etl.University: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `University` DISABLE KEYS */;
+/*!40000 ALTER TABLE `University` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
