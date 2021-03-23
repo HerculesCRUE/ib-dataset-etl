@@ -8,8 +8,13 @@
   <created_user>-</created_user>
   <created_date>2020/04/07 17:03:26.655</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2021/01/08 11:10:26.728</modified_date>
+  <modified_date>2021/03/23 08:51:58.507</modified_date>
   <parameters>
+    <parameter>
+      <name>limit</name>
+      <default_value>50</default_value>
+      <description/>
+    </parameter>
     <parameter>
       <name>version</name>
       <default_value>39</default_value>
@@ -322,7 +327,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
+      <xloc>224</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -334,7 +339,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1360</xloc>
+      <xloc>1440</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -371,7 +376,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1200</xloc>
+      <xloc>1264</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -408,8 +413,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
-      <yloc>416</yloc>
+      <xloc>912</xloc>
+      <yloc>400</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -421,8 +426,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1200</xloc>
-      <yloc>416</yloc>
+      <xloc>1264</xloc>
+      <yloc>400</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -458,7 +463,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
+      <xloc>560</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -471,8 +476,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
-      <yloc>576</yloc>
+      <xloc>912</xloc>
+      <yloc>560</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -508,7 +513,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>752</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -545,7 +550,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
+      <xloc>1088</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -585,7 +590,47 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
+      <xloc>912</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>master_data_load</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>rep_name</specification_method>
+      <trans_object_id/>
+      <filename/>
+      <transname>master_data_load</transname>
+      <directory>/.master_data</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -626,15 +671,6 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Start</from>
-      <to>check_connections_and_config</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>finalize_succeeded</from>
@@ -679,11 +715,29 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>load_relational_tables</from>
       <to>load_link</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Start</from>
+      <to>master_data_load</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>master_data_load</from>
+      <to>check_connections_and_config</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -723,8 +777,8 @@ http://localhost:19000</note>
       <note>Puerto Kafka:
 
 Ahora se usa el 29092 aunque en producción debería de ser 9092</note>
-      <xloc>704</xloc>
-      <yloc>32</yloc>
+      <xloc>768</xloc>
+      <yloc>16</yloc>
       <width>442</width>
       <heigth>70</heigth>
       <fontname>Segoe UI</fontname>

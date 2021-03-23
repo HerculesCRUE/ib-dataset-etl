@@ -8,6 +8,31 @@
     <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TABLE_NAME_1</name>
+        <default_value>Proyecto</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TABLE_NAME_2</name>
+        <default_value>FechaProyecto</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TABLE_NAME_3</name>
+        <default_value>RelacionOrigenProyecto</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TABLE_NAME_4</name>
+        <default_value>TipoOrigenProyecto</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TABLE_NAME_5</name>
+        <default_value>ProyectoCooperacionInternacional</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -442,12 +467,63 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/19 13:51:25.985</modified_date>
+    <modified_date>2021/03/23 08:53:34.272</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>Database_Master</name>
+    <server>${HostnameMaster}</server>
+    <type>MARIADB</type>
+    <access>Native</access>
+    <database>${DatabaseMaster}</database>
+    <port>${PortMaster}</port>
+    <username>${UserMaster}</username>
+    <password>${PwdMaster}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${PortMaster}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <connection>
     <name>Database_Source</name>
     <server>${HostnameSource}</server>
@@ -562,21 +638,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sr_id_proy_2</from>
-      <to>grp_id_proy_2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sr_id_proy</from>
-      <to>grp_id_proy</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>grp_id_proy</from>
-      <to>join_proy_fecha</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>sr_id_proy_3</from>
       <to>grp_id_proy_3</to>
       <enabled>Y</enabled>
@@ -602,23 +663,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>grp_id_proy_2</from>
-      <to>join_proy_fecha</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_final</from>
-      <to>ifvaln_null_control</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>ti_fecha_proyecto</from>
       <to>sv_fields_fecha_proy</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ifvaln_null_control</from>
-      <to>gsi_sysdate</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -662,13 +708,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>iu_proyecto</from>
+      <from>iu_project</from>
       <to>ac_json_format</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>gv_id_ejecucion</from>
-      <to>iu_proyecto</to>
+      <to>iu_project</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -719,6 +765,91 @@
     <hop>
       <from>join_proy_origen</from>
       <to>join_proy_origen 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>cln_intproject_fields 2</from>
+      <to>sv_intproject 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>grp_projectOrigin</from>
+      <to>mj_intp_porigin</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_intproject 2</from>
+      <to>mj_intp_porigin</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_projectOrigin</from>
+      <to>grp_projectOrigin</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_intproject 2</from>
+      <to>srt_intproject 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_projectOrigin</from>
+      <to>srt_projectOrigin</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_proy_coop_int 2</from>
+      <to>cln_intproject_fields 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_final</from>
+      <to>dmmy_union</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sr_id_proy</from>
+      <to>join_proy_fecha</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sr_id_proy_2</from>
+      <to>grp_id_proy_3 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>grp_id_proy_3 3</from>
+      <to>join_proy_fecha</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>mj_intp_porigin</from>
+      <to>sv_final_pinternat</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_final_pinternat</from>
+      <to>dmmy_union</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lkup_pclassif</from>
+      <to>sv_final 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_final 2</from>
+      <to>gsi_sysdate</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dmmy_union</from>
+      <to>lkup_pclassif</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_rel_origen_proyecto</from>
+      <to>sv_projectOrigin</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -878,6 +1009,18 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>lang</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>es-ES</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -888,7 +1031,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1456</xloc>
+      <xloc>1536</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -927,7 +1070,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
       <yloc>832</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1109,7 +1252,119 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>cln_intproject_fields 2</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>titulo</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>"</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>titulo</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>'</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>titulo</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>/</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>operation</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>UPDATE</replace_string>
+        <replace_by_string>INSERT</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>operation</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>DELETE</replace_string>
+        <replace_by_string>INSERT</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>624</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dmmy_union</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1134,7 +1389,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
+      <xloc>1728</xloc>
       <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1218,160 +1473,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
       <yloc>720</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>grp_id_proy</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>idProyecto</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>operation</aggregate>
-        <subject>operation</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>nombre</aggregate>
-        <subject>nombre</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>version</aggregate>
-        <subject>version</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>grp_id_proy_2</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>FechaProyecto_idProyecto</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>FechaProyecto_ENTITY_ID</aggregate>
-        <subject>FechaProyecto_ENTITY_ID</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>FechaProyecto_version</aggregate>
-        <subject>FechaProyecto_version</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>FechaProyecto_operation</aggregate>
-        <subject>FechaProyecto_operation</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>FechaProyecto_codTipoMotivoCambioFecha</aggregate>
-        <subject>FechaProyecto_codTipoMotivoCambioFecha</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>FechaProyecto_fechaFinProyecto</aggregate>
-        <subject>FechaProyecto_fechaFinProyecto</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>FechaProyecto_fechaInicioExpediente</aggregate>
-        <subject>FechaProyecto_fechaInicioExpediente</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>FechaProyecto_fechaInicioProyecto</aggregate>
-        <subject>FechaProyecto_fechaInicioProyecto</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>FechaProyecto_motivoCambioFecha</aggregate>
-        <subject>FechaProyecto_motivoCambioFecha</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>FechaProyecto_numero</aggregate>
-        <subject>FechaProyecto_numero</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>480</xloc>
-      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1480,6 +1583,116 @@
     </GUI>
   </step>
   <step>
+    <name>grp_id_proy_3 3</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>idProyecto</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>startDate</aggregate>
+        <subject>startDate</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>endDate</aggregate>
+        <subject>endDate</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>grp_projectOrigin</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>idProyecto</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>codTipoOrigen</aggregate>
+        <subject>codTipoOrigen</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>idOrigenProyecto</aggregate>
+        <subject>idOrigenProyecto</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>idProyecto</aggregate>
+        <subject>idProyecto</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>752</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>gsi_sysdate</name>
     <type>SystemInfo</type>
     <description/>
@@ -1505,7 +1718,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
+      <xloc>1184</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1544,7 +1757,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
+      <xloc>1296</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1583,95 +1796,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
       <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ifvaln_null_control</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <replaceAllByValue/>
-    <replaceAllMask/>
-    <selectFields>Y</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>idProyecto</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>version</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>operation</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>nombre</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>tipo</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>idOrigenProyecto</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>ini</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fin</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>896</xloc>
-      <yloc>320</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>iu_proyecto</name>
+    <name>iu_project</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>N</distribute>
@@ -1686,7 +1817,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema/>
-      <table>Proyecto</table>
+      <table>Project</table>
       <key>
         <name>idProyecto</name>
         <field>id</field>
@@ -1725,12 +1856,12 @@
       </value>
       <value>
         <name>tipo</name>
-        <rename>tipo</rename>
+        <rename>codTipoOrigen</rename>
         <update>Y</update>
       </value>
       <value>
         <name>fechaFin</name>
-        <rename>fin</rename>
+        <rename>endDate</rename>
         <update>Y</update>
       </value>
       <value>
@@ -1740,12 +1871,17 @@
       </value>
       <value>
         <name>fechaInicio</name>
-        <rename>ini</rename>
+        <rename>startDate</rename>
         <update>Y</update>
       </value>
       <value>
         <name>version</name>
         <rename>version</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ProjectClassification</name>
+        <rename>ProjectClassification</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -1758,7 +1894,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>1408</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1775,13 +1911,13 @@
       <schema_name/>
     </partitioning>
     <join_type>LEFT OUTER</join_type>
-    <step1>grp_id_proy</step1>
-    <step2>grp_id_proy_2</step2>
+    <step1>sr_id_proy</step1>
+    <step2>grp_id_proy_3 3</step2>
     <keys_1>
       <key>idProyecto</key>
     </keys_1>
     <keys_2>
-      <key>FechaProyecto_idProyecto</key>
+      <key>idProyecto</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -1905,7 +2041,7 @@
         <element>id</element>
       </field>
       <field>
-        <name>tipo</name>
+        <name>codTipoOrigen</name>
         <element>modality</element>
       </field>
       <field>
@@ -1925,7 +2061,7 @@
         <element>keyword</element>
       </field>
       <field>
-        <name>ini</name>
+        <name>startDate</name>
         <element>startDate</element>
       </field>
       <field>
@@ -1933,7 +2069,7 @@
         <element>foreseenJustificationDate</element>
       </field>
       <field>
-        <name>fin</name>
+        <name>endDate</name>
         <element>endDate</element>
       </field>
       <field>
@@ -1943,6 +2079,14 @@
       <field>
         <name>description</name>
         <element>description</element>
+      </field>
+      <field>
+        <name>lang</name>
+        <element>lang</element>
+      </field>
+      <field>
+        <name>ProjectClassification</name>
+        <element>projectClassification</element>
       </field>
     </fields>
     <attributes/>
@@ -1954,7 +2098,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
+      <xloc>1680</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2002,8 +2146,90 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
       <yloc>960</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lkup_pclassif</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Database_Master</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>master</schema>
+      <table>ProjectClassification</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>ProjectClassification</name>
+        <field>id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>name</name>
+        <rename>ProjectClassification</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>mj_intp_porigin</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>srt_intproject 2</step1>
+    <step2>grp_projectOrigin</step2>
+    <keys_1>
+      <key>idProyecto</key>
+    </keys_1>
+    <keys_2>
+      <key>idProyecto</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2152,7 +2378,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1728</xloc>
+      <xloc>1808</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2269,23 +2495,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>FechaProyecto_idProyecto</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>FechaProyecto_version</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>FechaProyecto_numero</name>
+        <name>idProyecto</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -2350,6 +2560,98 @@
     </GUI>
   </step>
   <step>
+    <name>srt_intproject 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>idProyecto</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>version</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>624</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>srt_projectOrigin</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>idProyecto</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>752</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>sv_fields_fecha_proy</name>
     <type>SelectValues</type>
     <description/>
@@ -2362,53 +2664,22 @@
     </partitioning>
     <fields>
       <field>
-        <name>ENTITY_ID</name>
-        <rename>FechaProyecto_ENTITY_ID</rename>
-      </field>
-      <field>
-        <name>version</name>
-        <rename>FechaProyecto_version</rename>
-      </field>
-      <field>
-        <name>operation</name>
-        <rename>FechaProyecto_operation</rename>
-      </field>
-      <field>
-        <name>codTipoMotivoCambioFecha</name>
-        <rename>FechaProyecto_codTipoMotivoCambioFecha</rename>
-      </field>
-      <field>
-        <name>fechaFinProyecto</name>
-        <rename>FechaProyecto_fechaFinProyecto</rename>
-      </field>
-      <field>
-        <name>fechaInicioExpediente</name>
-        <rename>FechaProyecto_fechaInicioExpediente</rename>
+        <name>idProyecto</name>
       </field>
       <field>
         <name>fechaInicioProyecto</name>
-        <rename>FechaProyecto_fechaInicioProyecto</rename>
       </field>
       <field>
-        <name>idProyecto</name>
-        <rename>FechaProyecto_idProyecto</rename>
-      </field>
-      <field>
-        <name>motivoCambioFecha</name>
-        <rename>FechaProyecto_motivoCambioFecha</rename>
-      </field>
-      <field>
-        <name>numero</name>
-        <rename>FechaProyecto_numero</rename>
+        <name>fechaFinProyecto</name>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
-        <name>FechaProyecto_fechaFinProyecto</name>
-        <rename>FechaProyecto_fechaFinProyecto</rename>
+        <name>fechaInicioProyecto</name>
+        <rename>startDate</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>yyyy/MM/dd</conversion_mask>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone>Europe/Madrid</date_format_timezone>
@@ -2420,12 +2691,12 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>FechaProyecto_fechaInicioProyecto</name>
-        <rename>FechaProyecto_fechaInicioProyecto</rename>
+        <name>fechaFinProyecto</name>
+        <rename>endDate</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>yyyy/MM/dd</conversion_mask>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone>Europe/Madrid</date_format_timezone>
@@ -2498,6 +2769,9 @@
     </partitioning>
     <fields>
       <field>
+        <name>ENTITY_ID</name>
+      </field>
+      <field>
         <name>operation</name>
       </field>
       <field>
@@ -2508,6 +2782,9 @@
       </field>
       <field>
         <name>version</name>
+      </field>
+      <field>
+        <name>ProjectClassification</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -2566,6 +2843,185 @@
     <name>sv_final</name>
     <type>SelectValues</type>
     <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>ENTITY_ID</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>version</name>
+      </field>
+      <field>
+        <name>idProyecto</name>
+      </field>
+      <field>
+        <name>nombre</name>
+      </field>
+      <field>
+        <name>startDate</name>
+      </field>
+      <field>
+        <name>endDate</name>
+      </field>
+      <field>
+        <name>idOrigenProyecto</name>
+      </field>
+      <field>
+        <name>codTipoOrigen</name>
+      </field>
+      <field>
+        <name>ProjectClassification</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_final 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>ENTITY_ID</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>version</name>
+      </field>
+      <field>
+        <name>idProyecto</name>
+      </field>
+      <field>
+        <name>nombre</name>
+      </field>
+      <field>
+        <name>startDate</name>
+      </field>
+      <field>
+        <name>endDate</name>
+      </field>
+      <field>
+        <name>idOrigenProyecto</name>
+      </field>
+      <field>
+        <name>codTipoOrigen</name>
+      </field>
+      <field>
+        <name>ProjectClassification</name>
+        <rename>ProjectClassification_code</rename>
+      </field>
+      <field>
+        <name>ProjectClassification_1</name>
+        <rename>ProjectClassification</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1088</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_final_pinternat</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>ENTITY_ID</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>version</name>
+      </field>
+      <field>
+        <name>idProyecto</name>
+      </field>
+      <field>
+        <name>nombre</name>
+      </field>
+      <field>
+        <name>startDate</name>
+      </field>
+      <field>
+        <name>endDate</name>
+      </field>
+      <field>
+        <name>idOrigenProyecto</name>
+      </field>
+      <field>
+        <name>codTipoOrigen</name>
+      </field>
+      <field>
+        <name>ProjectClassification</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>704</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_intproject 2</name>
+    <type>SelectValues</type>
+    <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
@@ -2575,7 +3031,7 @@
     </partitioning>
     <fields>
       <field>
-        <name>idProyecto</name>
+        <name>ENTITY_ID</name>
       </field>
       <field>
         <name>version</name>
@@ -2584,25 +3040,26 @@
         <name>operation</name>
       </field>
       <field>
-        <name>nombre</name>
+        <name>fecFin</name>
       </field>
       <field>
-        <name>codTipoOrigen</name>
-        <rename>tipo</rename>
+        <name>fecInicio</name>
       </field>
       <field>
-        <name>idOrigenProyecto</name>
+        <name>proyecto</name>
+        <rename>idProyecto</rename>
       </field>
       <field>
-        <name>FechaProyecto_fechaInicioProyecto</name>
+        <name>titulo</name>
+        <rename>nombre</rename>
       </field>
       <field>
-        <name>FechaProyecto_fechaFinProyecto</name>
+        <name>ProjectClassification</name>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
-        <name>FechaProyecto_fechaInicioProyecto</name>
-        <rename>ini</rename>
+        <name>fecInicio</name>
+        <rename>startDate</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -2618,8 +3075,8 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>FechaProyecto_fechaFinProyecto</name>
-        <rename>fin</rename>
+        <name>fecFin</name>
+        <rename>endDate</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -2644,8 +3101,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>320</yloc>
+      <xloc>416</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2675,8 +3132,45 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
       <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_projectOrigin</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>codTipoOrigen</name>
+      </field>
+      <field>
+        <name>idOrigenProyecto</name>
+      </field>
+      <field>
+        <name>idProyecto</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>752</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2697,17 +3191,17 @@
 , version
 , operation
 , codTipoMotivoCambioFecha
-, fechaFinProyecto
+, STR_TO_DATE(fechaInicioProyecto, '%Y/%m/%d') as fechaInicioProyecto
+, STR_TO_DATE(fechaFinProyecto, '%Y/%m/%d') as fechaFinProyecto
 , fechaInicioExpediente
-, fechaInicioProyecto
 , idProyecto
 , motivoCambioFecha
 , numero
-FROM FechaProyecto</sql>
+FROM ${TABLE_NAME_2}</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -2717,7 +3211,7 @@ FROM FechaProyecto</sql>
         <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>FechaProyecto</origin>
+        <origin>ti_fecha_proyecto</origin>
         <comments>ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2740,7 +3234,7 @@ FROM FechaProyecto</sql>
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>FechaProyecto</origin>
+        <origin>ti_fecha_proyecto</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2763,7 +3257,7 @@ FROM FechaProyecto</sql>
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>FechaProyecto</origin>
+        <origin>ti_fecha_proyecto</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2786,7 +3280,7 @@ FROM FechaProyecto</sql>
         <name>codTipoMotivoCambioFecha</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>FechaProyecto</origin>
+        <origin>ti_fecha_proyecto</origin>
         <comments>codTipoMotivoCambioFecha</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2804,12 +3298,35 @@ FROM FechaProyecto</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fechaInicioProyecto</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>ti_fecha_proyecto</origin>
+        <comments>fechaInicioProyecto</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
         <storagetype>normal</storagetype>
         <name>fechaFinProyecto</name>
-        <length>255</length>
+        <length>-1</length>
         <precision>-1</precision>
-        <origin>FechaProyecto</origin>
+        <origin>ti_fecha_proyecto</origin>
         <comments>fechaFinProyecto</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2832,31 +3349,8 @@ FROM FechaProyecto</sql>
         <name>fechaInicioExpediente</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>FechaProyecto</origin>
+        <origin>ti_fecha_proyecto</origin>
         <comments>fechaInicioExpediente</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>fechaInicioProyecto</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>FechaProyecto</origin>
-        <comments>fechaInicioProyecto</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -2878,7 +3372,7 @@ FROM FechaProyecto</sql>
         <name>idProyecto</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>FechaProyecto</origin>
+        <origin>ti_fecha_proyecto</origin>
         <comments>idProyecto</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2901,7 +3395,7 @@ FROM FechaProyecto</sql>
         <name>motivoCambioFecha</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>FechaProyecto</origin>
+        <origin>ti_fecha_proyecto</origin>
         <comments>motivoCambioFecha</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2924,7 +3418,7 @@ FROM FechaProyecto</sql>
         <name>numero</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>FechaProyecto</origin>
+        <origin>ti_fecha_proyecto</origin>
         <comments>numero</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2974,12 +3468,12 @@ FROM FechaProyecto</sql>
 , operation
 , codTipoOrigen
 , descripcion
-FROM TipoOrigenProyecto
+FROM ${TABLE_NAME_4}
 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -3098,14 +3592,271 @@ FROM TipoOrigenProyecto
         <date_format_timezone>Europe/Berlin</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ti_proy_coop_int 2</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Database_Source</connection>
+    <sql>SELECT
+  ENTITY_ID
+, version
+, operation
+, STR_TO_DATE(fecInicio, '%Y/%m/%d') as fecInicio
+, STR_TO_DATE(fecFin, '%Y/%m/%d') as fecFin
+, identificador
+, pcInPorcentaje
+, proyecto
+, titulo
+, '6' AS ProjectClassification
+FROM ${TABLE_NAME_5}
+where version = ${version}
+limit ${limit}
+
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>idOrigenProyecto</name>
+        <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_origen_proyecto</origin>
-        <comments>idOrigenProyecto</comments>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>ENTITY_ID</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>version</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>version</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>operation</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>operation</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fecInicio</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>fecInicio</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fecFin</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>fecFin</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>identificador</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>identificador</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>pcInPorcentaje</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>pcInPorcentaje</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>proyecto</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>proyecto</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>titulo</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>titulo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>ProjectClassification</name>
+        <length>1</length>
+        <precision>-1</precision>
+        <origin>ti_proy_coop_int 2</origin>
+        <comments>ProjectClassification</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -3131,8 +3882,8 @@ FROM TipoOrigenProyecto
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>464</yloc>
+      <xloc>48</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3156,10 +3907,11 @@ FROM TipoOrigenProyecto
 , limitativo
 , nombre
 , proyectoFinalista
-FROM Proyecto
-where version = ${version} and idProyecto in (
-145,148,152,153,154,156,162,163,165,166,169,170,171,174,175,177,179,185,186,187,197,198,201,204,205,212,217,220,221,222,224,235,238,239,247,249,253,259,261,264,268,280,284,288,290,293,294,296,301,308,310,320,323,330,338,339,341,348,349,353,354,355,356,358,359,363,364,365,366,367,368,369,371,372,373,376,380,381,382,385,389,390,399,401,405,406,409,412,413,414,417,418,424,427,428,432,434,1858,1865,2658,2779,3459,3463,3484,3550,3552,3560,4136,4173,4175,4178,4181,4183,4338,4472,4711,4773,4786,4787,4791,4792,4804,4810,4817,4821,4825,4827,4832,4987,5047,5048,5049,5051,5059,5144,5511,5753,5769,5815,5836,6388,6659,6660,6661,6669,6676,6677,6748,7045,7063,7120,7428,7448,7461,7479,7490,7560,7571,8190,8390,8391,8486,8521,8544,8652,9480,9524,9527,9563,9644,9647,9999,10154,10364,10422,10432,10547,10864,10916,10991,11107,11372,11388,11397,11614,11858,11904,11930,12034,12036,12043,12102,12108,12127,12129,12196,12198,12267,12274,12288,12334,12482,12591,12595,12596,12597,12598,12599,12600,12604,12605,12616,12619,16373,15760,11871,13256,14859,16291,19953,20061,10527,15584,11894,12307,26442,10887,15487,14861,17090,17327,10315,19797,20404,16836,15304,14532,14852,17636,17579,17307,15241,12737,19486,14617,11950,13793,25852,17476,15446,16286,14206,10300,10196,14787,19453,10953,10877,15316,11288,12880,12573,20224,16305,17164,16766,15860,16707,15509,11725,19694,12141,20220,15219,20064,20040,10574,19517,14862,17201,13062,15123,14863,20243,10504,11931,19487,18884,16765,17205,14776,19448,12589,10294,11892,16197,16354,13022,17868,12444,12606,20442,25724,14312,19773,12857,14007,18856,15239,10702,12446,20042,15952,26438,15017,10889,13103,17718,14833,12532,16478,19774,13352,10312,13929,10885,12449,26903,14925,19792,12588,26789,16015,16771,11945,12919,14839,16323,25869,14616,17482,11293,18237,17341,13076,19056,16227,12007,26194,17782,14318,11546,19500,14629,13234,18705,14699,19781,10330,26412,16784,16408,16787,26880,12648,16308,13923,25574,19865,13098,13090,13117,17360,10528,20370,25848,10571,13892,12116,19550,17170,17180,26152,12200,11468,14301,18849,19396,26207,19278,14877,19388,18948,16961,11376,14041,12931,12917,17593,17140,12930,15024,19757,12912,18179,13237,10319,11959,15672,10205,13383,11937,10850,25203,14864,10909,26129,12234,25712,14603,14229,26161,26904,19242,11949,12414,17145,13110,10275,13760,15145,12611,18455,13621,11990,20386,17759,10997,25483,17239,20247,13421,17340,14308,26755,15009,14784,17802,14014,20039,14858,12954,16824,20325,13799,13339,14661,16547,10900,15305,17163,14335,13904,13231,17158,17588,14732,12948,10649,14225,17591,11289,16828,16219,11025,14336,10705,12441,17687,14952,13399,10313,10304,20407,10408,13115,19708,17781,16371,19373,19754,11280,15027,16303,14150,25627,17936,25784,10896,13755,17202,16284,19772,13757,17156,17863,15995,16167,13055,12574,19138,15287,10271,17455,19212,13710,16248,20445,26151,19717,12957,13120,26301,12287,10914,12447,17689,10369,20145,17160,11033,16285,19136,14004,10878,17130,25826,27077,19710,11473,25617,10513,13437,20143,26031,13719,20332,14011,18842,12925,14848,13058,17248,25855,12045,13966,14875,18904,26135,25845,12650,12371,19498,12943,10264,25442,12976,13384,15468,13922,15240,14774,12997,25505,19878,20013,16872,15692,10989,20211,12911,10261,13801,10881,17867,16268,12136,12418,13029,16016,16166,16292,19480,25218,19755,10311,13912,16681,16288,25842,14655,14209,13239,10903,13886,25550,19451,13092,12856,13887,11891,17494,25837,17312,19258,11855,13891,17778,13877,13916,26422,16798,25850,14309,12440,20319,11400,19691,13998,11287,25475,13994,15013,20161,17162,10827,16938,10439,25778,14074,12033,20149,19707,17288,17142,15083,19666,25429,10892,10281,14592,15988,19409,17204,17525,13009,17141,16685,12104,14879,12724,12909,20409,17138,19454,11992,11307,12329,17154,15209,13907,17179,10946,11874,19699,12908,17256,10317,26756,14313,13057,19542,11606,12445,12951,25169,25702,11487,11032,10291,12525,26045,19768,18007,14131,10870,10879,13230,13104,10440,12131,11996,14656,17323,15809,19793,16823,10265,19788,14311,19706,25836,19859,16315,15317,14121,25408,10836,25713,19379,14389,25851,14050,12337,25428,14880,19166,13489,16309,12728,13347,20228,15278,17604,10526,15634,11086,12151,25432,17929,10866,11003,25430,14213,16381,11948,14148,25847,10295,12923,11907,25531,19716,26188,12020,19546,12031,14874,15513,13794,25437,11995,10321,14883,14278,20212,16778,18426,10290,11039,10263,25246,20326,14836,13809,12920,20112,13686,13107,17589,10282,12952,19784,19779,13394,12950,26165,11845,14207,10329,12021,14853,25613,19778,19216,11905,15981,18833,13924,13348,15059,14351,13638,18808,10893,26132,20308,14780,14807,10428,10960,16155,12725,15661,14731,13077,17933,25838,14010,18794,17538,10391,18959,14055,19787,15504,25434,14219,12569,13081,19762,17685,14953,27029,10926,19575,13100,12907,11857,19570,18006,25812,15596,15855,19798,17679,20002,13330,15040,11988,19752,13127,18246,14719,20214,20213,15042,26199,14239,10524,25833,26050,11887,12009,20052,11037,16409,26217,13810,14846,12023,17537,17753,26254,10299,13012,15267,15067,11868,19766,11834,18873,16246,10316,15053,13820,13672,20215,16396,25528,11727,10707,19759,19742,16639,14857,17161,17108,16225,11034,12868,15575,14136,13174,11847,15838,19674,13889,27085,11471,12415,19801,16413,19874,12936,14607,12512,25348,18914,20060,16017,15979,11303,11740,12974,16317,12918,19361,14106,19245,11936,14850,16704,18003,10260,15948,13247,26206,26094,19527,16283,11076,12140,14843,19833,12966,16613,13851,12039,15221,25181,14487,16479,17349,17384,26179,11462,10828,11837,15035,13390,12933,19689,18956,18857,20380,26076,11911,11869,17661,13013,19760,13704,13051,25551,16022,20055,15100,15291,20318,10706,19255,18633,14867,15946,19687,19483,14588,17139,10750,19591,16270,20257,17152,13177,16310,14031,15339,16287,25827,19574,18906,14145,13819,10413,19497,17181,20056,20070,10497,26419,19758,19958,19815,3537,14679,16829,17627,14625,16281,8522,16059,16559,15773,13240,20171,13182,17266,9473,17595,14777,13728,14614,15086,13006,15360,10568,9085,8624,14664,19022,8428,17262,13910,17582,18137,14678,16821,2826,16649,18082,17895,17404,15576,14697,16203,14789,14024,12590,13225,18960,14891,16260,11729,14343,14325,14393,19870,19285,19076,19198,9414,19068,9815,12821,18518,14834,20420,15673,5396,17261,14392,16834,13223,15660,15853,17008,14304,18131,17013,16543,17397,15659,7658,12944,14253,17486,14926,16036,12945,19558,16448,16086,19341,17633,14783,13814,19888,15605,16586,16866,17756,14782,11297,12416,15337,15087,18185,16159,19281,14751,15172,16196,17475,14285,11932,16805,18245,14756,10843,16232,15341,14785,13695,15353,17107,16331,16060,15847,14442,10389,12277,18907,17719,16869,16137,16807,16475,14702,15764,8559,16620,16043,19065,18034,14141,17396,15972,13315,14362,17746,17938,13270,16936,17900,5759,12705,17295,12861,17766,15971,17398,18022,15716,15361,15469,13882,18632,15280,18821,15759,15271,16908,14605,16207,17609,20007,16517,14604,16240,17666,13893,13378,13881,14274,14242,17790,17480,19141,17562,17937,15178,20427,16313,19295,19174,15768,15284,19852,14049,13365,15191,17761,13749,17576,7122,19053,12410,13302,18827,13807,13407,14634,16871,17313,16820,25212,19447,13393,15985,14243,16210,14639,15135,12399,16411,14046,16243,16886,17263,13358,13521,14419,15177,16554,19671,18872,16515,9105,15058,17654,19753,14701,17293,14227,19656,15136,13800,15457,14608,19875,15975,8995,17428,13464,18506,15662,14388,20424,16234,12401,13241,15441,16221,15376,15213,17241,17797,15574,14606,17592,14401,12942,17751,18913,17249,18507,16235,19746,17875,16056,13802,17320,17014,13773,18786,19450,25178,13468,9811,16224,17772,17973,15767,9978,19243,17414,13424,17896,12242,15455,14640,12417,16518,16935,16542,15578,18004,13634,17091,16377,15470,16208,18332,17051,20376,16566,19343,17089,20378,17647,6751,15598,19719,14637,17974,18940,18797,12523,19270,19925,18859,16794,17000,15207,15691,16046,15758,25224,16474,13466,18042,17855,17683,18089,15330,14635,12820,18621,18109,15211,14932,15454,17760,16239,14105,11257,17039,16278,14332,16279,18763,20099,12412,19959,15063,17869
-)</sql>
+, '9' AS ProjectClassification
+FROM ${TABLE_NAME_1}
+where version = ${version}
+limit ${limit}
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3328,6 +4080,29 @@ where version = ${version} and idProyecto in (
         <date_format_timezone>Europe/Berlin</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>ProjectClassification</name>
+        <length>1</length>
+        <precision>-1</precision>
+        <origin>ti_proyecto</origin>
+        <comments>ProjectClassification</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -3347,7 +4122,7 @@ where version = ${version} and idProyecto in (
     <name>ti_rel_origen_proyecto</name>
     <type>TableInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -3362,12 +4137,12 @@ where version = ${version} and idProyecto in (
 , codTipoOrigen
 , idOrigenProyecto
 , idProyecto
-FROM RelacionOrigenProyecto
+FROM ${TABLE_NAME_3}
 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -3377,7 +4152,7 @@ FROM RelacionOrigenProyecto
         <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>RelacionOrigenProyecto</origin>
+        <origin>ti_rel_origen_proyecto</origin>
         <comments>ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3400,7 +4175,7 @@ FROM RelacionOrigenProyecto
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>RelacionOrigenProyecto</origin>
+        <origin>ti_rel_origen_proyecto</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -3423,7 +4198,7 @@ FROM RelacionOrigenProyecto
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>RelacionOrigenProyecto</origin>
+        <origin>ti_rel_origen_proyecto</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3446,7 +4221,7 @@ FROM RelacionOrigenProyecto
         <name>codTipoOrigen</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>RelacionOrigenProyecto</origin>
+        <origin>ti_rel_origen_proyecto</origin>
         <comments>codTipoOrigen</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3469,7 +4244,7 @@ FROM RelacionOrigenProyecto
         <name>idOrigenProyecto</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>RelacionOrigenProyecto</origin>
+        <origin>ti_rel_origen_proyecto</origin>
         <comments>idOrigenProyecto</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3492,7 +4267,7 @@ FROM RelacionOrigenProyecto
         <name>idProyecto</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>RelacionOrigenProyecto</origin>
+        <origin>ti_rel_origen_proyecto</origin>
         <comments>idProyecto</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -3538,7 +4313,7 @@ FROM RelacionOrigenProyecto
       <min_pct_rows/>
     </error>
     <error>
-      <source_step>iu_proyecto</source_step>
+      <source_step>iu_project</source_step>
       <target_step/>
       <is_enabled>N</is_enabled>
       <nr_valuename>erro_line</nr_valuename>

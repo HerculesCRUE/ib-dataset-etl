@@ -442,7 +442,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/20 15:47:22.780</modified_date>
+    <modified_date>2021/02/25 16:47:21.176</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -612,11 +612,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ti_tipo_financ</from>
-      <to>so_clean_fields</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>so_clean_fields</from>
       <to>ris_tipo_financ_fields</to>
       <enabled>Y</enabled>
@@ -624,6 +619,11 @@
     <hop>
       <from>ris_tipo_financ_fields</from>
       <to>ifvaln_nulls</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_funding</from>
+      <to>so_clean_fields</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -731,6 +731,18 @@
         <decimal/>
         <group/>
         <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>lang</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>es-ES</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1244,7 +1256,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>etl</schema>
-      <table>TipoFinanciacion</table>
+      <table>Funding</table>
       <key>
         <name>codTipoFinanciacion</name>
         <field>codigo</field>
@@ -1351,6 +1363,10 @@
       <field>
         <name>date</name>
         <element>date</element>
+      </field>
+      <field>
+        <name>lang</name>
+        <element>lang</element>
       </field>
     </fields>
     <attributes/>
@@ -1613,7 +1629,7 @@
     </GUI>
   </step>
   <step>
-    <name>ti_tipo_financ</name>
+    <name>ti_funding</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -1631,7 +1647,6 @@
 , codTipoFinanciacion
 , descripcion
 FROM TipoFinanciacion
-where version=${version}
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1765,7 +1780,7 @@ where version=${version}
       </output>
     </remotesteps>
     <GUI>
-      <xloc>32</xloc>
+      <xloc>48</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>

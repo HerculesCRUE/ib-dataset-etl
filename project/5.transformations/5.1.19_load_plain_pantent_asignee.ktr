@@ -8,6 +8,11 @@
     <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TABLE_NAME</name>
+        <default_value>EmpresaExplotacionPatente</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -442,7 +447,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/21 12:10:54.806</modified_date>
+    <modified_date>2021/03/23 09:01:14.857</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -784,6 +789,18 @@
         <decimal/>
         <group/>
         <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>lang</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>es-ES</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1534,6 +1551,10 @@
         <name>abbreviation</name>
         <element>abbreviation</element>
       </field>
+      <field>
+        <name>lang</name>
+        <element>lang</element>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1768,35 +1789,27 @@
     <fields>
       <field>
         <name>version</name>
-        <rename/>
       </field>
       <field>
         <name>operation</name>
-        <rename/>
       </field>
       <field>
         <name>idPatente</name>
-        <rename/>
       </field>
       <field>
         <name>idTercero</name>
-        <rename/>
       </field>
       <field>
         <name>numero</name>
-        <rename/>
       </field>
       <field>
         <name>observaciones</name>
-        <rename/>
       </field>
       <field>
         <name>fechaInicioPeriodo</name>
-        <rename/>
       </field>
       <field>
         <name>fechaFinPeriodo</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1870,8 +1883,10 @@
 , idTercero
 , numero
 , observaciones
-FROM EmpresaExplotacionPatente
-where version=${version}</sql>
+FROM ${TABLE_NAME}
+where version=${version}
+limit ${limit}
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

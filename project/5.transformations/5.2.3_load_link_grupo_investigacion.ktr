@@ -5,8 +5,19 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TableSourceName_1</name>
+        <default_value>ResearchGroup</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableSourceName_2</name>
+        <default_value>Rel_DatosEquipoInvestigacion</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -428,7 +439,7 @@
     <created_user>-</created_user>
     <created_date>2020/11/06 13:15:04.556</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/21 13:04:09.444</modified_date>
+    <modified_date>2021/03/16 12:15:05.551</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -619,7 +630,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>org</nullif>
+        <nullif>hasPart</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -631,7 +642,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>ResearchAccreditation</nullif>
+        <nullif>Organization</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -643,7 +654,271 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>accr</nullif>
+        <nullif>hasPredecessorOrganization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_4</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Organization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_4</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasSuccessorOrganization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_5</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>ResearchAccreditation</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_5</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasAccreditation</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_6</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>KnowledgeArea</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_6</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasKnowledgeArea</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_7</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Organization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_7</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasContactInfo</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_8</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Feature</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_8</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>locatedIn</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_9</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Relationship</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_9</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>relatedBy</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_10</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Feature</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_10</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>locatedIn</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_11</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Reservable</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_11</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasReservable</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_12</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Activity</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_12</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>participates</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_13</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>ScientificPublication</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_13</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>homepage</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_14</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Service</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_14</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>provides</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -922,40 +1197,42 @@
 
 //Variables
 parent_id  = idGrupoInvestigacion;
-child_id_1 = idPersona;
+//child_id_1 = idPersona;
 //child_id_3 = idProyecto;
 
 json = {};
 split_child_1 = [];
 split_child_2 = [];
 split_child_3 = [];
+split_child_4 = [];
+split_child_5 = [];
+split_child_6 = [];
+split_child_7 = [];
+split_child_8 = [];
+split_child_9 = [];
+split_child_10 = [];
+
 
 
 Child_1 = [];
 Child_2 = [];
 Child_3 = []; 
+Child_4 = [];
+Child_5 = [];
+Child_6 = []; 
+Child_7 = [];
+Child_8 = [];
+Child_9 = []; 
+Child_10 = [];
 
 
 //splitting the data
-split_child_1   = child_id_1.split('|');
+//split_child_1   = child_id_1.split('|');
 
 json.className = classname_1;
 json.fieldName = fieldname_1;
 
 
-// Loop through the splitted data and build the child structure
-if (isEmpty(split_child_1)){
-	Child_1 = []
-	} else {
-		for(i=0; i&lt;split_child_1.length; i++){
-    		child=split_child_1[i];
-    		Child_1.push(child);
-		}
-	}
-
-json.ids = Child_1;
-
-JsonOutput_1 = JSON.stringify(json);
 
 
  //splitting the data
@@ -1004,9 +1281,151 @@ json.ids = Child_3;
  // JSON Stringify the data object
 JsonOutput_3 = JSON.stringify(json);
 
+json.className = classname_4;
+json.fieldName = fieldname_4;
 
 
-var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ',' + JsonOutput_3 + ']}}}';
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_4)){
+	Child_4 = []
+	} else {
+		for(i=0; i&lt;split_child_4.length; i++){
+    		child=split_child_4[i];
+    		Child_4.push(child);
+		}
+	}
+
+json.ids = Child_4;
+
+
+ // JSON Stringify the data object
+JsonOutput_4 = JSON.stringify(json);
+
+json.className = classname_5;
+json.fieldName = fieldname_5;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_5)){
+	Child_5 = []
+	} else {
+		for(i=0; i&lt;split_child_5.length; i++){
+    		child=split_child_5[i];
+    		Child_5.push(child);
+		}
+	}
+
+json.ids = Child_5;
+
+
+ // JSON Stringify the data object
+JsonOutput_5 = JSON.stringify(json);
+
+json.className = classname_6;
+json.fieldName = fieldname_6;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_6)){
+	Child_6 = []
+	} else {
+		for(i=0; i&lt;split_child_6.length; i++){
+    		child=split_child_6[i];
+    		Child_6.push(child);
+		}
+	}
+
+json.ids = Child_6;
+
+
+ // JSON Stringify the data object
+JsonOutput_6 = JSON.stringify(json);
+
+json.className = classname_7;
+json.fieldName = fieldname_7;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_7)){
+	Child_7 = []
+	} else {
+		for(i=0; i&lt;split_child_7.length; i++){
+    		child=split_child_7[i];
+    		Child_7.push(child);
+		}
+	}
+
+json.ids = Child_7;
+
+
+ // JSON Stringify the data object
+JsonOutput_7 = JSON.stringify(json);
+
+json.className = classname_8;
+json.fieldName = fieldname_8;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_8)){
+	Child_8 = []
+	} else {
+		for(i=0; i&lt;split_child_8.length; i++){
+    		child=split_child_8[i];
+    		Child_8.push(child);
+		}
+	}
+
+json.ids = Child_8;
+
+
+ // JSON Stringify the data object
+JsonOutput_8 = JSON.stringify(json);
+
+json.className = classname_9;
+json.fieldName = fieldname_9;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_9)){
+	Child_9 = []
+	} else {
+		for(i=0; i&lt;split_child_9.length; i++){
+    		child=split_child_9[i];
+    		Child_9.push(child);
+		}
+	}
+
+json.ids = Child_9;
+
+
+ // JSON Stringify the data object
+JsonOutput_9 = JSON.stringify(json);
+
+json.className = classname_10;
+json.fieldName = fieldname_10;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_10)){
+	Child_10 = []
+	} else {
+		for(i=0; i&lt;split_child_10.length; i++){
+    		child=split_child_10[i];
+    		Child_10.push(child);
+		}
+	}
+
+json.ids = Child_10;
+
+
+ // JSON Stringify the data object
+JsonOutput_10 = JSON.stringify(json);
+
+
+
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' +  JsonOutput_2 + ',' + JsonOutput_3 
+
++ ',' + JsonOutput_4 + ',' + JsonOutput_5 + ',' + JsonOutput_6 + ',' + JsonOutput_7 + ',' + JsonOutput_8 + ',' + JsonOutput_9 + ',' + JsonOutput_10 + ']}}}';
 
 
 
@@ -1140,27 +1559,21 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </field>
       <field>
         <name>version</name>
-        <rename/>
       </field>
       <field>
         <name>nombre</name>
-        <rename/>
       </field>
       <field>
         <name>idEjecucion</name>
-        <rename/>
       </field>
       <field>
         <name>fechaCreacion</name>
-        <rename/>
       </field>
       <field>
         <name>fechaModificacion</name>
-        <rename/>
       </field>
       <field>
         <name>operation</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1256,22 +1669,14 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </partitioning>
     <connection>Database_Target</connection>
     <sql>SELECT
-  id
-, idPersona
-, idGrupoInvestigacion
-, version
-, idEjecucion
-, operation
-, fechaCreacion
-, fechaModificacion
-, tipoParticipacion
-, responsable
-FROM etl.Rel_DatosEquipoInvestigacion
+  *
+FROM ${TableSourceName_2}
+where version = ${version}
 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -1533,16 +1938,9 @@ FROM etl.Rel_DatosEquipoInvestigacion
     </partitioning>
     <connection>Database_Target</connection>
     <sql>SELECT
-  id
-, version
-, nombre
-, idEjecucion
-, fechaCreacion
-, fechaModificacion
-, operation
-FROM GrupoInvestigacion
+  *
+FROM ${TableSourceName_1}
 where version = ${version}
-
 </sql>
     <limit>0</limit>
     <lookup/>

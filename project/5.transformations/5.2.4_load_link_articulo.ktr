@@ -5,8 +5,24 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TableSourceName_1</name>
+        <default_value>Article</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableSourceName_2</name>
+        <default_value>Rel_AutorArticulo</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableSourceName_3</name>
+        <default_value>ArticleKeyword</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -428,7 +444,7 @@
     <created_user>-</created_user>
     <created_date>2020/11/05 14:55:32.651</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/21 09:31:17.034</modified_date>
+    <modified_date>2021/03/18 16:37:44.364</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -512,11 +528,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>grp_articulo_id</from>
-      <to>ac_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>ac_pojo</from>
       <to>mjsv_pojo_build</to>
       <enabled>Y</enabled>
@@ -537,11 +548,259 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>sv_autor_articulo 2</from>
+      <to>srt_articulo_id_2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_keyword</from>
+      <to>sv_autor_articulo 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_articulo_id_2 2</from>
+      <to>mj_article_keyword</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>mj_articulo_libro</from>
-      <to>grp_articulo_id</to>
+      <to>mj_article_keyword</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>mj_article_keyword</from>
+      <to>grp_articles</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>grp_articles</from>
+      <to>ac_pojo</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>ti_keyword</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Database_Target</connection>
+    <sql>SELECT
+  *
+FROM ${TableSourceName_3}
+where version = ${version}
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>SELECT *</origin>
+        <comments>id</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>version</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>SELECT *</origin>
+        <comments>version</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fechaCreacion</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>SELECT *</origin>
+        <comments>fechaCreacion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fechaModificacion</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>SELECT *</origin>
+        <comments>fechaModificacion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>operation</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>SELECT *</origin>
+        <comments>operation</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>idEjecucion</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>SELECT *</origin>
+        <comments>idEjecucion</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>keyword</name>
+        <length>1000</length>
+        <precision>-1</precision>
+        <origin>SELECT *</origin>
+        <comments>keyword</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>idPublication</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>SELECT *</origin>
+        <comments>idPublication</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>ac_pojo</name>
     <type>Constant</type>
@@ -585,7 +844,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>pers</nullif>
+        <nullif>correspondingAuthor</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -609,7 +868,79 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>org</nullif>
+        <nullif>correspondingOrganization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_3</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Book</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_3</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasPublicationVenue</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_4</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Status</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_4</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>status</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_5</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>ArticleKeyword</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_5</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>freeTextKeyword</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -625,15 +956,15 @@
     </remotesteps>
     <GUI>
       <xloc>928</xloc>
-      <yloc>288</yloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>grp_articulo_id</name>
+    <name>grp_articles</name>
     <type>GroupBy</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -655,16 +986,28 @@
     </group>
     <fields>
       <field>
-        <aggregate>idPersona</aggregate>
-        <subject>idPersona</subject>
-        <type>CONCAT_STRING</type>
-        <valuefield>|</valuefield>
+        <aggregate>version</aggregate>
+        <subject>version</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
       </field>
       <field>
         <aggregate>operation</aggregate>
         <subject>operation</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
+      </field>
+      <field>
+        <aggregate>idPersona</aggregate>
+        <subject>idPersona</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
+      </field>
+      <field>
+        <aggregate>idKeyword</aggregate>
+        <subject>idKeyword</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
       </field>
     </fields>
     <attributes/>
@@ -677,7 +1020,7 @@
     </remotesteps>
     <GUI>
       <xloc>768</xloc>
-      <yloc>288</yloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -725,7 +1068,41 @@
     </remotesteps>
     <GUI>
       <xloc>1392</xloc>
-      <yloc>288</yloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>mj_article_keyword</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>mj_articulo_libro</step1>
+    <step2>srt_articulo_id_2 2</step2>
+    <keys_1>
+      <key>idArticulo</key>
+    </keys_1>
+    <keys_2>
+      <key>idArticulo</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -788,14 +1165,21 @@
 //Variables
 parent_id  = idArticulo;
 child_id_1 = idPersona;
-//child_id_2 = idTercero;
+child_id_3 = idKeyword;
 
 json = {};
 split_child_1 = [];
 split_child_2 = [];
+split_child_3 = [];
+split_child_4 = [];
+split_child_5 = [];
+
 
 Child_1 = [];
 Child_2 = []; 
+Child_3 = []
+Child_4 = []; 
+Child_5 = [];
 
 
 //splitting the data
@@ -846,8 +1230,77 @@ json.ids = Child_2;
 JsonOutput_2 = JSON.stringify(json);
 
 
+//splitting the data
+split_child_3   = child_id_3.split('|');
 
-var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ']}}}';
+json.className = classname_3;
+json.fieldName = fieldname_3;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_3)){
+	Child_3 = []
+	} else {
+		for(i=0; i&lt;split_child_3.length; i++){
+    		child=split_child_3[i];
+    		Child_3.push(child);
+		}
+	}
+
+json.ids = Child_3;
+
+ // JSON Stringify the data object
+JsonOutput_3 = JSON.stringify(json);
+
+//splitting the data
+//split_child_4   = child_id_4.split('|');
+
+json.className = classname_4;
+json.fieldName = fieldname_4;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_4)){
+	Child_4 = []
+	} else {
+		for(i=0; i&lt;split_child_4.length; i++){
+    		child=split_child_4[i];
+    		Child_4.push(child);
+		}
+	}
+
+json.ids = Child_4;
+
+
+ // JSON Stringify the data object
+JsonOutput_4 = JSON.stringify(json);
+
+
+//splitting the data
+//split_child_5   = child_id_5.split('|');
+
+json.className = classname_5;
+json.fieldName = fieldname_5;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_5)){
+	Child_5 = []
+	} else {
+		for(i=0; i&lt;split_child_5.length; i++){
+    		child=split_child_5[i];
+    		Child_5.push(child);
+		}
+	}
+
+json.ids = Child_5;
+
+
+ // JSON Stringify the data object
+JsonOutput_5 = JSON.stringify(json);
+
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ',' + JsonOutput_3 + 
++ ',' + JsonOutput_4 + ',' + JsonOutput_5 + ']}}}';
 </jsScript_script>
       </jsScript>
     </jsScripts>
@@ -871,7 +1324,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </remotesteps>
     <GUI>
       <xloc>1088</xloc>
-      <yloc>288</yloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -956,6 +1409,48 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     <GUI>
       <xloc>400</xloc>
       <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>srt_articulo_id_2 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>idArticulo</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1065,6 +1560,60 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </GUI>
   </step>
   <step>
+    <name>sv_autor_articulo 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+        <rename>idKeyword</rename>
+      </field>
+      <field>
+        <name>version</name>
+      </field>
+      <field>
+        <name>fechaCreacion</name>
+      </field>
+      <field>
+        <name>fechaModificacion</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>idEjecucion</name>
+      </field>
+      <field>
+        <name>keyword</name>
+      </field>
+      <field>
+        <name>idPublication</name>
+        <rename>idArticulo</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>sv_output</name>
     <type>SelectValues</type>
     <description/>
@@ -1091,7 +1640,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </remotesteps>
     <GUI>
       <xloc>1248</xloc>
-      <yloc>288</yloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1108,16 +1657,10 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </partitioning>
     <connection>Database_Target</connection>
     <sql>SELECT
-  id
-, version
-, operation
-, idEjecucion
-, fechaCreacion
-, fechaModificacion
-, titulo
-, coautoria
-FROM Articulo
-where version = ${version}</sql>
+  *
+FROM ${TableSourceName_1}
+where version = ${version}
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1131,7 +1674,7 @@ where version = ${version}</sql>
         <name>id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Articulo</origin>
+        <origin>ti_articulo</origin>
         <comments>id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1154,7 +1697,7 @@ where version = ${version}</sql>
         <name>version</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Articulo</origin>
+        <origin>ti_articulo</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1177,7 +1720,7 @@ where version = ${version}</sql>
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>Articulo</origin>
+        <origin>ti_articulo</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1200,7 +1743,7 @@ where version = ${version}</sql>
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Articulo</origin>
+        <origin>ti_articulo</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1223,7 +1766,7 @@ where version = ${version}</sql>
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Articulo</origin>
+        <origin>ti_articulo</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1246,7 +1789,7 @@ where version = ${version}</sql>
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Articulo</origin>
+        <origin>ti_articulo</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1269,7 +1812,7 @@ where version = ${version}</sql>
         <name>titulo</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>Articulo</origin>
+        <origin>ti_articulo</origin>
         <comments>titulo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1292,8 +1835,31 @@ where version = ${version}</sql>
         <name>coautoria</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>Articulo</origin>
+        <origin>ti_articulo</origin>
         <comments>coautoria</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>Año</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>ti_articulo</origin>
+        <comments>Año</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -1337,20 +1903,14 @@ where version = ${version}</sql>
     </partitioning>
     <connection>Database_Target</connection>
     <sql>SELECT
-  id
-, idPersona
-, idArticulo
-, version
-, idEjecucion
-, operation
-, fechaCreacion
-, fechaModificacion
-FROM Rel_AutorArticulo
+  *
+FROM ${TableSourceName_2}
+where version = ${version}
 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -1360,7 +1920,7 @@ FROM Rel_AutorArticulo
         <name>id</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>AutorArticulo</origin>
+        <origin>ti_autor_articulo</origin>
         <comments>id</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1383,7 +1943,7 @@ FROM Rel_AutorArticulo
         <name>idPersona</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>AutorArticulo</origin>
+        <origin>ti_autor_articulo</origin>
         <comments>idPersona</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1406,7 +1966,7 @@ FROM Rel_AutorArticulo
         <name>idArticulo</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>AutorArticulo</origin>
+        <origin>ti_autor_articulo</origin>
         <comments>idArticulo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1429,7 +1989,7 @@ FROM Rel_AutorArticulo
         <name>version</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>AutorArticulo</origin>
+        <origin>ti_autor_articulo</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1452,7 +2012,7 @@ FROM Rel_AutorArticulo
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>AutorArticulo</origin>
+        <origin>ti_autor_articulo</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1475,7 +2035,7 @@ FROM Rel_AutorArticulo
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>AutorArticulo</origin>
+        <origin>ti_autor_articulo</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1498,7 +2058,7 @@ FROM Rel_AutorArticulo
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>AutorArticulo</origin>
+        <origin>ti_autor_articulo</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1521,7 +2081,7 @@ FROM Rel_AutorArticulo
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>AutorArticulo</origin>
+        <origin>ti_autor_articulo</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>

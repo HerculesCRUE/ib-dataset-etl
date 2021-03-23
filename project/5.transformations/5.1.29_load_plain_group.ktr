@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>5.1.2_load_plain_proyecto_internacional</name>
+    <name>5.1.29_load_plain_group</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -8,6 +8,16 @@
     <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TABLE_NAME</name>
+        <default_value>ComiteEditorial</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TABLE_NAME_2</name>
+        <default_value>ComiteCongreso</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -442,7 +452,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/12 15:42:26.710</modified_date>
+    <modified_date>2021/03/23 09:00:52.471</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -552,33 +562,8 @@
   </connection>
   <order>
     <hop>
-      <from>sv_intproject</from>
-      <to>srt_intproject</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_projectOrigin</from>
-      <to>grp_projectOrigin</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>grp_projectOrigin</from>
-      <to>mj_intProject_projectOrigin</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ti_rel_orig_proy</from>
-      <to>sv_projectOrigin</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_projectOrigin</from>
-      <to>srt_projectOrigin</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_final</from>
-      <to>ifvaln_nulls</to>
+      <from>srt_entity_id</from>
+      <to>grp_entity_id</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -587,128 +572,168 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_pojo</from>
-      <to>gv_keykafka</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ti_proy_coop_int</from>
-      <to>cln_intproject_fields</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>cln_intproject_fields</from>
-      <to>sv_intproject</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ac_pojo</from>
-      <to>jsono_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>jsono_pojo</from>
-      <to>ris_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ris_pojo</from>
-      <to>cf_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>cf_pojo</from>
-      <to>sv_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>gsi_sysdate</from>
-      <to>gv_idEjecucion</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>iu_proy_coop</from>
-      <to>ac_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>gv_idEjecucion</from>
-      <to>iu_proy_coop</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ti_tipo_financ</from>
-      <to>ris_typeFund</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>mj_intProject_fund</from>
-      <to>sv_final</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ti_financ</from>
-      <to>mj_proyFund_typeFund</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ris_typeFund</from>
-      <to>mj_proyFund_typeFund</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>mj_proyFund_typeFund</from>
-      <to>sv_fund</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_fund</from>
-      <to>srt_fund</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>mj_intProject_projectOrigin</from>
-      <to>mj_intProject_fund</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_fund</from>
-      <to>grp_fund</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>grp_fund</from>
-      <to>mj_intProject_fund</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>gv_keykafka</from>
-      <to>dval_output_validation</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>dval_output_validation</from>
-      <to>dmmy_val_fail</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>dval_output_validation</from>
-      <to>ac_val_ok</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ac_val_ok</from>
       <to>kafp_pojo</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>srt_intproject</from>
-      <to>mj_intProject_projectOrigin</to>
+      <from>gsi_sysdate</from>
+      <to>gv_execution_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>gv_execution_id</from>
+      <to>iu_target_db</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_commitee_1</from>
+      <to>ris_entity_fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ac_pojo 2</from>
+      <to>jsono_pojo 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>cf_pojo 2</from>
+      <to>sv_output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>jsono_pojo 2</from>
+      <to>ris_pojo 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ris_pojo 2</from>
+      <to>cf_pojo 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_output</from>
+      <to>gv_keykafka</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>iu_target_db</from>
+      <to>ac_pojo 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_commitee_2</from>
+      <to>ris_entity_fields 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_entity_fields</from>
+      <to>Dummy (do nothing)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_entity_fields 2</from>
+      <to>Dummy (do nothing)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Dummy (do nothing)</from>
+      <to>srt_entity_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ris_entity_fields</from>
+      <to>ac_pojo 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ac_pojo 2 2</from>
+      <to>sv_entity_fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ris_entity_fields 2</from>
+      <to>ac_pojo 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ac_pojo 2 2 2</from>
+      <to>sv_entity_fields 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>grp_entity_id</from>
+      <to>Add sequence</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add sequence</from>
+      <to>ifvaln_nulls</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>ac_pojo</name>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>id</valuename>
+    <use_database>N</use_database>
+    <connection/>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Dummy (do nothing)</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ac_pojo 2</name>
     <type>Constant</type>
     <description/>
     <distribute>N</distribute>
@@ -780,13 +805,25 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>proy</name>
+        <name>nombre_objeto</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>InternationalProject</nullif>
+        <nullif>Group</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>lang</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>es-ES</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -801,16 +838,16 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
-      <yloc>464</yloc>
+      <xloc>1280</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ac_val_ok</name>
+    <name>ac_pojo 2 2</name>
     <type>Constant</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -819,13 +856,205 @@
     </partitioning>
     <fields>
       <field>
-        <name>result</name>
+        <name>date</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>El formato es correcto</nullif>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>locatedIn</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasContactInfo</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasKnowledgeArea</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>provides</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasAccreditation</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>predecessorOrganization</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasRole</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>abbreviation</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>homepage</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasPart</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>participates</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>identifier</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>sucessorOrganization</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasReservable</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>relatedBy</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>keyword</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -840,13 +1069,256 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
-      <yloc>608</yloc>
+      <xloc>320</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>cf_pojo</name>
+    <name>ac_pojo 2 2 2</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>locatedIn</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasContactInfo</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasKnowledgeArea</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>provides</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasAccreditation</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>predecessorOrganization</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasRole</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>abbreviation</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>homepage</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasPart</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>participates</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>identifier</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>sucessorOrganization</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasReservable</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>relatedBy</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>keyword</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>description</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>cf_pojo 2</name>
     <type>ConcatFields</type>
     <description/>
     <distribute>N</distribute>
@@ -1022,209 +1494,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
-      <yloc>464</yloc>
+      <xloc>1696</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>cln_intproject_fields</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>titulo</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>"</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>titulo</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>'</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>titulo</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>/</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>operation</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>UPDATE</replace_string>
-        <replace_by_string>INSERT</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>operation</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>DELETE</replace_string>
-        <replace_by_string>INSERT</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>304</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>dmmy_val_fail</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1328</xloc>
-      <yloc>736</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>dval_output_validation</name>
-    <type>Validator</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <validate_all>Y</validate_all>
-    <concat_errors>N</concat_errors>
-    <concat_separator>|</concat_separator>
-    <validator_field>
-      <name>outputValue</name>
-      <validation_name>JSON START</validation_name>
-      <max_length/>
-      <min_length/>
-      <null_allowed>N</null_allowed>
-      <only_null_allowed>N</only_null_allowed>
-      <only_numeric_allowed>N</only_numeric_allowed>
-      <data_type>String</data_type>
-      <data_type_verified>Y</data_type_verified>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <max_value/>
-      <min_value/>
-      <start_string>{"operation":</start_string>
-      <end_string/>
-      <start_string_not_allowed/>
-      <end_string_not_allowed/>
-      <regular_expression/>
-      <regular_expression_not_allowed/>
-      <error_code>1</error_code>
-      <error_description>Inicio de JSON no válido</error_description>
-      <is_sourcing_values>N</is_sourcing_values>
-      <sourcing_step/>
-      <sourcing_field/>
-      <allowed_value/>
-    </validator_field>
-    <validator_field>
-      <name>outputValue</name>
-      <validation_name>JSON END</validation_name>
-      <max_length/>
-      <min_length/>
-      <null_allowed>Y</null_allowed>
-      <only_null_allowed>N</only_null_allowed>
-      <only_numeric_allowed>N</only_numeric_allowed>
-      <data_type>String</data_type>
-      <data_type_verified>Y</data_type_verified>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <max_value/>
-      <min_value/>
-      <start_string/>
-      <end_string>}}</end_string>
-      <start_string_not_allowed/>
-      <end_string_not_allowed/>
-      <regular_expression/>
-      <regular_expression_not_allowed/>
-      <error_code>2</error_code>
-      <error_description>Formato de cierre del JSON no válido</error_description>
-      <is_sourcing_values>N</is_sourcing_values>
-      <sourcing_step/>
-      <sourcing_field/>
-      <allowed_value/>
-    </validator_field>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1328</xloc>
-      <yloc>608</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>grp_fund</name>
+    <name>grp_entity_id</name>
     <type>GroupBy</type>
     <description/>
     <distribute>Y</distribute>
@@ -1244,14 +1520,134 @@
     <give_back_row>N</give_back_row>
     <group>
       <field>
-        <name>idProyecto</name>
+        <name>ENTITY_ID</name>
       </field>
     </group>
     <fields>
       <field>
-        <aggregate>descripcion</aggregate>
-        <subject>descripcion</subject>
-        <type>FIRST_INCL_NULL</type>
+        <aggregate>version</aggregate>
+        <subject>version</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>operation</aggregate>
+        <subject>operation</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>date</aggregate>
+        <subject>date</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>locatedIn</aggregate>
+        <subject>locatedIn</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>title</aggregate>
+        <subject>title</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>description</aggregate>
+        <subject>description</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>homepage</aggregate>
+        <subject>homepage</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>hasContactInfo</aggregate>
+        <subject>hasContactInfo</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>hasKnowledgeArea</aggregate>
+        <subject>hasKnowledgeArea</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>provides</aggregate>
+        <subject>provides</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>hasAccreditation</aggregate>
+        <subject>hasAccreditation</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>predecessorOrganization</aggregate>
+        <subject>predecessorOrganization</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>hasRole</aggregate>
+        <subject>hasRole</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>abbreviation</aggregate>
+        <subject>abbreviation</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>hasPart</aggregate>
+        <subject>hasPart</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>participates</aggregate>
+        <subject>participates</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>identifier</aggregate>
+        <subject>identifier</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>sucessorOrganization</aggregate>
+        <subject>sucessorOrganization</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>hasReservable</aggregate>
+        <subject>hasReservable</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>relatedBy</aggregate>
+        <subject>relatedBy</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>keyword</aggregate>
+        <subject>keyword</subject>
+        <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
     </fields>
@@ -1264,66 +1660,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>grp_projectOrigin</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>idProyecto</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>codTipoOrigen</aggregate>
-        <subject>codTipoOrigen</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>idOrigenProyecto</aggregate>
-        <subject>idOrigenProyecto</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>idProyecto</aggregate>
-        <subject>idProyecto</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>192</yloc>
+      <xloc>816</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1353,13 +1691,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
-      <yloc>336</yloc>
+      <xloc>992</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>gv_idEjecucion</name>
+    <name>gv_execution_id</name>
     <type>GetVariable</type>
     <description/>
     <distribute>N</distribute>
@@ -1392,8 +1730,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1616</xloc>
-      <yloc>336</yloc>
+      <xloc>1120</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1431,8 +1769,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
-      <yloc>608</yloc>
+      <xloc>1840</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1456,6 +1794,12 @@
       </valuetypes>
     <fields>
       <field>
+        <name>ENTITY_ID</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
         <name>version</name>
         <value/>
         <mask/>
@@ -1468,55 +1812,115 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>endDate</name>
+        <name>date</name>
         <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>startDate</name>
+        <name>locatedIn</name>
         <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>identificador</name>
+        <name>title</name>
         <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>pcInPorcentaje</name>
+        <name>description</name>
         <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>idProyecto</name>
+        <name>homepage</name>
         <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>nombre</name>
+        <name>hasContactInfo</name>
         <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>codTipoOrigen</name>
+        <name>hasKnowledgeArea</name>
         <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>idOrigenProyecto</name>
+        <name>provides</name>
         <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>descripcion</name>
+        <name>hasAccreditation</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>predecessorOrganization</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasRole</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>abbreviation</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasPart</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>participates</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>identifier</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>sucessorOrganization</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>hasReservable</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>relatedBy</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>keyword</name>
         <value/>
         <mask/>
         <set_empty_string>N</set_empty_string>
@@ -1531,13 +1935,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1328</xloc>
-      <yloc>336</yloc>
+      <xloc>992</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>iu_proy_coop</name>
+    <name>iu_target_db</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>N</distribute>
@@ -1552,21 +1956,21 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>etl</schema>
-      <table>ProyectoCooperacionInternacional</table>
+      <table>Group</table>
       <key>
-        <name>idProyecto</name>
+        <name>id</name>
         <field>id</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>id</name>
-        <rename>idProyecto</rename>
+        <name>version</name>
+        <rename>version</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>idEjecucion</name>
-        <rename>idEjecucion</rename>
+        <name>operation</name>
+        <rename>operation</rename>
         <update>Y</update>
       </value>
       <value>
@@ -1580,39 +1984,44 @@
         <update>Y</update>
       </value>
       <value>
-        <name>operation</name>
-        <rename>operation</rename>
+        <name>IdEjecucion</name>
+        <rename>IdEjecucion</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>nombre</name>
-        <rename>nombre</rename>
+        <name>date</name>
+        <rename>date</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>tipo</name>
-        <rename>codTipoOrigen</rename>
+        <name>locatedIn</name>
+        <rename>locatedIn</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>fechaFin</name>
-        <rename>endDate</rename>
+        <name>title</name>
+        <rename>title</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>idOrigenProyecto</name>
-        <rename>idOrigenProyecto</rename>
+        <name>id</name>
+        <rename>id</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>fechaInicio</name>
-        <rename>startDate</rename>
+        <name>abbreviation</name>
+        <rename>abbreviation</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>version</name>
-        <rename>version</rename>
-        <update>N</update>
+        <name>description</name>
+        <rename>description</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>homepage</name>
+        <rename>homepage</rename>
+        <update>Y</update>
       </value>
     </lookup>
     <attributes/>
@@ -1624,13 +2033,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1616</xloc>
-      <yloc>464</yloc>
+      <xloc>1280</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>jsono_pojo</name>
+    <name>jsono_pojo 2</name>
     <type>JsonOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1661,28 +2070,36 @@
     </file>
     <fields>
       <field>
-        <name>idProyecto</name>
+        <name>id</name>
         <element>id</element>
       </field>
       <field>
-        <name>nombre</name>
-        <element>name</element>
-      </field>
-      <field>
-        <name>codTipoOrigen</name>
-        <element>objective</element>
-      </field>
-      <field>
-        <name>proy</name>
+        <name>nombre_objeto</name>
         <element>@class</element>
       </field>
       <field>
-        <name>startDate</name>
-        <element>startDate</element>
+        <name>title</name>
+        <element>dedicationPercentage</element>
       </field>
       <field>
-        <name>endDate</name>
-        <element>endDate</element>
+        <name>description</name>
+        <element>dedication</element>
+      </field>
+      <field>
+        <name>date</name>
+        <element>date</element>
+      </field>
+      <field>
+        <name>locatedIn</name>
+        <element>description</element>
+      </field>
+      <field>
+        <name>homepage</name>
+        <element>homepage</element>
+      </field>
+      <field>
+        <name>lang</name>
+        <element>lang</element>
       </field>
     </fields>
     <attributes/>
@@ -1694,8 +2111,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1328</xloc>
-      <yloc>464</yloc>
+      <xloc>1424</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1742,14 +2159,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1616</xloc>
-      <yloc>608</yloc>
+      <xloc>1840</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>mj_intProject_fund</name>
-    <type>MergeJoin</type>
+    <name>ris_entity_fields</name>
+    <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1758,15 +2175,56 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>mj_intProject_projectOrigin</step1>
-    <step2>grp_fund</step2>
-    <keys_1>
-      <key>idProyecto</key>
-    </keys_1>
-    <keys_2>
-      <key>idProyecto</key>
-    </keys_2>
+    <fields>
+      <field>
+        <in_stream_name>operation</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>UPDATE</replace_string>
+        <replace_by_string>INSERT</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>operation</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>DELETE</replace_string>
+        <replace_by_string>INSERT</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>inreDescripcion</in_stream_name>
+        <out_stream_name/>
+        <use_regex>yes</use_regex>
+        <replace_string>[\p{P}\p{S}]</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>reisTitulo</in_stream_name>
+        <out_stream_name/>
+        <use_regex>yes</use_regex>
+        <replace_string>[\p{P}\p{S}]</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1776,48 +2234,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
-      <yloc>336</yloc>
+      <xloc>192</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>mj_intProject_projectOrigin</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>srt_intproject</step1>
-    <step2>grp_projectOrigin</step2>
-    <keys_1>
-      <key>idProyecto</key>
-    </keys_1>
-    <keys_2>
-      <key>idProyecto</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>mj_proyFund_typeFund</name>
-    <type>MergeJoin</type>
+    <name>ris_entity_fields 2</name>
+    <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1826,15 +2250,56 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>INNER</join_type>
-    <step1>ti_financ</step1>
-    <step2>ris_typeFund</step2>
-    <keys_1>
-      <key>codTipoFinanciacion</key>
-    </keys_1>
-    <keys_2>
-      <key>codTipoFinanciacion</key>
-    </keys_2>
+    <fields>
+      <field>
+        <in_stream_name>operation</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>UPDATE</replace_string>
+        <replace_by_string>INSERT</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>operation</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>DELETE</replace_string>
+        <replace_by_string>INSERT</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>congLugar</in_stream_name>
+        <out_stream_name/>
+        <use_regex>yes</use_regex>
+        <replace_string>[\p{P}\p{S}]</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>congTitCongreso</in_stream_name>
+        <out_stream_name/>
+        <use_regex>yes</use_regex>
+        <replace_string>[\p{P}\p{S}]</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1844,13 +2309,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>336</yloc>
+      <xloc>224</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ris_pojo</name>
+    <name>ris_pojo 2</name>
     <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
@@ -1907,136 +2372,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
-      <yloc>464</yloc>
+      <xloc>1552</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ris_typeFund</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>descripcion</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>"</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>descripcion</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>'</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>descripcion</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>/</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>codTipoFinanciacion</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>"</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>codTipoFinanciacion</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>'</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>codTipoFinanciacion</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>/</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>operation</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>UPDATE</replace_string>
-        <replace_by_string>INSERT</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>operation</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>DELETE</replace_string>
-        <replace_by_string>INSERT</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>304</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>srt_fund</name>
+    <name>srt_entity_id</name>
     <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -2055,7 +2397,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>idProyecto</name>
+        <name>ENTITY_ID</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -2072,166 +2414,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>336</yloc>
+      <xloc>720</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>srt_intproject</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>idProyecto</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>version</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>srt_projectOrigin</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>idProyecto</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>sv_final</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>version</name>
-      </field>
-      <field>
-        <name>operation</name>
-      </field>
-      <field>
-        <name>endDate</name>
-      </field>
-      <field>
-        <name>startDate</name>
-      </field>
-      <field>
-        <name>identificador</name>
-      </field>
-      <field>
-        <name>pcInPorcentaje</name>
-      </field>
-      <field>
-        <name>idProyecto</name>
-      </field>
-      <field>
-        <name>nombre</name>
-      </field>
-      <field>
-        <name>codTipoOrigen</name>
-      </field>
-      <field>
-        <name>idOrigenProyecto</name>
-      </field>
-      <field>
-        <name>descripcion</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1168</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>sv_fund</name>
+    <name>sv_entity_fields</name>
     <type>SelectValues</type>
     <description/>
     <distribute>N</distribute>
@@ -2243,12 +2432,92 @@
     </partitioning>
     <fields>
       <field>
-        <name>idProyecto</name>
+        <name>ENTITY_ID</name>
       </field>
       <field>
-        <name>descripcion</name>
+        <name>version</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>date</name>
+      </field>
+      <field>
+        <name>locatedIn</name>
+      </field>
+      <field>
+        <name>reisTitulo</name>
+        <rename>title</rename>
+      </field>
+      <field>
+        <name>inreDescripcion</name>
+        <rename>description</rename>
+      </field>
+      <field>
+        <name>reisUrl</name>
+        <rename>homepage</rename>
+      </field>
+      <field>
+        <name>hasContactInfo</name>
+      </field>
+      <field>
+        <name>hasKnowledgeArea</name>
+      </field>
+      <field>
+        <name>provides</name>
+      </field>
+      <field>
+        <name>hasAccreditation</name>
+      </field>
+      <field>
+        <name>predecessorOrganization</name>
+      </field>
+      <field>
+        <name>hasRole</name>
+      </field>
+      <field>
+        <name>abbreviation</name>
+      </field>
+      <field>
+        <name>hasPart</name>
+      </field>
+      <field>
+        <name>participates</name>
+      </field>
+      <field>
+        <name>identifier</name>
+      </field>
+      <field>
+        <name>sucessorOrganization</name>
+      </field>
+      <field>
+        <name>hasReservable</name>
+      </field>
+      <field>
+        <name>relatedBy</name>
+      </field>
+      <field>
+        <name>keyword</name>
       </field>
       <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>date</name>
+        <rename>date</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -2259,13 +2528,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>336</yloc>
+      <xloc>480</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>sv_intproject</name>
+    <name>sv_entity_fields 2</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -2286,46 +2555,68 @@
         <name>operation</name>
       </field>
       <field>
-        <name>fecFin</name>
+        <name>congFecha</name>
       </field>
       <field>
-        <name>fecInicio</name>
+        <name>congLugar</name>
+        <rename>locatedIn</rename>
       </field>
       <field>
-        <name>identificador</name>
+        <name>congTitCongreso</name>
+        <rename>title</rename>
       </field>
       <field>
-        <name>pcInPorcentaje</name>
+        <name>description</name>
       </field>
       <field>
-        <name>proyecto</name>
-        <rename>idProyecto</rename>
+        <name>homepage</name>
       </field>
       <field>
-        <name>titulo</name>
-        <rename>nombre</rename>
+        <name>hasContactInfo</name>
+      </field>
+      <field>
+        <name>hasKnowledgeArea</name>
+      </field>
+      <field>
+        <name>provides</name>
+      </field>
+      <field>
+        <name>hasAccreditation</name>
+      </field>
+      <field>
+        <name>predecessorOrganization</name>
+      </field>
+      <field>
+        <name>hasRole</name>
+      </field>
+      <field>
+        <name>abbreviation</name>
+      </field>
+      <field>
+        <name>hasPart</name>
+      </field>
+      <field>
+        <name>participates</name>
+      </field>
+      <field>
+        <name>identifier</name>
+      </field>
+      <field>
+        <name>sucessorOrganization</name>
+      </field>
+      <field>
+        <name>hasReservable</name>
+      </field>
+      <field>
+        <name>relatedBy</name>
+      </field>
+      <field>
+        <name>keyword</name>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
-        <name>fecInicio</name>
-        <rename>startDate</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>fecFin</name>
-        <rename>endDate</rename>
+        <name>congFecha</name>
+        <rename>date</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -2350,16 +2641,16 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>64</yloc>
+      <xloc>480</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>sv_pojo</name>
+    <name>sv_output</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -2381,50 +2672,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
-      <yloc>608</yloc>
+      <xloc>1840</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>sv_projectOrigin</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>codTipoOrigen</name>
-      </field>
-      <field>
-        <name>idOrigenProyecto</name>
-      </field>
-      <field>
-        <name>idProyecto</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>304</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ti_financ</name>
+    <name>ti_commitee_1</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2435,23 +2689,15 @@
       <schema_name/>
     </partitioning>
     <connection>Database_Source</connection>
-    <sql>SELECT
-  ENTITY_ID
-, version
-, operation
-, codTipoFinanciacion
-, codTipoFuente
-, codTipoMoneda
-, idProyecto
-, importe
-, numero
-, numeroAnualidad
-FROM FinanciacionProyecto
+    <sql>SELECT *
+FROM ${TABLE_NAME}
+where version = ${version}
+limit ${limit}
 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -2461,7 +2707,7 @@ FROM FinanciacionProyecto
         <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>in_proyFund</origin>
+        <origin>ti_commitee_1</origin>
         <comments>ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2484,7 +2730,7 @@ FROM FinanciacionProyecto
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>in_proyFund</origin>
+        <origin>ti_commitee_1</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2507,7 +2753,7 @@ FROM FinanciacionProyecto
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>in_proyFund</origin>
+        <origin>ti_commitee_1</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2527,11 +2773,11 @@ FROM FinanciacionProyecto
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>codTipoFinanciacion</name>
+        <name>inreDescripcion</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>in_proyFund</origin>
-        <comments>codTipoFinanciacion</comments>
+        <origin>ti_commitee_1</origin>
+        <comments>inreDescripcion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -2550,34 +2796,11 @@ FROM FinanciacionProyecto
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>codTipoFuente</name>
+        <name>reisCategory</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>in_proyFund</origin>
-        <comments>codTipoFuente</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>codTipoMoneda</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>in_proyFund</origin>
-        <comments>codTipoMoneda</comments>
+        <origin>ti_commitee_1</origin>
+        <comments>reisCategory</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -2596,12 +2819,35 @@ FROM FinanciacionProyecto
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>idProyecto</name>
+        <name>reisCritCalidad</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>in_proyFund</origin>
-        <comments>idProyecto</comments>
+        <origin>ti_commitee_1</origin>
+        <comments>reisCritCalidad</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>reisElectronica</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_commitee_1</origin>
+        <comments>reisElectronica</comments>
+        <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -2619,11 +2865,11 @@ FROM FinanciacionProyecto
       <value-meta>
         <type>Number</type>
         <storagetype>normal</storagetype>
-        <name>importe</name>
+        <name>reisImpacto</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>in_proyFund</origin>
-        <comments>importe</comments>
+        <origin>ti_commitee_1</origin>
+        <comments>reisImpacto</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -2640,14 +2886,37 @@ FROM FinanciacionProyecto
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>numero</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>in_proyFund</origin>
-        <comments>numero</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <name>reisInreCodigo</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_commitee_1</origin>
+        <comments>reisInreCodigo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>reisIssn</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_commitee_1</origin>
+        <comments>reisIssn</comments>
+        <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -2665,12 +2934,58 @@ FROM FinanciacionProyecto
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>numeroAnualidad</name>
+        <name>reisQuartile</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>in_proyFund</origin>
-        <comments>numeroAnualidad</comments>
+        <origin>ti_commitee_1</origin>
+        <comments>reisQuartile</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>reisTitulo</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_commitee_1</origin>
+        <comments>reisTitulo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>reisUrl</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_commitee_1</origin>
+        <comments>reisUrl</comments>
+        <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -2695,13 +3010,13 @@ FROM FinanciacionProyecto
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>336</yloc>
+      <xloc>80</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ti_proy_coop_int</name>
+    <name>ti_commitee_2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2715,15 +3030,15 @@ FROM FinanciacionProyecto
     <sql>SELECT
   ENTITY_ID
 , version
-, operation
-, STR_TO_DATE(fecInicio, '%Y/%m/%d') as fecInicio
-, STR_TO_DATE(fecFin, '%Y/%m/%d') as fecFin
-, identificador
-, pcInPorcentaje
-, proyecto
-, titulo
-FROM ProyectoCooperacionInternacional
+, operation 
+, STR_TO_DATE(congFecha,'%Y/%m/%d') as congFecha
+, congInternacional
+, congLugar
+, congNumero
+, congTitCongreso
+FROM ${TABLE_NAME_2}
 where version = ${version}
+limit ${limit}
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -2738,7 +3053,7 @@ where version = ${version}
         <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>in_intproject</origin>
+        <origin>ti_commitee_2</origin>
         <comments>ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2761,7 +3076,7 @@ where version = ${version}
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>in_intproject</origin>
+        <origin>ti_commitee_2</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2784,7 +3099,7 @@ where version = ${version}
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>in_intproject</origin>
+        <origin>ti_commitee_2</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2804,34 +3119,11 @@ where version = ${version}
       <value-meta>
         <type>Date</type>
         <storagetype>normal</storagetype>
-        <name>fecInicio</name>
+        <name>congFecha</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>in_intproject</origin>
-        <comments>fecInicio</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Date</type>
-        <storagetype>normal</storagetype>
-        <name>fecFin</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>in_intproject</origin>
-        <comments>fecFin</comments>
+        <origin>ti_commitee_2</origin>
+        <comments>congFecha</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -2850,11 +3142,34 @@ where version = ${version}
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>identificador</name>
+        <name>congInternacional</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>in_intproject</origin>
-        <comments>identificador</comments>
+        <origin>ti_commitee_2</origin>
+        <comments>congInternacional</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>congLugar</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_commitee_2</origin>
+        <comments>congLugar</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -2873,34 +3188,11 @@ where version = ${version}
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>pcInPorcentaje</name>
+        <name>congNumero</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>in_intproject</origin>
-        <comments>pcInPorcentaje</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>proyecto</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>in_intproject</origin>
-        <comments>proyecto</comments>
+        <origin>ti_commitee_2</origin>
+        <comments>congNumero</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -2919,11 +3211,11 @@ where version = ${version}
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>titulo</name>
+        <name>congTitCongreso</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>in_intproject</origin>
-        <comments>titulo</comments>
+        <origin>ti_commitee_2</origin>
+        <comments>congTitCongreso</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -2949,367 +3241,16 @@ where version = ${version}
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ti_rel_orig_proy</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Database_Source</connection>
-    <sql>SELECT
-  ENTITY_ID
-, version
-, operation
-, codTipoOrigen
-, idOrigenProyecto
-, idProyecto
-FROM RelacionOrigenProyecto
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>ENTITY_ID</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>in_projectOrigin</origin>
-        <comments>ENTITY_ID</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>version</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>in_projectOrigin</origin>
-        <comments>version</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>operation</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>in_projectOrigin</origin>
-        <comments>operation</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>codTipoOrigen</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>in_projectOrigin</origin>
-        <comments>codTipoOrigen</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>idOrigenProyecto</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>in_projectOrigin</origin>
-        <comments>idOrigenProyecto</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>idProyecto</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>in_projectOrigin</origin>
-        <comments>idProyecto</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ti_tipo_financ</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Database_Source</connection>
-    <sql>SELECT
-  ENTITY_ID
-, version
-, operation
-, codTipoFinanciacion
-, descripcion
-FROM TipoFinanciacion
-
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>ENTITY_ID</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>in_typeFund</origin>
-        <comments>ENTITY_ID</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>version</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>in_typeFund</origin>
-        <comments>version</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>operation</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>in_typeFund</origin>
-        <comments>operation</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>codTipoFinanciacion</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>in_typeFund</origin>
-        <comments>codTipoFinanciacion</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>descripcion</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>in_typeFund</origin>
-        <comments>descripcion</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>480</yloc>
+      <xloc>80</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
     <error>
-      <source_step>dval_output_validation</source_step>
-      <target_step>dmmy_val_fail</target_step>
+      <source_step>iu_target_db</source_step>
+      <target_step/>
       <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename>error_description</descriptions_valuename>
-      <fields_valuename>error_fieldname</fields_valuename>
-      <codes_valuename>error_code</codes_valuename>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
-    <error>
-      <source_step>iu_proy_coop</source_step>
-      <target_step>dmmy_val_fail</target_step>
-      <is_enabled>N</is_enabled>
       <nr_valuename>erro_line</nr_valuename>
       <descriptions_valuename>error_desc</descriptions_valuename>
       <fields_valuename>error_name</fields_valuename>

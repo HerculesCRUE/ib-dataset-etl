@@ -9,8 +9,38 @@
     <directory>/5.transformations</directory>
     <parameters>
       <parameter>
-        <name>parent</name>
-        <default_value>Proyecto</default_value>
+        <name>TableNameSource_1</name>
+        <default_value>Project</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableNameSource_2</name>
+        <default_value>Rel_RelacionOrigenProyecto</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableNameSource_3</name>
+        <default_value>Invoice</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableNameSource_4</name>
+        <default_value>Rel_EquipoProyecto</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableNameSource_5</name>
+        <default_value>Rel_FinanciacionProyecto</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableNameSource_6</name>
+        <default_value>ProjectExpense</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableNameSource_7</name>
+        <default_value>Rel_InvestigadorProyectoCooperacionInternacional</default_value>
         <description/>
       </parameter>
     </parameters>
@@ -434,7 +464,7 @@
     <created_user>-</created_user>
     <created_date>2020/11/05 14:55:32.651</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/20 17:40:02.189</modified_date>
+    <modified_date>2021/03/18 16:30:58.545</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -518,11 +548,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_equipo</from>
-      <to>srt_id_proyecto_4</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>grp_proyectos_final</from>
       <to>ac_pojo</to>
       <enabled>Y</enabled>
@@ -535,11 +560,6 @@
     <hop>
       <from>sv_output</from>
       <to>kafp_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_id_proyecto_4</from>
-      <to>mj_proyecto_equipo</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -657,7 +677,57 @@
       <to>grp_proyectos_final</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>ti_inv_proy_coop_int</from>
+      <to>sv_equipo 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_equipo</from>
+      <to>Dummy (do nothing)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Dummy (do nothing)</from>
+      <to>srt_id_proyecto_4</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_equipo 2</from>
+      <to>Dummy (do nothing)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_id_proyecto_4</from>
+      <to>mj_proyecto_equipo</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Dummy (do nothing)</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>624</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Filter rows</name>
     <type>FilterRows</type>
@@ -743,8 +813,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1344</xloc>
-      <yloc>848</yloc>
+      <xloc>1504</xloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -815,7 +885,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>pers</nullif>
+        <nullif>relates</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -839,7 +909,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>fund</nullif>
+        <nullif>fundedBy</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -863,7 +933,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>source</nullif>
+        <nullif>supportedBy</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -887,7 +957,295 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>pexp</nullif>
+        <nullif>spends</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_6</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>ProjectContract</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_6</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasContract</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_7</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>HumanResourceClassification</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_7</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasHRClassification</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_8</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Status</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_8</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>projectStatus</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_9</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Feature</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_9</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>locatedIn</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_10</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>ProjectKeyword</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_10</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>freeTextKeyword</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_11</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Activity</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_11</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>participates</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_12</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Dossier</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_12</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>relatedBy</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_13</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Role</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_13</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>related</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_14</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>KnowledgeArea</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_14</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasKnowledgeArea</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_15</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>ProjectCategorization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_15</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasProjectCategorization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_16</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Project</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_16</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasPart</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_17</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>ResearchObject</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_17</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>produces</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -902,8 +1260,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1216</xloc>
-      <yloc>848</yloc>
+      <xloc>1376</xloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1149,8 +1507,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1072</xloc>
-      <yloc>848</yloc>
+      <xloc>1232</xloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1202,7 +1560,7 @@
     </remotesteps>
     <GUI>
       <xloc>624</xloc>
-      <yloc>736</yloc>
+      <yloc>880</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1249,8 +1607,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1728</xloc>
-      <yloc>848</yloc>
+      <xloc>1888</xloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1385,8 +1743,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>880</xloc>
-      <yloc>848</yloc>
+      <xloc>1040</xloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1419,8 +1777,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>880</xloc>
-      <yloc>736</yloc>
+      <xloc>1040</xloc>
+      <yloc>880</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1448,43 +1806,32 @@
 
 //Variables
 parent_id  = idProyecto;
-child_id_1 = idFactura;
+//child_id_1 = idFactura;
 child_id_2 = idPersona;
 child_id_3 = codTipoFinanciacion;
 child_id_4 = codTipoFuente;
 child_id_5 = idDocumento;
 
+
 json = {};
 
-Child_1 = [];
+//Child_1 = [];
 Child_2 = [];
 Child_3 = [];
 Child_4 = [];
 Child_5 = [];
+Child_6 = [];
+Child_7 = [];
+Child_8 = [];
+Child_10= [];
+Child_11 = [];
+Child_12 = [];
+Child_13 = [];
+Child_14 = [];
+Child_15 = [];
+Child_16 = [];
 
 
-//splitting the data
-split_child_1   = child_id_1.split('|');
-
-json.className = classname_1;
-json.fieldName = fieldname_1;
-
-
-// Loop through the splitted data and build the child structure
-if (isEmpty(split_child_1)){
-	Child_1 = []
-	} else {
-		for(i=0; i&lt;split_child_1.length; i++){
-    		child=split_child_1[i];
-    		Child_1.push(child);
-		}
-	}
-
-json.ids = Child_1;
-
-
- // JSON Stringify the data object
-JsonOutput = JSON.stringify(json);
 
 
 //splitting the data
@@ -1585,11 +1932,267 @@ json.ids = Child_5;
 JsonOutput_5 = JSON.stringify(json);
 
 
+//splitting the data
+split_child_6   = [];
+
+json.className = classname_6;
+json.fieldName = fieldname_6;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_6)){
+	Child_6 = []
+	} else {
+		for(i=0; i&lt;split_child_6.length; i++){
+    		child=split_child_6[i];
+    		Child_6.push(child);
+		}
+	}
+
+json.ids = Child_6;
+
+
+ // JSON Stringify the data object
+JsonOutput_6 = JSON.stringify(json);
 
 
 
 
-var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput + ',' + JsonOutput_2 + ',' + JsonOutput_3 + ',' + JsonOutput_4 + ',' + JsonOutput_5 + ']}}}';
+
+//splitting the data
+split_child_7   = [];
+
+json.className = classname_7;
+json.fieldName = fieldname_7;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_7)){
+	Child_7 = []
+	} else {
+		for(i=0; i&lt;split_child_7.length; i++){
+    		child=split_child_7[i];
+    		Child_7.push(child);
+		}
+	}
+
+json.ids = Child_7;
+
+
+ // JSON Stringify the data object
+JsonOutput_7 = JSON.stringify(json);
+
+//splitting the data
+split_child_8   = [];
+
+json.className = classname_8;
+json.fieldName = fieldname_8;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_8)){
+	Child_8 = []
+	} else {
+		for(i=0; i&lt;split_child_8.length; i++){
+    		child=split_child_8[i];
+    		Child_8.push(child);
+		}
+	}
+
+json.ids = Child_8;
+
+
+ // JSON Stringify the data object
+JsonOutput_8 = JSON.stringify(json);
+
+//splitting the data
+split_child_9   = [];
+
+json.className = classname_9;
+json.fieldName = fieldname_9;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_9)){
+	Child_9 = []
+	} else {
+		for(i=0; i&lt;split_child_9.length; i++){
+    		child=split_child_9[i];
+    		Child_9.push(child);
+		}
+	}
+
+json.ids = Child_9;
+
+
+ // JSON Stringify the data object
+JsonOutput_9 = JSON.stringify(json);
+
+//splitting the data
+split_child_10   = [];
+
+json.className = classname_10;
+json.fieldName = fieldname_10;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_10)){
+	Child_10 = []
+	} else {
+		for(i=0; i&lt;split_child_10.length; i++){
+    		child=split_child_10[i];
+    		Child_10.push(child);
+		}
+	}
+
+json.ids = Child_10;
+
+
+ // JSON Stringify the data object
+JsonOutput_10 = JSON.stringify(json);
+
+//splitting the data
+split_child_11   = [];
+
+json.className = classname_11;
+json.fieldName = fieldname_11;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_11)){
+	Child_11 = []
+	} else {
+		for(i=0; i&lt;split_child_11.length; i++){
+    		child=split_child_11[i];
+    		Child_11.push(child);
+		}
+	}
+
+json.ids = Child_11;
+
+
+ // JSON Stringify the data object
+JsonOutput_11 = JSON.stringify(json);
+
+//splitting the data
+split_child_12   = [];
+
+json.className = classname_12;
+json.fieldName = fieldname_12;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_12)){
+	Child_12 = []
+	} else {
+		for(i=0; i&lt;split_child_12.length; i++){
+    		child=split_child_12[i];
+    		Child_12.push(child);
+		}
+	}
+
+json.ids = Child_12;
+
+
+ // JSON Stringify the data object
+JsonOutput_12 = JSON.stringify(json);
+
+//splitting the data
+split_child_13   = [];
+
+json.className = classname_13;
+json.fieldName = fieldname_13;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_13)){
+	Child_13 = []
+	} else {
+		for(i=0; i&lt;split_child_13.length; i++){
+    		child=split_child_13[i];
+    		Child_13.push(child);
+		}
+	}
+
+json.ids = Child_13;
+
+
+ // JSON Stringify the data object
+JsonOutput_13 = JSON.stringify(json);
+
+//splitting the data
+split_child_14   = [];
+
+json.className = classname_14;
+json.fieldName = fieldname_14;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_14)){
+	Child_14 = []
+	} else {
+		for(i=0; i&lt;split_child_14.length; i++){
+    		child=split_child_14[i];
+    		Child_14.push(child);
+		}
+	}
+
+json.ids = Child_14;
+
+
+ // JSON Stringify the data object
+JsonOutput_14 = JSON.stringify(json);
+
+//splitting the data
+split_child_15   = [];
+
+json.className = classname_15;
+json.fieldName = fieldname_15;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_15)){
+	Child_15 = []
+	} else {
+		for(i=0; i&lt;split_child_15.length; i++){
+    		child=split_child_15[i];
+    		Child_15.push(child);
+		}
+	}
+
+json.ids = Child_15;
+
+
+ // JSON Stringify the data object
+JsonOutput_15 = JSON.stringify(json);
+
+//splitting the data
+split_child_16   = [];
+
+json.className = classname_16;
+json.fieldName = fieldname_16;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_16)){
+	Child_16 = []
+	} else {
+		for(i=0; i&lt;split_child_16.length; i++){
+    		child=split_child_16[i];
+    		Child_16.push(child);
+		}
+	}
+
+json.ids = Child_16;
+
+
+ // JSON Stringify the data object
+JsonOutput_16 = JSON.stringify(json);
+
+
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_2 + ',' + JsonOutput_3 + ',' + JsonOutput_4 + ',' + JsonOutput_5 + 
+',' + JsonOutput_6 + ',' + JsonOutput_7 + ',' + JsonOutput_8 + ',' + JsonOutput_9 + ',' + JsonOutput_10 + ',' + JsonOutput_11 + ',' + JsonOutput_12 + ',' + JsonOutput_13 + 
+',' + JsonOutput_14 + ',' + JsonOutput_15 + ',' + JsonOutput_16 + ']}}}';
 </jsScript_script>
       </jsScript>
     </jsScripts>
@@ -1612,8 +2215,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1472</xloc>
-      <yloc>848</yloc>
+      <xloc>1616</xloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1780,7 +2383,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>624</xloc>
       <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1823,7 +2426,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </remotesteps>
     <GUI>
       <xloc>432</xloc>
-      <yloc>736</yloc>
+      <yloc>880</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1865,7 +2468,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </remotesteps>
     <GUI>
       <xloc>432</xloc>
-      <yloc>848</yloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1883,9 +2486,80 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     <fields>
       <field>
         <name>idPersona</name>
+        <rename/>
       </field>
       <field>
         <name>idProyecto</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>idPersona</name>
+        <rename>idPersona</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>idProyecto</name>
+        <rename>idProyecto</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>624</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_equipo 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>idPersona</name>
+      </field>
+      <field>
+        <name>proyecto</name>
+        <rename>idProyecto</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1899,7 +2573,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </remotesteps>
     <GUI>
       <xloc>272</xloc>
-      <yloc>624</yloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1933,7 +2607,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </remotesteps>
     <GUI>
       <xloc>272</xloc>
-      <yloc>848</yloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1986,15 +2660,12 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     <fields>
       <field>
         <name>idProyecto</name>
-        <rename/>
       </field>
       <field>
         <name>codTipoFinanciacion</name>
-        <rename/>
       </field>
       <field>
         <name>codTipoFuente</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -2042,7 +2713,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </remotesteps>
     <GUI>
       <xloc>272</xloc>
-      <yloc>736</yloc>
+      <yloc>880</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2109,8 +2780,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
-      <yloc>848</yloc>
+      <xloc>1760</xloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2164,18 +2835,9 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       <schema_name/>
     </partitioning>
     <connection>Database_Target</connection>
-    <sql>SELECT
-  id
-, idPersona
-, version
-, operation
-, fechaCreacion
-, fechaModificacion
-, idEjecucion
-, idProyecto
-, numeroColaborador
-FROM Rel_EquipoProyecto
-
+    <sql>SELECT *
+FROM ${TableNameSource_4}
+where version = ${version}
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -2190,7 +2852,7 @@ FROM Rel_EquipoProyecto
         <name>id</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>EquipoProyecto</origin>
+        <origin>ti_equipo</origin>
         <comments>id</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2213,7 +2875,7 @@ FROM Rel_EquipoProyecto
         <name>idPersona</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>EquipoProyecto</origin>
+        <origin>ti_equipo</origin>
         <comments>idPersona</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2236,7 +2898,7 @@ FROM Rel_EquipoProyecto
         <name>version</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>EquipoProyecto</origin>
+        <origin>ti_equipo</origin>
         <comments>version</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2259,7 +2921,7 @@ FROM Rel_EquipoProyecto
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>EquipoProyecto</origin>
+        <origin>ti_equipo</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2282,7 +2944,7 @@ FROM Rel_EquipoProyecto
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>EquipoProyecto</origin>
+        <origin>ti_equipo</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2305,7 +2967,7 @@ FROM Rel_EquipoProyecto
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>EquipoProyecto</origin>
+        <origin>ti_equipo</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2328,7 +2990,7 @@ FROM Rel_EquipoProyecto
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>EquipoProyecto</origin>
+        <origin>ti_equipo</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2351,7 +3013,7 @@ FROM Rel_EquipoProyecto
         <name>idProyecto</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>EquipoProyecto</origin>
+        <origin>ti_equipo</origin>
         <comments>idProyecto</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2374,7 +3036,7 @@ FROM Rel_EquipoProyecto
         <name>numeroColaborador</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>EquipoProyecto</origin>
+        <origin>ti_equipo</origin>
         <comments>numeroColaborador</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2418,19 +3080,9 @@ FROM Rel_EquipoProyecto
       <schema_name/>
     </partitioning>
     <connection>Database_Target</connection>
-    <sql>SELECT
-  idDocumento
-, operation
-, version
-, idEjecucion
-, fechaCreacion
-, fechaModificacion
-, descripcion
-, tipoGasto
-, idTipoGasto
-, importe
-, idProyecto
-FROM GastoProyecto
+    <sql>SELECT *
+FROM ${TableNameSource_6}
+where version = ${version}
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -2445,7 +3097,7 @@ FROM GastoProyecto
         <name>idDocumento</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>idDocumento</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2468,7 +3120,7 @@ FROM GastoProyecto
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2491,7 +3143,7 @@ FROM GastoProyecto
         <name>version</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2514,7 +3166,7 @@ FROM GastoProyecto
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2537,7 +3189,7 @@ FROM GastoProyecto
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2560,7 +3212,7 @@ FROM GastoProyecto
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2583,7 +3235,7 @@ FROM GastoProyecto
         <name>descripcion</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>descripcion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2606,7 +3258,7 @@ FROM GastoProyecto
         <name>tipoGasto</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>tipoGasto</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2629,7 +3281,7 @@ FROM GastoProyecto
         <name>idTipoGasto</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>idTipoGasto</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2652,7 +3304,7 @@ FROM GastoProyecto
         <name>importe</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>importe</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2675,7 +3327,7 @@ FROM GastoProyecto
         <name>idProyecto</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_financ 2</origin>
+        <origin>ti_expend</origin>
         <comments>idProyecto</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2703,7 +3355,7 @@ FROM GastoProyecto
     </remotesteps>
     <GUI>
       <xloc>112</xloc>
-      <yloc>848</yloc>
+      <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2719,18 +3371,9 @@ FROM GastoProyecto
       <schema_name/>
     </partitioning>
     <connection>Database_Target</connection>
-    <sql>SELECT
-  id
-, version
-, operation
-, idProyecto
-, numeroFacturaPrevista
-, FechaCreacion
-, FechaModificacion
-, IdEjecucion
-FROM FacturaProyecto
-
-
+    <sql>SELECT *
+FROM ${TableNameSource_3}
+where version = ${version}
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -2745,7 +3388,7 @@ FROM FacturaProyecto
         <name>id</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>FacturaProyecto</origin>
+        <origin>ti_factura</origin>
         <comments>id</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2768,7 +3411,7 @@ FROM FacturaProyecto
         <name>version</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>FacturaProyecto</origin>
+        <origin>ti_factura</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2791,7 +3434,7 @@ FROM FacturaProyecto
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>FacturaProyecto</origin>
+        <origin>ti_factura</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2814,7 +3457,7 @@ FROM FacturaProyecto
         <name>idProyecto</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>FacturaProyecto</origin>
+        <origin>ti_factura</origin>
         <comments>idProyecto</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2837,7 +3480,7 @@ FROM FacturaProyecto
         <name>numeroFacturaPrevista</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>FacturaProyecto</origin>
+        <origin>ti_factura</origin>
         <comments>numeroFacturaPrevista</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2860,7 +3503,7 @@ FROM FacturaProyecto
         <name>FechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>FacturaProyecto</origin>
+        <origin>ti_factura</origin>
         <comments>FechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2883,7 +3526,7 @@ FROM FacturaProyecto
         <name>FechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>FacturaProyecto</origin>
+        <origin>ti_factura</origin>
         <comments>FechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2906,7 +3549,7 @@ FROM FacturaProyecto
         <name>IdEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>FacturaProyecto</origin>
+        <origin>ti_factura</origin>
         <comments>IdEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2950,19 +3593,9 @@ FROM FacturaProyecto
       <schema_name/>
     </partitioning>
     <connection>Database_Target</connection>
-    <sql>SELECT
-  id
-, idProyecto
-, codTipoFinanciacion
-, tipoFinanciacion
-, codTipoFuente
-, tipoFuente
-, idEjecucion
-, version
-, fechaCreacion
-, fechaModificacion
-, operation
-FROM Rel_FinanciacionProyecto
+    <sql>SELECT *
+FROM ${TableNameSource_5}
+where version = ${version}
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -3235,6 +3868,236 @@ FROM Rel_FinanciacionProyecto
     </remotesteps>
     <GUI>
       <xloc>112</xloc>
+      <yloc>880</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ti_inv_proy_coop_int</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Database_Target</connection>
+    <sql>SELECT
+  id
+, version
+, operation
+, idEjecucion
+, fechaCreacion
+, fechaModificacion
+, idPersona
+, proyecto
+FROM ${TableNameSource_7}
+where version=${version}
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>ti_inv_proy_coop_int</origin>
+        <comments>id</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>version</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>ti_inv_proy_coop_int</origin>
+        <comments>version</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>operation</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>ti_inv_proy_coop_int</origin>
+        <comments>operation</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>idEjecucion</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>ti_inv_proy_coop_int</origin>
+        <comments>idEjecucion</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fechaCreacion</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>ti_inv_proy_coop_int</origin>
+        <comments>fechaCreacion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fechaModificacion</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>ti_inv_proy_coop_int</origin>
+        <comments>fechaModificacion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>idPersona</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>ti_inv_proy_coop_int</origin>
+        <comments>idPersona</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>proyecto</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>ti_inv_proy_coop_int</origin>
+        <comments>proyecto</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
       <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3251,21 +4114,9 @@ FROM Rel_FinanciacionProyecto
       <schema_name/>
     </partitioning>
     <connection>Database_Target</connection>
-    <sql>SELECT
-  id
-, version
-, nombre
-, tipo
-, idOrigenProyecto
-, idEjecucion
-, fechaFin
-, fechaCreacion
-, fechaModificacion
-, operation
-, fechaInicio
-FROM Proyecto
+    <sql>SELECT *
+FROM ${TableNameSource_1}
 where version = ${version}
-
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -3554,17 +4405,9 @@ where version = ${version}
       <schema_name/>
     </partitioning>
     <connection>Database_Target</connection>
-    <sql>SELECT
-  id
-, version
-, operation
-, fechaCreacion
-, fechaModificacion
-, idEjecucion
-, codTipoOrigen
-, idOrigenProyecto
-, idProyecto
-FROM Rel_RelacionOrigenProyecto
+    <sql>SELECT *
+FROM ${TableNameSource_2}
+where version = ${version}
 </sql>
     <limit>0</limit>
     <lookup/>

@@ -7,7 +7,7 @@
   <created_user>-</created_user>
   <created_date>2020/11/20 14:17:35.957</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2021/01/07 16:38:15.079</modified_date>
+  <modified_date>2021/03/08 12:48:33.023</modified_date>
   <parameters>
     </parameters>
   <slaveservers>
@@ -315,12 +315,12 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
+      <xloc>704</xloc>
       <yloc>304</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>load_link_proyecto</name>
+      <name>load_link_project</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -405,7 +405,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
+      <xloc>480</xloc>
       <yloc>592</yloc>
       <attributes_kjc/>
     </entry>
@@ -418,7 +418,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
+      <xloc>480</xloc>
       <yloc>752</yloc>
       <attributes_kjc/>
     </entry>
@@ -444,73 +444,11 @@
       <yloc>464</yloc>
       <attributes_kjc/>
     </entry>
-    <entry>
-      <name>load_link_proyecto_internacional</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>rep_name</specification_method>
-      <trans_object_id/>
-      <filename/>
-      <transname>5.2.6_load_link_proyecto_internacional</transname>
-      <directory>/5.transformations</directory>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>Y</set_logfile>
-      <logfile>${param_path}\8.logs\log</logfile>
-      <logext>log</logext>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Error</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>Y</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>704</xloc>
-      <yloc>304</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>svar_int_proyecto_int</name>
-      <description/>
-      <type>SET_VARIABLES</type>
-      <attributes/>
-      <replacevars>Y</replacevars>
-      <filename/>
-      <file_variable_type>CURRENT_JOB</file_variable_type>
-      <fields>
-        <field>
-          <variable_name>entity_name</variable_name>
-          <variable_value>PROYECTO_INT_LINK</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-      </fields>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>704</xloc>
-      <yloc>464</yloc>
-      <attributes_kjc/>
-    </entry>
   </entries>
   <hops>
     <hop>
       <from>Start</from>
-      <to>load_link_proyecto</to>
+      <to>load_link_project</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -518,7 +456,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>load_link_proyecto</from>
+      <from>load_link_project</from>
       <to>svar_int_proyecto</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -545,40 +483,13 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>load_link_proyecto</from>
-      <to>load_link_proyecto_internacional</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>load_link_proyecto_internacional</from>
+      <from>load_link_project</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>load_link_proyecto_internacional</from>
-      <to>svar_int_proyecto_int</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>svar_int_proyecto_int</from>
-      <to>control_error</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>

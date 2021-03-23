@@ -8,6 +8,21 @@
     <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TABLE_NAME_1</name>
+        <default_value>Patente</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TABLE_NAME_2</name>
+        <default_value>EmpresaTitularPatente</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TABLE_NAME_3</name>
+        <default_value>ProteccionPatente</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -442,7 +457,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/21 12:09:36.326</modified_date>
+    <modified_date>2021/03/23 08:55:51.570</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -657,13 +672,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>iu_patente</from>
+      <from>iu_patent</from>
       <to>ac_pojo</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>gv_id_ejecucion</from>
-      <to>iu_patente</to>
+      <to>iu_patent</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -856,7 +871,7 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>abstract</name>
+        <name>summary</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -875,6 +890,18 @@
         <decimal/>
         <group/>
         <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>lang</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>es-ES</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1442,7 +1469,7 @@
     </GUI>
   </step>
   <step>
-    <name>iu_patente</name>
+    <name>iu_patent</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>N</distribute>
@@ -1457,7 +1484,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>etl</schema>
-      <table>Patente</table>
+      <table>Patent</table>
       <key>
         <name>idPatente</name>
         <field>id</field>
@@ -1594,19 +1621,23 @@
       </field>
       <field>
         <name>endPage</name>
-        <element>endPage</element>
+        <element>pageEnd</element>
       </field>
       <field>
         <name>startPage</name>
-        <element>startPage</element>
+        <element>pageStart</element>
       </field>
       <field>
-        <name>abstract</name>
-        <element>abstract</element>
+        <name>summary</name>
+        <element>summary</element>
       </field>
       <field>
         <name>doi</name>
         <element>doi</element>
+      </field>
+      <field>
+        <name>lang</name>
+        <element>lang</element>
       </field>
     </fields>
     <attributes/>
@@ -2247,15 +2278,12 @@
     <fields>
       <field>
         <name>fechaConcesion</name>
-        <rename/>
       </field>
       <field>
         <name>idPatente</name>
-        <rename/>
       </field>
       <field>
         <name>fechaAbandono</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -2330,12 +2358,12 @@
 , numero
 , observaciones
 , participacion
-FROM EmpresaTitularPatente
+FROM ${TABLE_NAME_2}
 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -2345,7 +2373,7 @@ FROM EmpresaTitularPatente
         <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2368,7 +2396,7 @@ FROM EmpresaTitularPatente
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2391,7 +2419,7 @@ FROM EmpresaTitularPatente
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2414,7 +2442,7 @@ FROM EmpresaTitularPatente
         <name>fechaFinPeriodo</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>fechaFinPeriodo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2437,7 +2465,7 @@ FROM EmpresaTitularPatente
         <name>fechaInicioPeriodo</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>fechaInicioPeriodo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2460,7 +2488,7 @@ FROM EmpresaTitularPatente
         <name>idPatente</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>idPatente</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2483,7 +2511,7 @@ FROM EmpresaTitularPatente
         <name>idTercero</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>idTercero</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2506,7 +2534,7 @@ FROM EmpresaTitularPatente
         <name>numero</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>numero</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2529,7 +2557,7 @@ FROM EmpresaTitularPatente
         <name>observaciones</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>observaciones</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2552,7 +2580,7 @@ FROM EmpresaTitularPatente
         <name>participacion</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>ti_patent_owner</origin>
+        <origin>ti_empresa_titular</origin>
         <comments>participacion</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2613,9 +2641,11 @@ FROM EmpresaTitularPatente
 , referenciaPatente
 , tipoPatente
 , titulo
-FROM Patente
+FROM ${TABLE_NAME_1}
 where version=${version}
 order by idPatente asc
+limit ${limit}
+
 
 
 </sql>
@@ -3038,12 +3068,12 @@ order by idPatente asc
 , numeroPublicacion
 , numeroSolicitud
 , referencia
-FROM ProteccionPatente
+FROM ${TABLE_NAME_3}
 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -3053,7 +3083,7 @@ FROM ProteccionPatente
         <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3076,7 +3106,7 @@ FROM ProteccionPatente
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -3099,7 +3129,7 @@ FROM ProteccionPatente
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3122,7 +3152,7 @@ FROM ProteccionPatente
         <name>codTipoViaProteccion</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>codTipoViaProteccion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3145,7 +3175,7 @@ FROM ProteccionPatente
         <name>fechaConcesion</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>fechaConcesion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3168,7 +3198,7 @@ FROM ProteccionPatente
         <name>fechaAbandono</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>fechaAbandono</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3191,7 +3221,7 @@ FROM ProteccionPatente
         <name>fechaFinPlazoPrioridad</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>fechaFinPlazoPrioridad</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3214,7 +3244,7 @@ FROM ProteccionPatente
         <name>fechaPrioridad</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>fechaPrioridad</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3237,7 +3267,7 @@ FROM ProteccionPatente
         <name>fechaPublicacion</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>fechaPublicacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3260,7 +3290,7 @@ FROM ProteccionPatente
         <name>fechaSolicitud</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>fechaSolicitud</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3283,7 +3313,7 @@ FROM ProteccionPatente
         <name>idPatente</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>idPatente</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -3306,7 +3336,7 @@ FROM ProteccionPatente
         <name>motivoCambioFecha</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>motivoCambioFecha</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3329,7 +3359,7 @@ FROM ProteccionPatente
         <name>numero</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>numero</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -3352,7 +3382,7 @@ FROM ProteccionPatente
         <name>numeroPublicacion</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>numeroPublicacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3375,7 +3405,7 @@ FROM ProteccionPatente
         <name>numeroSolicitud</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>numeroSolicitud</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3398,7 +3428,7 @@ FROM ProteccionPatente
         <name>referencia</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ProteccionPatente</origin>
+        <origin>ti_proteccion_patente</origin>
         <comments>referencia</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -3432,7 +3462,7 @@ FROM ProteccionPatente
   </step>
   <step_error_handling>
     <error>
-      <source_step>iu_patente</source_step>
+      <source_step>iu_patent</source_step>
       <target_step/>
       <is_enabled>Y</is_enabled>
       <nr_valuename>erro_line</nr_valuename>

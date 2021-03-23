@@ -5,8 +5,19 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TableSourceName_1</name>
+        <default_value>Conference</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableSourceName_2</name>
+        <default_value>Rel_AutorCongreso</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -428,7 +439,7 @@
     <created_user>-</created_user>
     <created_date>2020/11/05 14:55:32.651</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/12 17:36:58.161</modified_date>
+    <modified_date>2021/03/16 11:34:29.152</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -585,7 +596,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>pers</nullif>
+        <nullif>participatedBy</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1063,20 +1074,14 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </partitioning>
     <connection>Database_Target</connection>
     <sql>SELECT
-  id
-, version
-, operation
-, idEjecucion
-, fechaCreacion
-, fechaModificacion
-, idPersona
-, congNumero
-FROM etl.Rel_AutorCongreso
+  *
+FROM ${TableSourceName_2}
+where version = ${version}
 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -1292,16 +1297,8 @@ FROM etl.Rel_AutorCongreso
     </partitioning>
     <connection>Database_Target</connection>
     <sql>SELECT
-  id
-, version
-, fechaCreacion
-, fechaModificacion
-, operation
-, idEjecucion
-, titulo
-, lugarCelebracion
-, fechaCelebracion
-FROM Congreso
+  *
+FROM ${TableSourceName_1}
 where version = ${version}
 </sql>
     <limit>0</limit>

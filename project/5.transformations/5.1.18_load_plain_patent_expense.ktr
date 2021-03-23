@@ -8,6 +8,16 @@
     <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TABLE_NAME_1</name>
+        <default_value>CostePatente</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableNameTarget</name>
+        <default_value>PatentExpense</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -442,7 +452,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/21 12:12:16.801</modified_date>
+    <modified_date>2021/03/23 09:04:00.486</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -748,6 +758,18 @@
         <decimal/>
         <group/>
         <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>lang</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>es-ES</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1308,8 +1330,8 @@
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>etl</schema>
-      <table>PatentExpense</table>
+      <schema>${DatabaseTarget}</schema>
+      <table>${TableNameTarget}</table>
       <key>
         <name>idDocumento</name>
         <field>id</field>
@@ -1452,6 +1474,10 @@
       <field>
         <name>title</name>
         <element>title</element>
+      </field>
+      <field>
+        <name>lang</name>
+        <element>lang</element>
       </field>
     </fields>
     <attributes/>
@@ -1698,55 +1724,42 @@
     <fields>
       <field>
         <name>version</name>
-        <rename/>
       </field>
       <field>
         <name>operation</name>
-        <rename/>
       </field>
       <field>
         <name>codTipoCostePatente</name>
-        <rename/>
       </field>
       <field>
         <name>codTipoMoneda</name>
-        <rename/>
       </field>
       <field>
         <name>fechaPago</name>
-        <rename/>
       </field>
       <field>
         <name>idDocumento</name>
-        <rename/>
       </field>
       <field>
         <name>idPatente</name>
-        <rename/>
       </field>
       <field>
         <name>idProyecto</name>
-        <rename/>
       </field>
       <field>
         <name>idTercero</name>
-        <rename/>
       </field>
       <field>
         <name>importe</name>
-        <rename/>
       </field>
       <field>
         <name>nombre</name>
-        <rename/>
       </field>
       <field>
         <name>numero</name>
-        <rename/>
       </field>
       <field>
         <name>observaciones</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1839,10 +1852,11 @@
 , nombre
 , numero
 , observaciones
-FROM CostePatente
+FROM ${TABLE_NAME_1}
 where version=${version}
 order by idProyecto asc
-LIMIT 1000</sql>
+limit ${limit}
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

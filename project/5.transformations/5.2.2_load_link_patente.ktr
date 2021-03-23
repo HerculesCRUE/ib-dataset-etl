@@ -5,8 +5,19 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TableSourceName_1</name>
+        <default_value>Patent</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>TableSourceName_2</name>
+        <default_value>Rel_InventorPatente</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -428,7 +439,7 @@
     <created_user>-</created_user>
     <created_date>2020/11/05 14:55:32.651</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/21 09:01:36.779</modified_date>
+    <modified_date>2021/03/16 16:40:46.759</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -590,7 +601,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>pers</nullif>
+        <nullif>correspondingAuthor</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -614,7 +625,55 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>org</nullif>
+        <nullif>correspondingOrganization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_3</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Book</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_3</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hasPublicationVenue</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>classname_4</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Status</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_4</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>status</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -798,9 +857,13 @@ child_id_2 = [];
 json = {};
 split_child_1 = [];
 split_child_2 = [];
+split_child_3 = [];
+split_child_4 = [];
 
 Child_1 = [];
 Child_2 = []; 
+Child_3 = [];
+Child_4 = []; 
 
 
 //splitting the data
@@ -849,9 +912,56 @@ json.ids = Child_2;
  // JSON Stringify the data object
 JsonOutput_2 = JSON.stringify(json);
 
+//splitting the data
+//split_child_3   = child_id_3.split('|');
+
+json.className = classname_3;
+json.fieldName = fieldname_3;
 
 
-var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ']}}}';
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_3)){
+	Child_3 = []
+	} else {
+		for(i=0; i&lt;split_child_3.length; i++){
+    		child=split_child_3[i];
+    		Child_3.push(child);
+		}
+	}
+
+json.ids = Child_3;
+
+
+ // JSON Stringify the data object
+JsonOutput_3 = JSON.stringify(json);
+
+
+//splitting the data
+//split_child_4   = child_id_4.split('|');
+
+json.className = classname_4;
+json.fieldName = fieldname_4;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_4)){
+	Child_4 = []
+	} else {
+		for(i=0; i&lt;split_child_4.length; i++){
+    		child=split_child_4[i];
+    		Child_4.push(child);
+		}
+	}
+
+json.ids = Child_4;
+
+
+ // JSON Stringify the data object
+JsonOutput_4 = JSON.stringify(json);
+
+
+
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ',' + JsonOutput_3 + ',' + JsonOutput_3 + ']}}}';
 </jsScript_script>
       </jsScript>
     </jsScripts>
@@ -1154,21 +1264,14 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </partitioning>
     <connection>Database_Target</connection>
     <sql>SELECT
-  id
-, idPersona
-, version
-, operation
-, idEjecucion
-, fechaCreacion
-, fechaModificacion
-, idPatente
-, inventorPrincipal
-FROM Rel_InventorPatente
+  *
+FROM ${TableSourceName_2}
+where version = ${version}
 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -1178,7 +1281,7 @@ FROM Rel_InventorPatente
         <name>id</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>InventorPatente</origin>
+        <origin>ti_inventor_patente</origin>
         <comments>id</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1201,7 +1304,7 @@ FROM Rel_InventorPatente
         <name>idPersona</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>InventorPatente</origin>
+        <origin>ti_inventor_patente</origin>
         <comments>idPersona</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1224,7 +1327,7 @@ FROM Rel_InventorPatente
         <name>version</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>InventorPatente</origin>
+        <origin>ti_inventor_patente</origin>
         <comments>version</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1247,7 +1350,7 @@ FROM Rel_InventorPatente
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>InventorPatente</origin>
+        <origin>ti_inventor_patente</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1270,7 +1373,7 @@ FROM Rel_InventorPatente
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>InventorPatente</origin>
+        <origin>ti_inventor_patente</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1293,7 +1396,7 @@ FROM Rel_InventorPatente
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>InventorPatente</origin>
+        <origin>ti_inventor_patente</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1316,7 +1419,7 @@ FROM Rel_InventorPatente
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>InventorPatente</origin>
+        <origin>ti_inventor_patente</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1339,7 +1442,7 @@ FROM Rel_InventorPatente
         <name>idPatente</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>InventorPatente</origin>
+        <origin>ti_inventor_patente</origin>
         <comments>idPatente</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1362,7 +1465,7 @@ FROM Rel_InventorPatente
         <name>inventorPrincipal</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>InventorPatente</origin>
+        <origin>ti_inventor_patente</origin>
         <comments>inventorPrincipal</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1407,19 +1510,9 @@ FROM Rel_InventorPatente
     </partitioning>
     <connection>Database_Target</connection>
     <sql>SELECT
-  id
-, version
-, idEjecucion
-, operation
-, fechaConcesionPatente
-, FechaExpiracionPatente
-, fechaCreacion
-, fechaModificacion
-, titulo
-, tipo
-FROM Patente
+  *
+FROM ${TableSourceName_1}
 where version = ${version}
-
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1434,7 +1527,7 @@ where version = ${version}
         <name>id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1457,7 +1550,7 @@ where version = ${version}
         <name>version</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1480,7 +1573,7 @@ where version = ${version}
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1503,7 +1596,7 @@ where version = ${version}
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1526,7 +1619,7 @@ where version = ${version}
         <name>fechaConcesionPatente</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>fechaConcesionPatente</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1549,7 +1642,7 @@ where version = ${version}
         <name>FechaExpiracionPatente</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>FechaExpiracionPatente</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1572,7 +1665,7 @@ where version = ${version}
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1595,7 +1688,7 @@ where version = ${version}
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1618,7 +1711,7 @@ where version = ${version}
         <name>titulo</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>titulo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1641,7 +1734,7 @@ where version = ${version}
         <name>tipo</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>Patente</origin>
+        <origin>ti_patente</origin>
         <comments>tipo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
