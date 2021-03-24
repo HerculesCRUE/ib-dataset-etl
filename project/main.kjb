@@ -8,11 +8,11 @@
   <created_user>-</created_user>
   <created_date>2020/04/07 17:03:26.655</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2021/03/23 08:51:58.507</modified_date>
+  <modified_date>2021/03/24 13:06:37.334</modified_date>
   <parameters>
     <parameter>
       <name>limit</name>
-      <default_value>50</default_value>
+      <default_value>1000</default_value>
       <description/>
     </parameter>
     <parameter>

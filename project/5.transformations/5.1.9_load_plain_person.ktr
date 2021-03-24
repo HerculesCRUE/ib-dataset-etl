@@ -452,7 +452,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/03/22 19:39:06.957</modified_date>
+    <modified_date>2021/03/24 13:03:53.823</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -2320,7 +2320,7 @@ order by idPersona asc
         <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_persona</origin>
+        <origin>ti_person</origin>
         <comments>ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2343,7 +2343,7 @@ order by idPersona asc
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ti_persona</origin>
+        <origin>ti_person</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2366,7 +2366,7 @@ order by idPersona asc
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_persona</origin>
+        <origin>ti_person</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2389,7 +2389,7 @@ order by idPersona asc
         <name>cedNombre</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_persona</origin>
+        <origin>ti_person</origin>
         <comments>cedNombre</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2412,7 +2412,7 @@ order by idPersona asc
         <name>depNombre</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_persona</origin>
+        <origin>ti_person</origin>
         <comments>depNombre</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2435,7 +2435,7 @@ order by idPersona asc
         <name>idPersona</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ti_persona</origin>
+        <origin>ti_person</origin>
         <comments>idPersona</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -2458,7 +2458,7 @@ order by idPersona asc
         <name>persCentCodigo</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_persona</origin>
+        <origin>ti_person</origin>
         <comments>persCentCodigo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2481,7 +2481,7 @@ order by idPersona asc
         <name>persDeptCodigo</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_persona</origin>
+        <origin>ti_person</origin>
         <comments>persDeptCodigo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -2509,7 +2509,7 @@ order by idPersona asc
     </remotesteps>
     <GUI>
       <xloc>96</xloc>
-      <yloc>224</yloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
