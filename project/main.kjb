@@ -8,7 +8,7 @@
   <created_user>-</created_user>
   <created_date>2020/04/07 17:03:26.655</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2021/03/24 13:06:37.334</modified_date>
+  <modified_date>2021/04/05 11:32:18.539</modified_date>
   <parameters>
     <parameter>
       <name>limit</name>
@@ -339,7 +339,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1440</xloc>
+      <xloc>1456</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -376,7 +376,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1264</xloc>
+      <xloc>1280</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -413,7 +413,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>912</xloc>
+      <xloc>1088</xloc>
       <yloc>400</yloc>
       <attributes_kjc/>
     </entry>
@@ -426,7 +426,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1264</xloc>
+      <xloc>1280</xloc>
       <yloc>400</yloc>
       <attributes_kjc/>
     </entry>
@@ -463,7 +463,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>560</xloc>
+      <xloc>464</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -476,7 +476,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>912</xloc>
+      <xloc>1088</xloc>
       <yloc>560</yloc>
       <attributes_kjc/>
     </entry>
@@ -513,7 +513,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>752</xloc>
+      <xloc>832</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -555,82 +555,39 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>load_relational_tables</name>
+      <name>pre_loading_data</name>
       <description/>
-      <type>TRANS</type>
+      <type>JOB</type>
       <attributes/>
       <specification_method>rep_name</specification_method>
-      <trans_object_id/>
+      <job_object_id/>
       <filename/>
-      <transname>load_relational_tables</transname>
-      <directory>/5.transformations</directory>
+      <jobname>4.0.0_pre_loading_data</jobname>
+      <directory>/4.jobs</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
+      <set_logfile>Y</set_logfile>
+      <logfile>${param_path}\8.logs\log</logfile>
+      <logext>log</logext>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
+      <loglevel>Error</loglevel>
       <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
+      <pass_export>N</pass_export>
       <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>912</xloc>
-      <yloc>256</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>master_data_load</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>rep_name</specification_method>
-      <trans_object_id/>
-      <filename/>
-      <transname>master_data_load</transname>
-      <directory>/.master_data</directory>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
       <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
+      <xloc>672</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -661,15 +618,6 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>check_connections_and_config</from>
-      <to>load_plain</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -710,15 +658,6 @@
     </hop>
     <hop>
       <from>load_plain</from>
-      <to>load_relational_tables</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>load_relational_tables</from>
       <to>load_link</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -728,7 +667,7 @@
     </hop>
     <hop>
       <from>Start</from>
-      <to>master_data_load</to>
+      <to>check_connections_and_config</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -736,13 +675,22 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>master_data_load</from>
-      <to>check_connections_and_config</to>
+      <from>check_connections_and_config</from>
+      <to>pre_loading_data</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>pre_loading_data</from>
+      <to>load_plain</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

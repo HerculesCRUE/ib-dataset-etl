@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>5.1.4_load_plain_universidad</name>
+    <name>5.1.32_load_plain_pantent_owner</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,8 +9,8 @@
     <directory>/5.transformations</directory>
     <parameters>
       <parameter>
-        <name>University</name>
-        <default_value>12</default_value>
+        <name>TABLE_NAME</name>
+        <default_value>EmpresaTitularPatente</default_value>
         <description/>
       </parameter>
     </parameters>
@@ -24,12 +24,12 @@
         <timeout_days/>
         <field>
           <id>ID_BATCH</id>
-          <enabled>Y</enabled>
+          <enabled>N</enabled>
           <name>ID_BATCH</name>
         </field>
         <field>
           <id>CHANNEL_ID</id>
-          <enabled>Y</enabled>
+          <enabled>N</enabled>
           <name>CHANNEL_ID</name>
         </field>
         <field>
@@ -46,71 +46,71 @@
           <id>LINES_READ</id>
           <enabled>Y</enabled>
           <name>LINES_READ</name>
-          <subject/>
+          <subject>kafp_pojo</subject>
         </field>
         <field>
           <id>LINES_WRITTEN</id>
           <enabled>Y</enabled>
           <name>LINES_WRITTEN</name>
-          <subject/>
+          <subject>kafp_pojo</subject>
         </field>
         <field>
           <id>LINES_UPDATED</id>
           <enabled>Y</enabled>
           <name>LINES_UPDATED</name>
-          <subject/>
+          <subject>kafp_pojo</subject>
         </field>
         <field>
           <id>LINES_INPUT</id>
           <enabled>Y</enabled>
           <name>LINES_INPUT</name>
-          <subject/>
+          <subject>kafp_pojo</subject>
         </field>
         <field>
           <id>LINES_OUTPUT</id>
           <enabled>Y</enabled>
           <name>LINES_OUTPUT</name>
-          <subject/>
+          <subject>kafp_pojo</subject>
         </field>
         <field>
           <id>LINES_REJECTED</id>
           <enabled>Y</enabled>
           <name>LINES_REJECTED</name>
-          <subject/>
+          <subject>kafp_pojo</subject>
         </field>
         <field>
           <id>ERRORS</id>
-          <enabled>Y</enabled>
+          <enabled>N</enabled>
           <name>ERRORS</name>
         </field>
         <field>
           <id>STARTDATE</id>
-          <enabled>Y</enabled>
+          <enabled>N</enabled>
           <name>STARTDATE</name>
         </field>
         <field>
           <id>ENDDATE</id>
-          <enabled>Y</enabled>
+          <enabled>N</enabled>
           <name>ENDDATE</name>
         </field>
         <field>
           <id>LOGDATE</id>
-          <enabled>Y</enabled>
+          <enabled>N</enabled>
           <name>LOGDATE</name>
         </field>
         <field>
           <id>DEPDATE</id>
-          <enabled>Y</enabled>
+          <enabled>N</enabled>
           <name>DEPDATE</name>
         </field>
         <field>
           <id>REPLAYDATE</id>
-          <enabled>Y</enabled>
+          <enabled>N</enabled>
           <name>REPLAYDATE</name>
         </field>
         <field>
           <id>LOG_FIELD</id>
-          <enabled>Y</enabled>
+          <enabled>N</enabled>
           <name>LOG_FIELD</name>
         </field>
         <field>
@@ -445,23 +445,23 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2020/04/30 12:55:56.274</created_date>
+    <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/03/30 12:50:53.587</modified_date>
+    <modified_date>2021/03/30 14:03:45.643</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>Database_Master</name>
-    <server>${HostnameMaster}</server>
+    <name>Database_Source</name>
+    <server>${HostnameSource}</server>
     <type>MARIADB</type>
     <access>Native</access>
-    <database>${DatabaseMaster}</database>
-    <port>${PortMaster}</port>
-    <username>${UserMaster}</username>
-    <password>${PwdMaster}</password>
+    <database>${DatabaseSource}</database>
+    <port>${PortSource}</port>
+    <username>${UserSource}</username>
+    <password>${PwdSource}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -480,7 +480,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>${PortMaster}</attribute>
+        <attribute>${PortSource}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -557,102 +557,93 @@
   </connection>
   <order>
     <hop>
-      <from>Get variables</from>
-      <to>gsi_sysdate</to>
+      <from>sv_output</from>
+      <to>gv_keykafka</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ac_pojo</from>
+      <to>jsono_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>jsono_pojo</from>
+      <to>ris_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ris_pojo</from>
+      <to>cf_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>cf_pojo</from>
+      <to>sv_output</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>gsi_sysdate</from>
-      <to>dblkp_univ 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>dblkp_univ 2</from>
       <to>gv_execution_id</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>cf_pojo 2</from>
-      <to>sv_output 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>gv_keykafka 2</from>
-      <to>kafp_pojo_output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ris_pojo 2</from>
-      <to>cf_pojo 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_output 2</from>
-      <to>gv_keykafka 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>jsono_pojo 2</from>
-      <to>ris_pojo 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ac_pojo 2</from>
-      <to>iu_univ</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>iu_univ</from>
-      <to>jsono_pojo 2</to>
+      <from>iu_target_db</from>
+      <to>ac_pojo</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>gv_execution_id</from>
-      <to>ac_pojo 2</to>
+      <to>iu_target_db</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>gv_keykafka</from>
+      <to>dval_output_val</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dval_output_val</from>
+      <to>ac_validation_output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ac_validation_output</from>
+      <to>kafp_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ris_tipo_financ_fields</from>
+      <to>ifvaln_nulls</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>grp_patent_asignee</from>
+      <to>gsi_sysdate</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_patent_asignee</from>
+      <to>sv_patent_asignee</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_patent_asignee</from>
+      <to>ris_tipo_financ_fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ifvaln_nulls</from>
+      <to>Sort rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows</from>
+      <to>grp_patent_asignee</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Get variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>University</name>
-        <variable>${University}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ac_pojo 2</name>
+    <name>ac_pojo</name>
     <type>Constant</type>
     <description/>
     <distribute>N</distribute>
@@ -730,13 +721,61 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>University</nullif>
+        <nullif>Organization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>publicCompany</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>isStartup</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
         <name>title</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>description</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>homepage</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -771,50 +810,41 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1200</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ac_validation_output</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
       <field>
-        <name>operation</name>
+        <name>result</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>INSERT</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>description</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>keyword</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>version</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
+        <nullif>El formato es correcto</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -829,13 +859,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>224</yloc>
+      <xloc>1696</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>cf_pojo 2</name>
+    <name>cf_pojo</name>
     <type>ConcatFields</type>
     <description/>
     <distribute>N</distribute>
@@ -861,7 +891,7 @@
     <file>
       <name/>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>txt</extention>
       <append>N</append>
       <split>N</split>
@@ -1011,51 +1041,81 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
-      <yloc>224</yloc>
+      <xloc>1568</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>dblkp_univ 2</name>
-    <type>DBLookup</type>
+    <name>dval_output_val</name>
+    <type>Validator</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_Master</connection>
-    <cache>Y</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>master</schema>
-      <table>Universities</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>University</name>
-        <field>id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>code</name>
-        <rename>code</rename>
-        <default/>
-        <type>None</type>
-      </value>
-      <value>
-        <name>name</name>
-        <rename>name</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
+    <validate_all>Y</validate_all>
+    <concat_errors>N</concat_errors>
+    <concat_separator>|</concat_separator>
+    <validator_field>
+      <name>outputValue</name>
+      <validation_name>JSON START</validation_name>
+      <max_length/>
+      <min_length/>
+      <null_allowed>N</null_allowed>
+      <only_null_allowed>N</only_null_allowed>
+      <only_numeric_allowed>N</only_numeric_allowed>
+      <data_type>String</data_type>
+      <data_type_verified>Y</data_type_verified>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <max_value/>
+      <min_value/>
+      <start_string>{"operation":</start_string>
+      <end_string/>
+      <start_string_not_allowed/>
+      <end_string_not_allowed/>
+      <regular_expression/>
+      <regular_expression_not_allowed/>
+      <error_code>1</error_code>
+      <error_description>Inicio de JSON no válido</error_description>
+      <is_sourcing_values>N</is_sourcing_values>
+      <sourcing_step/>
+      <sourcing_field/>
+      <allowed_value/>
+    </validator_field>
+    <validator_field>
+      <name>outputValue</name>
+      <validation_name>JSON END</validation_name>
+      <max_length/>
+      <min_length/>
+      <null_allowed>Y</null_allowed>
+      <only_null_allowed>N</only_null_allowed>
+      <only_numeric_allowed>N</only_numeric_allowed>
+      <data_type>String</data_type>
+      <data_type_verified>Y</data_type_verified>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <max_value/>
+      <min_value/>
+      <start_string/>
+      <end_string>}}</end_string>
+      <start_string_not_allowed/>
+      <end_string_not_allowed/>
+      <regular_expression/>
+      <regular_expression_not_allowed/>
+      <error_code>2</error_code>
+      <error_description>Formato de cierre del JSON no válido</error_description>
+      <is_sourcing_values>N</is_sourcing_values>
+      <sourcing_step/>
+      <sourcing_field/>
+      <allowed_value/>
+    </validator_field>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1065,8 +1125,90 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>224</yloc>
+      <xloc>1696</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>grp_patent_asignee</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>idTercero</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>idPatente</aggregate>
+        <subject>idPatente</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
+      </field>
+      <field>
+        <aggregate>version</aggregate>
+        <subject>version</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>operation</aggregate>
+        <subject>operation</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>fechaFinPeriodo</aggregate>
+        <subject>fechaFinPeriodo</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>fechaInicioPeriodo</aggregate>
+        <subject>fechaInicioPeriodo</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>numero</aggregate>
+        <subject>numero</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>observaciones</aggregate>
+        <subject>observaciones</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1096,8 +1238,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
-      <yloc>224</yloc>
+      <xloc>784</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1105,7 +1247,7 @@
     <name>gv_execution_id</name>
     <type>GetVariable</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1135,13 +1277,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>224</yloc>
+      <xloc>912</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>gv_keykafka 2</name>
+    <name>gv_keykafka</name>
     <type>GetVariable</type>
     <description/>
     <distribute>N</distribute>
@@ -1174,16 +1316,98 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1616</xloc>
-      <yloc>224</yloc>
+      <xloc>1696</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>iu_univ</name>
-    <type>InsertUpdate</type>
+    <name>ifvaln_nulls</name>
+    <type>IfNull</type>
     <description/>
     <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>version</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>operation</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>idPatente</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>idTercero</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>numero</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>observaciones</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fechaInicioPeriodo</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fechaFinPeriodo</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>iu_target_db</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1194,27 +1418,57 @@
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema/>
-      <table>University</table>
+      <schema>etl</schema>
+      <table>CompanyPatentOwner</table>
       <key>
-        <name>University</name>
+        <name>idTercero</name>
         <field>id</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
         <name>id</name>
-        <rename>University</rename>
+        <rename>idTercero</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>nombre</name>
-        <rename>name</rename>
+        <name>version</name>
+        <rename>version</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>idEjecucion</name>
-        <rename>idEjecucion</rename>
+        <name>operation</name>
+        <rename>operation</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>fechaFinPeriodo</name>
+        <rename>fechaFinPeriodo</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>fechaInicioPeriodo</name>
+        <rename>fechaInicioPeriodo</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>numero</name>
+        <rename>numero</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>observaciones</name>
+        <rename>observaciones</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>fechaModificacion</name>
+        <rename>sysdate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>IdEjecucion</name>
+        <rename>IdEjecucion</rename>
         <update>Y</update>
       </value>
       <value>
@@ -1223,19 +1477,9 @@
         <update>N</update>
       </value>
       <value>
-        <name>fechaModificacion</name>
-        <rename>sysdate</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>code</name>
-        <rename>code</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>operation</name>
-        <rename>operation</rename>
-        <update>Y</update>
+        <name>idPatente</name>
+        <rename>idPatente</rename>
+        <update>N</update>
       </value>
     </lookup>
     <attributes/>
@@ -1247,13 +1491,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>224</yloc>
+      <xloc>1056</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>jsono_pojo 2</name>
+    <name>jsono_pojo</name>
     <type>JsonOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1284,32 +1528,48 @@
     </file>
     <fields>
       <field>
-        <name>University</name>
-        <element>id</element>
-      </field>
-      <field>
         <name>nombre_objeto</name>
         <element>@class</element>
       </field>
       <field>
-        <name>name</name>
-        <element>title</element>
+        <name>idTercero</name>
+        <element>id</element>
       </field>
       <field>
-        <name>lang</name>
-        <element>lang</element>
+        <name>fechaInicioPeriodo</name>
+        <element>dateStart</element>
+      </field>
+      <field>
+        <name>fechaFinPeriodo</name>
+        <element>dateEnd</element>
+      </field>
+      <field>
+        <name>publicCompany</name>
+        <element>publicCompany</element>
+      </field>
+      <field>
+        <name>isStartup</name>
+        <element>isStartup</element>
+      </field>
+      <field>
+        <name>title</name>
+        <element>title</element>
       </field>
       <field>
         <name>description</name>
         <element>description</element>
       </field>
       <field>
-        <name>keyword</name>
-        <element>keyword</element>
+        <name>homepage</name>
+        <element>homepage</element>
       </field>
       <field>
-        <name>code</name>
+        <name>abbreviation</name>
         <element>abbreviation</element>
+      </field>
+      <field>
+        <name>lang</name>
+        <element>lang</element>
       </field>
     </fields>
     <attributes/>
@@ -1321,13 +1581,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
-      <yloc>224</yloc>
+      <xloc>1344</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>kafp_pojo_output</name>
+    <name>kafp_pojo</name>
     <type>KafkaProducerOutput</type>
     <description/>
     <distribute>N</distribute>
@@ -1369,13 +1629,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1792</xloc>
-      <yloc>224</yloc>
+      <xloc>1696</xloc>
+      <yloc>592</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ris_pojo 2</name>
+    <name>ris_pojo</name>
     <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
@@ -1432,16 +1692,79 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
-      <yloc>224</yloc>
+      <xloc>1472</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>sv_output 2</name>
-    <type>SelectValues</type>
+    <name>ris_tipo_financ_fields</name>
+    <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>observaciones</in_stream_name>
+        <out_stream_name/>
+        <use_regex>yes</use_regex>
+        <replace_string>[\p{P}\p{S}]</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>operation</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>UPDATE</replace_string>
+        <replace_by_string>INSERT</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>operation</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>DELETE</replace_string>
+        <replace_by_string>INSERT</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_output</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1463,12 +1786,427 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1456</xloc>
-      <yloc>224</yloc>
+      <xloc>1696</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_patent_asignee</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>version</name>
+        <rename/>
+      </field>
+      <field>
+        <name>operation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>idPatente</name>
+        <rename/>
+      </field>
+      <field>
+        <name>idTercero</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numero</name>
+        <rename/>
+      </field>
+      <field>
+        <name>observaciones</name>
+        <rename/>
+      </field>
+      <field>
+        <name>fechaInicioPeriodo</name>
+        <rename/>
+      </field>
+      <field>
+        <name>fechaFinPeriodo</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>fechaFinPeriodo</name>
+        <rename>fechaFinPeriodo</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>fechaInicioPeriodo</name>
+        <rename>fechaInicioPeriodo</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ti_patent_asignee</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Database_Source</connection>
+    <sql>SELECT
+  ENTITY_ID
+, version
+, operation
+, STR_TO_DATE(fechaFinPeriodo, '%Y/%m/%d') as fechaFinPeriodo
+, STR_TO_DATE(fechaInicioPeriodo, '%Y/%m/%d') as fechaInicioPeriodo
+, idPatente
+, idTercero
+, numero
+, observaciones
+FROM ${TABLE_NAME}
+where version=${version}
+limit ${limit}
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>ENTITY_ID</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_patent_asignee</origin>
+        <comments>ENTITY_ID</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>version</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>ti_patent_asignee</origin>
+        <comments>version</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>operation</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_patent_asignee</origin>
+        <comments>operation</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fechaFinPeriodo</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>ti_patent_asignee</origin>
+        <comments>fechaFinPeriodo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fechaInicioPeriodo</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>ti_patent_asignee</origin>
+        <comments>fechaInicioPeriodo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>idPatente</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>ti_patent_asignee</origin>
+        <comments>idPatente</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>idTercero</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>ti_patent_asignee</origin>
+        <comments>idTercero</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>numero</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>ti_patent_asignee</origin>
+        <comments>numero</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>observaciones</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_patent_asignee</origin>
+        <comments>observaciones</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>48</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>idTercero</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
+    <error>
+      <source_step>dval_output_val</source_step>
+      <target_step/>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename>error_description</descriptions_valuename>
+      <fields_valuename>error_fieldname</fields_valuename>
+      <codes_valuename>error_code</codes_valuename>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
+    <error>
+      <source_step>iu_target_db</source_step>
+      <target_step/>
+      <is_enabled>N</is_enabled>
+      <nr_valuename>erro_line</nr_valuename>
+      <descriptions_valuename>error_desc</descriptions_valuename>
+      <fields_valuename>error_name</fields_valuename>
+      <codes_valuename>error_code</codes_valuename>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
