@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>5.3.02_cvn_load_plain_project</name>
+    <name>5.3.11_cvn_load_plain_academic_degree</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -479,7 +479,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/05 15:34:51.056</modified_date>
+    <modified_date>2021/04/08 10:32:10.846</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -513,57 +513,6 @@
       <attribute>
         <code>PORT_NUMBER</code>
         <attribute>${PortCVN}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>Database_Master</name>
-    <server>${HostnameMaster}</server>
-    <type>MARIADB</type>
-    <access>Native</access>
-    <database>${DatabaseMaster}</database>
-    <port>${PortMaster}</port>
-    <username>${UserMaster}</username>
-    <password>${PwdMaster}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${PortMaster}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -730,11 +679,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>jsono_pojo</from>
-      <to>ris_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>ris_pojo</from>
       <to>cf_pojo</to>
       <enabled>Y</enabled>
@@ -785,11 +729,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>iu_target</from>
-      <to>ac_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>ti_string</from>
       <to>srt_item_id 7</to>
       <enabled>Y</enabled>
@@ -800,28 +739,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>gv_id_ejecucion</from>
-      <to>iu_target</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>dblkp</from>
-      <to>gsi_sysdate</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>fr_filter_public</from>
-      <to>sv_final</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_final</from>
-      <to>grp_entity_group</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>grp_entity_group</from>
-      <to>ac</to>
+      <from>as_entity_id</from>
+      <to>cf</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -830,23 +749,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>as_entity_id</from>
-      <to>cf</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>cf</from>
-      <to>dblkp</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>ti_date</from>
       <to>srt_item_id 9</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>mj_item_ids 7</from>
-      <to>mj_item_ids 8</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -855,11 +759,177 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>mj_item_ids 7</from>
+      <to>mj_item_ids 8</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>mj_item_ids 8</from>
       <to>fr_filter_public</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>fr_filter_public</from>
+      <to>sv_final</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>cf</from>
+      <to>gsi_sysdate</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>gv_id_ejecucion</from>
+      <to>ac_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>jsono_pojo</from>
+      <to>iu_target</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>iu_target</from>
+      <to>ris_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Group by</from>
+      <to>ac</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_final</from>
+      <to>srt_item_id 9 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_item_id 9 2</from>
+      <to>Row flattener</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Row flattener</from>
+      <to>Group by</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Group by</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>ENTITY_ID</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>version</aggregate>
+        <subject>version</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>operation</aggregate>
+        <subject>operation</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>title</aggregate>
+        <subject>title</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>entity</aggregate>
+        <subject>entity</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>date</aggregate>
+        <subject>date</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>1056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Row flattener</name>
+    <type>Flattener</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <field_name>value</field_name>
+    <fields>
+      <field>
+        <name>ciudad</name>
+      </field>
+      <field>
+        <name>CCAA</name>
+      </field>
+      <field>
+        <name>nota</name>
+      </field>
+      <field>
+        <name>country</name>
+      </field>
+      <field>
+        <name>type</name>
+      </field>
+      <field>
+        <name>title</name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
+      <yloc>1056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>ac</name>
     <type>Constant</type>
@@ -894,7 +964,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
+      <xloc>976</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -978,109 +1048,13 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Project</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>date</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>summary</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>doi</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>lang</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>es-ES</nullif>
+        <nullif>AwardedDegree</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
         <name>abbreviation</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>placeOfPublication</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>modality</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>keyword</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>ProjectClassification</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1104,49 +1078,13 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>foreseenJustificationDate</name>
+        <name>lang</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>needsEthicalValidation</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>title</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>dateEnd</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
+        <nullif>es-ES</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1161,7 +1099,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
+      <xloc>1520</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1196,7 +1134,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>1072</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1282,7 +1220,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>1184</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1464,55 +1402,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1792</xloc>
-      <yloc>1056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>dblkp</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Database_Master</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>master</schema>
-      <table>Universities</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>university</name>
-        <field>name</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>id</name>
-        <rename>univ_code</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1088</xloc>
+      <xloc>1904</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1536,29 +1426,14 @@
         <conditions>
           <condition>
             <negated>N</negated>
-            <leftvalue>descr_6</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>Nombre</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>descr</leftvalue>
+            <leftvalue>code_2</leftvalue>
             <function>CONTAINS</function>
             <rightvalue/>
             <value>
               <name>constant</name>
               <type>String</type>
-              <text>Proyectos</text>
+              <text>020.010.010.030</text>
               <length>-1</length>
               <precision>-1</precision>
               <isnull>N</isnull>
@@ -1577,89 +1452,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>1056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>grp_entity_group</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>title</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>givenName</aggregate>
-        <subject>givenName</subject>
-        <type>CONCAT_STRING</type>
-        <valuefield>|</valuefield>
-      </field>
-      <field>
-        <aggregate>initialPage</aggregate>
-        <subject>initialPage</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>finalPage</aggregate>
-        <subject>finalPage</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>operation</aggregate>
-        <subject>operation</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>version</aggregate>
-        <subject>version</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>university</aggregate>
-        <subject>university</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>dateStart</aggregate>
-        <subject>dateStart</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
+      <xloc>480</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1690,7 +1483,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
+      <xloc>1280</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1729,7 +1522,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
+      <xloc>1392</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1769,7 +1562,7 @@
     </remotesteps>
     <GUI>
       <xloc>1904</xloc>
-      <yloc>1168</yloc>
+      <yloc>1296</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1789,7 +1582,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>etl</schema>
-      <table>Cvn_Project</table>
+      <table>Cvn_AcademicDegree</table>
       <key>
         <name>id</name>
         <field>id</field>
@@ -1802,17 +1595,7 @@
         <update>Y</update>
       </value>
       <value>
-        <name>version</name>
-        <rename>version</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>operation</name>
-        <rename>operation</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>IdEjecucion</name>
+        <name>idEjecucion</name>
         <rename>IdEjecucion</rename>
         <update>Y</update>
       </value>
@@ -1827,23 +1610,28 @@
         <update>Y</update>
       </value>
       <value>
-        <name>nombre</name>
+        <name>version</name>
+        <rename>version</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>operation</name>
+        <rename>operation</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>dateTimeValue</name>
+        <rename>date</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>title</name>
         <rename>title</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>authors</name>
-        <rename>givenName</rename>
-        <update>Y</update>
-      </value>
-      <value>
         <name>university</name>
-        <rename>univ_code</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>fechaInicio</name>
-        <rename>dateStart</rename>
+        <rename>entity</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -1856,7 +1644,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1392</xloc>
+      <xloc>1728</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1901,48 +1689,8 @@
         <element>id</element>
       </field>
       <field>
-        <name>modality</name>
-        <element>modality</element>
-      </field>
-      <field>
-        <name>title</name>
-        <element>title</element>
-      </field>
-      <field>
-        <name>needsEthicalValidation</name>
-        <element>needsEthicalValidation</element>
-      </field>
-      <field>
-        <name>dateStart</name>
-        <element>dateStart</element>
-      </field>
-      <field>
-        <name>foreseenJustificationDate</name>
-        <element>foreseenJustificationDate</element>
-      </field>
-      <field>
-        <name>dateEnd</name>
-        <element>dateEnd</element>
-      </field>
-      <field>
-        <name>abbreviation</name>
-        <element>abbreviation</element>
-      </field>
-      <field>
-        <name>description</name>
-        <element>description</element>
-      </field>
-      <field>
-        <name>lang</name>
-        <element>lang</element>
-      </field>
-      <field>
-        <name>ProjectClassification</name>
-        <element>projectClassification</element>
-      </field>
-      <field>
-        <name>keyword</name>
-        <element>keyword</element>
+        <name>date</name>
+        <element>dateTimeValue</element>
       </field>
     </fields>
     <attributes/>
@@ -1954,7 +1702,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
+      <xloc>1632</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2003,7 +1751,7 @@
     </remotesteps>
     <GUI>
       <xloc>1904</xloc>
-      <yloc>1280</yloc>
+      <yloc>1408</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2337,7 +2085,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1696</xloc>
+      <xloc>1808</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2721,6 +2469,56 @@
     </GUI>
   </step>
   <step>
+    <name>srt_item_id 9 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>ENTITY_ID</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>descr_6</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>1056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>sv</name>
     <type>SelectValues</type>
     <description/>
@@ -2854,39 +2652,26 @@
         <name>operation</name>
       </field>
       <field>
-        <name>code</name>
-      </field>
-      <field>
-        <name>descr</name>
-      </field>
-      <field>
-        <name>value</name>
+        <name>name</name>
         <rename>title</rename>
       </field>
       <field>
         <name>entity</name>
       </field>
       <field>
-        <name>givenName</name>
+        <name>descr_6</name>
       </field>
       <field>
-        <name>finalPage</name>
-      </field>
-      <field>
-        <name>initialPage</name>
-      </field>
-      <field>
-        <name>entity</name>
-        <rename>university</rename>
+        <name>value</name>
       </field>
       <field>
         <name>value_1</name>
-        <rename>dateStart</rename>
+        <rename>date</rename>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
-        <name>dateStart</name>
-        <rename>dateStart</rename>
+        <name>date</name>
+        <rename>date</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -2911,7 +2696,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>576</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2943,7 +2728,7 @@
     </remotesteps>
     <GUI>
       <xloc>1904</xloc>
-      <yloc>1056</yloc>
+      <yloc>1184</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

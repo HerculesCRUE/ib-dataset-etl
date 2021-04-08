@@ -479,7 +479,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/03/31 16:51:06.744</modified_date>
+    <modified_date>2021/04/06 17:53:08.656</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -779,11 +779,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_final</from>
-      <to>grp_entity_group</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>cf</from>
       <to>gsi_sysdate</to>
       <enabled>Y</enabled>
@@ -801,6 +796,16 @@
     <hop>
       <from>iu_target</from>
       <to>ris_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_final</from>
+      <to>srt_item_id 9 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_item_id 9 2</from>
+      <to>grp_entity_group</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -838,7 +843,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>912</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1006,7 +1011,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif/>
+        <nullif>es-ES</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1033,7 +1038,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1360</xloc>
+      <xloc>1456</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1068,7 +1073,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
+      <xloc>1008</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1154,7 +1159,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
+      <xloc>1120</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1336,7 +1341,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1744</xloc>
+      <xloc>1840</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1352,7 +1357,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>sv_final</send_true_to>
+    <send_true_to>Value mapper</send_true_to>
     <send_false_to/>
     <compare>
       <condition>
@@ -1417,7 +1422,7 @@
     </group>
     <fields>
       <field>
-        <aggregate>ENTITY_ID</aggregate>
+        <aggregate>entityID</aggregate>
         <subject>ENTITY_ID</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
@@ -1468,7 +1473,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>816</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1499,7 +1504,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
+      <xloc>1216</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1538,7 +1543,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1232</xloc>
+      <xloc>1328</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1577,7 +1582,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1744</xloc>
+      <xloc>1840</xloc>
       <yloc>1296</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1675,7 +1680,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1568</xloc>
+      <xloc>1664</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1765,7 +1770,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1472</xloc>
+      <xloc>1568</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1813,7 +1818,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1744</xloc>
+      <xloc>1840</xloc>
       <yloc>1408</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2148,7 +2153,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
+      <xloc>1744</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2654,27 +2659,21 @@
     <fields>
       <field>
         <name>DTYPE</name>
-        <rename/>
       </field>
       <field>
         <name>ENTITY_ID</name>
-        <rename/>
       </field>
       <field>
         <name>version</name>
-        <rename/>
       </field>
       <field>
         <name>operation</name>
-        <rename/>
       </field>
       <field>
         <name>code</name>
-        <rename/>
       </field>
       <field>
         <name>descr</name>
-        <rename/>
       </field>
       <field>
         <name>entity</name>
@@ -2682,11 +2681,9 @@
       </field>
       <field>
         <name>value</name>
-        <rename/>
       </field>
       <field>
         <name>descr_6</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -2730,7 +2727,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1744</xloc>
+      <xloc>1840</xloc>
       <yloc>1184</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4733,7 +4730,61 @@ FROM ${Table_Input_8}
       <draw>Y</draw>
     </GUI>
   </step>
+  <step>
+    <name>srt_item_id 9 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>title</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
+      <yloc>1056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step_error_handling>
+    <error>
+      <source_step>sv_final</source_step>
+      <target_step>Value mapper</target_step>
+      <is_enabled>N</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>

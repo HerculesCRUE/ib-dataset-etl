@@ -8,7 +8,7 @@
   <created_user>-</created_user>
   <created_date>2020/04/07 17:03:26.655</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2021/04/05 11:32:18.539</modified_date>
+  <modified_date>2021/04/06 10:23:13.614</modified_date>
   <parameters>
     <parameter>
       <name>limit</name>
@@ -327,7 +327,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>224</xloc>
+      <xloc>288</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -339,7 +339,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1456</xloc>
+      <xloc>1408</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -376,7 +376,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1280</xloc>
+      <xloc>1232</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -413,7 +413,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
+      <xloc>1040</xloc>
       <yloc>400</yloc>
       <attributes_kjc/>
     </entry>
@@ -426,7 +426,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1280</xloc>
+      <xloc>1232</xloc>
       <yloc>400</yloc>
       <attributes_kjc/>
     </entry>
@@ -476,7 +476,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
+      <xloc>1040</xloc>
       <yloc>560</yloc>
       <attributes_kjc/>
     </entry>
@@ -513,7 +513,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
+      <xloc>864</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -550,7 +550,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
+      <xloc>1040</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
