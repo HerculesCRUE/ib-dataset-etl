@@ -439,7 +439,7 @@
     <created_user>-</created_user>
     <created_date>2020/11/05 14:55:32.651</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/05 12:25:37.541</modified_date>
+    <modified_date>2021/04/08 19:26:06.710</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -1120,7 +1120,7 @@ JsonOutput_3 + ',' + JsonOutput_4 + ']}}}';
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <splitfield>givenName</splitfield>
+    <splitfield>author</splitfield>
     <delimiter>|</delimiter>
     <newfield>person</newfield>
     <rownum>N</rownum>
@@ -1354,39 +1354,55 @@ JsonOutput_3 + ',' + JsonOutput_4 + ']}}}';
     <fields>
       <field>
         <name>id</name>
+        <rename/>
       </field>
       <field>
         <name>version</name>
+        <rename/>
       </field>
       <field>
         <name>fechaCreacion</name>
+        <rename/>
       </field>
       <field>
         <name>fechaModificacion</name>
+        <rename/>
       </field>
       <field>
         <name>operation</name>
+        <rename/>
       </field>
       <field>
         <name>idEjecucion</name>
+        <rename/>
       </field>
       <field>
         <name>codigo</name>
+        <rename/>
       </field>
       <field>
         <name>fecha</name>
+        <rename/>
       </field>
       <field>
         <name>titulo</name>
+        <rename/>
       </field>
       <field>
         <name>universidad</name>
+        <rename/>
       </field>
       <field>
         <name>premio</name>
+        <rename/>
       </field>
       <field>
-        <name>givenName</name>
+        <name>supervisor</name>
+        <rename/>
+      </field>
+      <field>
+        <name>author</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1418,9 +1434,55 @@ JsonOutput_3 + ',' + JsonOutput_4 + ']}}}';
     <fields>
       <field>
         <name>id</name>
+        <rename/>
       </field>
       <field>
-        <name>givenName</name>
+        <name>version</name>
+        <rename/>
+      </field>
+      <field>
+        <name>fechaCreacion</name>
+        <rename/>
+      </field>
+      <field>
+        <name>fechaModificacion</name>
+        <rename/>
+      </field>
+      <field>
+        <name>operation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>idEjecucion</name>
+        <rename/>
+      </field>
+      <field>
+        <name>codigo</name>
+        <rename/>
+      </field>
+      <field>
+        <name>fecha</name>
+        <rename/>
+      </field>
+      <field>
+        <name>titulo</name>
+        <rename/>
+      </field>
+      <field>
+        <name>universidad</name>
+        <rename/>
+      </field>
+      <field>
+        <name>premio</name>
+        <rename/>
+      </field>
+      <field>
+        <name>supervisor</name>
+        <rename/>
+      </field>
+      <field>
+        <name>author</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>

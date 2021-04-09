@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>5.4.05_cvn_load_link_person</name>
+    <name>5.4.16_cvn_load_link_principal_investigator_role</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -10,17 +10,12 @@
     <parameters>
       <parameter>
         <name>TableSourceName_1</name>
-        <default_value>Cvn_Person</default_value>
+        <default_value>Cvn_PrincipalInvestigatorRole</default_value>
         <description/>
       </parameter>
       <parameter>
         <name>TableSourceName_2</name>
-        <default_value/>
-        <description/>
-      </parameter>
-      <parameter>
-        <name>TableSourceName_3</name>
-        <default_value/>
+        <default_value>Cvn_ResearcherPosition</default_value>
         <description/>
       </parameter>
     </parameters>
@@ -444,7 +439,7 @@
     <created_user>-</created_user>
     <created_date>2020/11/05 14:55:32.651</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/08 15:52:46.128</modified_date>
+    <modified_date>2021/04/09 12:06:58.323</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -503,38 +498,8 @@
   </connection>
   <order>
     <hop>
-      <from>ti_person</from>
-      <to>sv_project</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_cv</from>
-      <to>srt_cv</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_project</from>
-      <to>srt_project</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_project</from>
-      <to>mj</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_output</from>
-      <to>kafp_output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_cv</from>
-      <to>mj</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ti_cv</from>
-      <to>sv_cv</to>
+      <from>If field value is null</from>
+      <to>ac_pojo 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -543,18 +508,48 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>mjsv_pojo_build 2</from>
-      <to>sv_output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>mj</from>
       <to>If field value is null</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>If field value is null</from>
-      <to>ac_pojo 2</to>
+      <from>mjsv_pojo_build 2</from>
+      <to>sv_output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_cv</from>
+      <to>mj</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_project</from>
+      <to>mj</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_cv</from>
+      <to>srt_cv</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_output</from>
+      <to>kafp_output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_project</from>
+      <to>srt_project</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_cv</from>
+      <to>sv_cv</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_person</from>
+      <to>sv_project</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -578,7 +573,7 @@
       </valuetypes>
     <fields>
       <field>
-        <name>idCV</name>
+        <name>idPosition</name>
         <value/>
         <mask/>
         <set_empty_string>Y</set_empty_string>
@@ -593,8 +588,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>288</yloc>
+      <xloc>832</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -617,7 +612,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Person</nullif>
+        <nullif>PrincipalInvestigatorRole</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -629,7 +624,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>CurriculumVitae</nullif>
+        <nullif>Relationship</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -641,7 +636,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>hasCV</nullif>
+        <nullif>relatedBy</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -653,7 +648,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Activity</nullif>
+        <nullif>Organization</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -665,7 +660,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>participates</nullif>
+        <nullif>relates</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -694,174 +689,6 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
-      <field>
-        <name>classname_4</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Contract</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fieldname_4</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>hasContract</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>classname_5</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Expense</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fieldname_5</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>spends</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>classname_6</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Role</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fieldname_6</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>hasRole</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>classname_7</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Position</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fieldname_7</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>hasPosition</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>classname_8</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Accreditation</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fieldname_8</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>hasAccreditation</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>classname_9</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>ScientificPublication</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fieldname_9</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>homepage</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>classname_10</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>InformationContentEntity</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fieldname_10</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>mbox</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -872,8 +699,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
-      <yloc>288</yloc>
+      <xloc>1040</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -920,8 +747,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1520</xloc>
-      <yloc>288</yloc>
+      <xloc>1584</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -954,8 +781,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>288</yloc>
+      <xloc>656</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -983,7 +810,7 @@
 
 //Variables
 parent_id  = id;
-child_id_1 = idCV;
+child_id_1 = idPosition;
 
 
 json = {};
@@ -991,13 +818,7 @@ json = {};
 Child_1 = [];
 Child_2 = [];
 Child_3 = [];
-Child_4 = [];
-Child_5 = [];
-Child_6 = [];
-Child_7 = [];
-Child_8 = [];
-Child_9 = [];
-Child_10= [];
+
 
 
 
@@ -1052,15 +873,13 @@ json.ids = Child_2;
  // JSON Stringify the data object
 JsonOutput_2 = JSON.stringify(json);
 
-
 //splitting the data
-split_child_3   = [];
+split_child_3  =  [];
+
 
 json.className = classname_3;
 json.fieldName = fieldname_3;
 
-
-// Loop through the splitted data and build the child structure
 if (isEmpty(split_child_3)){
 	Child_3 = []
 	} else {
@@ -1070,184 +889,18 @@ if (isEmpty(split_child_3)){
 		}
 	}
 
-json.ids = Child_3;
 
+
+//if( isEmpty(Child_2), Child_2 = [], json.ids = Child_2);
+
+json.ids = Child_3;
 
  // JSON Stringify the data object
 JsonOutput_3 = JSON.stringify(json);
 
 
-//splitting the data
-split_child_4   =  [];
 
-json.className = classname_4;
-json.fieldName = fieldname_4;
-
-
-// Loop through the splitted data and build the child structure
-if (isEmpty(split_child_4)){
-	Child_4 = []
-	} else {
-		for(i=0; i&lt;split_child_4.length; i++){
-    		child=split_child_4[i];
-    		Child_4.push(child);
-		}
-	}
-
-json.ids = Child_4;
-
-
- // JSON Stringify the data object
-JsonOutput_4 = JSON.stringify(json);
-
-
-//splitting the data
-split_child_5   = [];
-
-json.className = classname_5;
-json.fieldName = fieldname_5;
-
-
-// Loop through the splitted data and build the child structure
-if (isEmpty(split_child_5)){
-	Child_5 = []
-	} else {
-		for(i=0; i&lt;split_child_5.length; i++){
-    		child=split_child_5[i];
-    		Child_5.push(child);
-		}
-	}
-
-json.ids = Child_5;
-
-
- // JSON Stringify the data object
-JsonOutput_5 = JSON.stringify(json);
-
-
-//splitting the data
-split_child_6   = [];
-
-json.className = classname_6;
-json.fieldName = fieldname_6;
-
-
-// Loop through the splitted data and build the child structure
-if (isEmpty(split_child_6)){
-	Child_6 = []
-	} else {
-		for(i=0; i&lt;split_child_6.length; i++){
-    		child=split_child_6[i];
-    		Child_6.push(child);
-		}
-	}
-
-json.ids = Child_6;
-
-
- // JSON Stringify the data object
-JsonOutput_6 = JSON.stringify(json);
-
-
-
-
-
-//splitting the data
-split_child_7   = [];
-
-json.className = classname_7;
-json.fieldName = fieldname_7;
-
-
-// Loop through the splitted data and build the child structure
-if (isEmpty(split_child_7)){
-	Child_7 = []
-	} else {
-		for(i=0; i&lt;split_child_7.length; i++){
-    		child=split_child_7[i];
-    		Child_7.push(child);
-		}
-	}
-
-json.ids = Child_7;
-
-
- // JSON Stringify the data object
-JsonOutput_7 = JSON.stringify(json);
-
-//splitting the data
-split_child_8   = [];
-
-json.className = classname_8;
-json.fieldName = fieldname_8;
-
-
-// Loop through the splitted data and build the child structure
-if (isEmpty(split_child_8)){
-	Child_8 = []
-	} else {
-		for(i=0; i&lt;split_child_8.length; i++){
-    		child=split_child_8[i];
-    		Child_8.push(child);
-		}
-	}
-
-json.ids = Child_8;
-
-
- // JSON Stringify the data object
-JsonOutput_8 = JSON.stringify(json);
-
-//splitting the data
-split_child_9   = [];
-
-json.className = classname_9;
-json.fieldName = fieldname_9;
-
-
-// Loop through the splitted data and build the child structure
-if (isEmpty(split_child_9)){
-	Child_9 = []
-	} else {
-		for(i=0; i&lt;split_child_9.length; i++){
-    		child=split_child_9[i];
-    		Child_9.push(child);
-		}
-	}
-
-json.ids = Child_9;
-
-
- // JSON Stringify the data object
-JsonOutput_9 = JSON.stringify(json);
-
-//splitting the data
-split_child_10   = [];
-
-json.className = classname_10;
-json.fieldName = fieldname_10;
-
-
-// Loop through the splitted data and build the child structure
-if (isEmpty(split_child_10)){
-	Child_10 = []
-	} else {
-		for(i=0; i&lt;split_child_10.length; i++){
-    		child=split_child_10[i];
-    		Child_10.push(child);
-		}
-	}
-
-json.ids = Child_10;
-
-
- // JSON Stringify the data object
-JsonOutput_10 = JSON.stringify(json);
-
-
-
-var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ',' + JsonOutput_3 + ',' + JsonOutput_4 + ',' + JsonOutput_5 + 
-',' + JsonOutput_6 + ',' + JsonOutput_7 + ',' + JsonOutput_8 + ',' + JsonOutput_9 + ',' + JsonOutput_10 + ']}}}';
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ',' + JsonOutput_3 + ']}}}';
 </jsScript_script>
       </jsScript>
     </jsScripts>
@@ -1270,8 +923,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
-      <yloc>288</yloc>
+      <xloc>1248</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1312,8 +965,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>288</yloc>
+      <xloc>464</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1354,8 +1007,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>128</yloc>
+      <xloc>464</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1373,9 +1026,11 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     <fields>
       <field>
         <name>id</name>
+        <rename/>
       </field>
       <field>
-        <name>idCV</name>
+        <name>idPosition</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1388,8 +1043,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>288</yloc>
+      <xloc>320</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1419,8 +1074,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1376</xloc>
-      <yloc>288</yloc>
+      <xloc>1440</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1455,19 +1110,13 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
         <name>fechaModificacion</name>
       </field>
       <field>
-        <name>persCentCodigo</name>
+        <name>ordinal</name>
       </field>
       <field>
-        <name>cedNombre</name>
+        <name>givenName</name>
       </field>
       <field>
-        <name>persDeptCodigo</name>
-      </field>
-      <field>
-        <name>depNombre</name>
-      </field>
-      <field>
-        <name>name</name>
+        <name>role</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1480,8 +1129,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>128</yloc>
+      <xloc>320</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1497,9 +1146,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       <schema_name/>
     </partitioning>
     <connection>Database_Target</connection>
-    <sql>SELECT P.id, P.firstName, CV.correspondingAuthor, CV.id as idCV FROM CurriculumVitae CV, Cvn_Person P
-WHERE P.firstName  LIKE CONCAT('%',CV.correspondingAuthor,'%');
-</sql>
+    <sql>SELECT T1.id, T1.givenName, T2.id as idPosition,  T2.givenName  FROM ${TableSourceName_1} T1, ${TableSourceName_2} T2
+WHERE T1.givenName  LIKE CONCAT('%',T2.givenName,'%');</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1533,11 +1181,11 @@ WHERE P.firstName  LIKE CONCAT('%',CV.correspondingAuthor,'%');
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>firstName</name>
-        <length>255</length>
+        <name>givenName</name>
+        <length>50</length>
         <precision>-1</precision>
         <origin>ti_cv</origin>
-        <comments>firstName</comments>
+        <comments>givenName</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -1556,11 +1204,11 @@ WHERE P.firstName  LIKE CONCAT('%',CV.correspondingAuthor,'%');
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>correspondingAuthor</name>
+        <name>idPosition</name>
         <length>50</length>
         <precision>-1</precision>
         <origin>ti_cv</origin>
-        <comments>correspondingAuthor</comments>
+        <comments>idPosition</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -1579,11 +1227,11 @@ WHERE P.firstName  LIKE CONCAT('%',CV.correspondingAuthor,'%');
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>idCV</name>
+        <name>givenName_1</name>
         <length>50</length>
         <precision>-1</precision>
         <origin>ti_cv</origin>
-        <comments>idCV</comments>
+        <comments>givenName</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -1609,8 +1257,8 @@ WHERE P.firstName  LIKE CONCAT('%',CV.correspondingAuthor,'%');
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>288</yloc>
+      <xloc>176</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1900,8 +1548,8 @@ FROM ${TableSourceName_1}
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>128</yloc>
+      <xloc>176</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

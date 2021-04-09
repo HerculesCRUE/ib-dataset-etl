@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>5.3.03_cvn_load_plain_book</name>
+    <name>5.3.16_cvn_load_plain_principal_investigator_role</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -51,11 +51,6 @@
       <parameter>
         <name>Table_Input_8</name>
         <default_value>8_VolumeBean</default_value>
-        <description/>
-      </parameter>
-      <parameter>
-        <name>Table_Input_9</name>
-        <default_value>10_DateYear</default_value>
         <description/>
       </parameter>
     </parameters>
@@ -479,7 +474,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/08 15:03:43.881</modified_date>
+    <modified_date>2021/04/09 11:59:06.471</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -679,11 +674,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>jsono_pojo</from>
-      <to>ris_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>ris_pojo</from>
       <to>cf_pojo</to>
       <enabled>Y</enabled>
@@ -734,8 +724,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>iu_target</from>
-      <to>ac_pojo</to>
+      <from>mj_item_ids 7</from>
+      <to>sv_final</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -749,13 +739,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>gv_id_ejecucion</from>
-      <to>iu_target</to>
+      <from>ac</from>
+      <to>as_entity_id</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ac</from>
-      <to>as_entity_id</to>
+      <from>as_entity_id</from>
+      <to>cf</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows</from>
+      <to>grp_entity_group</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -769,49 +764,34 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>as_entity_id</from>
-      <to>cf</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ti_date</from>
-      <to>srt_item_id 9</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_item_id 9</from>
-      <to>mj_item_ids 8</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>mj_item_ids 7</from>
-      <to>mj_item_ids 8</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>mj_item_ids 8</from>
-      <to>fr_filter_public</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>fr_filter_public</from>
-      <to>sv_final</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>sv_final</from>
-      <to>Replace in string</to>
+      <to>Filter rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Replace in string</from>
-      <to>grp_entity_group</to>
+      <from>gv_id_ejecucion</from>
+      <to>ac_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>jsono_pojo</from>
+      <to>iu_target</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>iu_target</from>
+      <to>ris_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Replace in string</name>
-    <type>ReplaceString</type>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -820,78 +800,102 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <send_true_to>Sort rows</send_true_to>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>code_1</leftvalue>
+            <function>CONTAINS</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>050.010.000.080</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>code_1</leftvalue>
+            <function>CONTAINS</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>050.020.020.250</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>code_1</leftvalue>
+            <function>CONTAINS</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>050.020.010.140</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>928</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <in_stream_name>value</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã³</replace_string>
-        <replace_by_string>o</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>value</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã</replace_string>
-        <replace_by_string>i</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>value</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã©</replace_string>
-        <replace_by_string>e</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>value</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã“</replace_string>
-        <replace_by_string>O</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>value</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã </replace_string>
-        <replace_by_string>A</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>value</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>i©</replace_string>
-        <replace_by_string>e</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
+        <name>givenName</name>
+        <ascending>N</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <attributes/>
@@ -903,8 +907,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>1040</yloc>
+      <xloc>720</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -942,8 +946,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>1040</yloc>
+      <xloc>928</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1026,43 +1030,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Book</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>publishedIn</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>summary</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>doi</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
+        <nullif>PrincipalInvestigatorRole</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1079,6 +1047,54 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>ordinal</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>description</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>dedication</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>keyword</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1089,8 +1105,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
-      <yloc>1040</yloc>
+      <xloc>1520</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1124,8 +1140,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
-      <yloc>1040</yloc>
+      <xloc>1040</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1211,7 +1227,7 @@
     </remotesteps>
     <GUI>
       <xloc>1136</xloc>
-      <yloc>1040</yloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1393,72 +1409,7 @@
     </remotesteps>
     <GUI>
       <xloc>1904</xloc>
-      <yloc>1040</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>fr_filter_public</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>sv_final</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>descr_6</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>título</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>descr</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>Publicacion</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>1040</yloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1483,49 +1434,13 @@
     <give_back_row>N</give_back_row>
     <group>
       <field>
-        <name>value</name>
+        <name>givenName</name>
       </field>
     </group>
     <fields>
       <field>
-        <aggregate>givenName</aggregate>
-        <subject>givenName</subject>
-        <type>CONCAT_STRING</type>
-        <valuefield>|</valuefield>
-      </field>
-      <field>
-        <aggregate>authors</aggregate>
-        <subject>givenName</subject>
-        <type>CONCAT_STRING</type>
-        <valuefield>|</valuefield>
-      </field>
-      <field>
         <aggregate>signature</aggregate>
         <subject>signature</subject>
-        <type>CONCAT_STRING</type>
-        <valuefield>|</valuefield>
-      </field>
-      <field>
-        <aggregate>name</aggregate>
-        <subject>value</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>descr_6</aggregate>
-        <subject>descr_6</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>initialPage</aggregate>
-        <subject>initialPage</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>finalPage</aggregate>
-        <subject>finalPage</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
@@ -1542,14 +1457,14 @@
         <valuefield/>
       </field>
       <field>
-        <aggregate>date</aggregate>
-        <subject>date</subject>
+        <aggregate>role</aggregate>
+        <subject>role</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
       <field>
-        <aggregate>isbn</aggregate>
-        <subject>isbn</subject>
+        <aggregate>givenName</aggregate>
+        <subject>givenName</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
@@ -1564,7 +1479,7 @@
     </remotesteps>
     <GUI>
       <xloc>816</xloc>
-      <yloc>1040</yloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1595,7 +1510,7 @@
     </remotesteps>
     <GUI>
       <xloc>1248</xloc>
-      <yloc>1040</yloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1634,7 +1549,7 @@
     </remotesteps>
     <GUI>
       <xloc>1392</xloc>
-      <yloc>1040</yloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1673,7 +1588,7 @@
     </remotesteps>
     <GUI>
       <xloc>1904</xloc>
-      <yloc>1280</yloc>
+      <yloc>1168</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1693,7 +1608,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>etl</schema>
-      <table>Cvn_Book</table>
+      <table>Cvn_PrincipalInvestigatorRole</table>
       <key>
         <name>id</name>
         <field>id</field>
@@ -1706,28 +1621,8 @@
         <update>Y</update>
       </value>
       <value>
-        <name>operation</name>
-        <rename>operation</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>version</name>
-        <rename>version</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>titulo</name>
-        <rename>value</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>givenName</name>
-        <rename>signature</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>fecha</name>
-        <rename>date</rename>
+        <name>idEjecucion</name>
+        <rename>IdEjecucion</rename>
         <update>Y</update>
       </value>
       <value>
@@ -1741,13 +1636,28 @@
         <update>Y</update>
       </value>
       <value>
-        <name>idEjecucion</name>
-        <rename>IdEjecucion</rename>
+        <name>version</name>
+        <rename>version</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>isbn</name>
-        <rename>isbn</rename>
+        <name>operation</name>
+        <rename>operation</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ordinal</name>
+        <rename>ordinal</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>givenName</name>
+        <rename>signature</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>role</name>
+        <rename>role</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -1760,8 +1670,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
-      <yloc>1040</yloc>
+      <xloc>1728</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1805,40 +1715,20 @@
         <element>@class</element>
       </field>
       <field>
-        <name>name</name>
-        <element>title</element>
+        <name>ordinal</name>
+        <element>ordinal</element>
       </field>
       <field>
-        <name>date</name>
-        <element>date</element>
+        <name>description</name>
+        <element>description</element>
       </field>
       <field>
-        <name>initialPage</name>
-        <element>startPage</element>
+        <name>dedication</name>
+        <element>dedication</element>
       </field>
       <field>
-        <name>finalPage</name>
-        <element>endPage</element>
-      </field>
-      <field>
-        <name>summary</name>
-        <element>summary</element>
-      </field>
-      <field>
-        <name>doi</name>
-        <element>doi</element>
-      </field>
-      <field>
-        <name>publishedIn</name>
-        <element>publishedIn</element>
-      </field>
-      <field>
-        <name>lang</name>
-        <element>lang</element>
-      </field>
-      <field>
-        <name>isbn</name>
-        <element>isbn</element>
+        <name>keyword</name>
+        <element>keyword</element>
       </field>
     </fields>
     <attributes/>
@@ -1850,8 +1740,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1712</xloc>
-      <yloc>1040</yloc>
+      <xloc>1632</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1899,7 +1789,7 @@
     </remotesteps>
     <GUI>
       <xloc>1904</xloc>
-      <yloc>1392</yloc>
+      <yloc>1280</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2142,40 +2032,6 @@
     </GUI>
   </step>
   <step>
-    <name>mj_item_ids 8</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>mj_item_ids 7</step1>
-    <step2>srt_item_id 9</step2>
-    <keys_1>
-      <key>ENTITY_ID</key>
-    </keys_1>
-    <keys_2>
-      <key>CvnItemBean_ENTITY_ID</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>1040</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>ris_pojo</name>
     <type>ReplaceString</type>
     <description/>
@@ -2234,7 +2090,7 @@
     </remotesteps>
     <GUI>
       <xloc>1808</xloc>
-      <yloc>1040</yloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2575,48 +2431,6 @@
     </GUI>
   </step>
   <step>
-    <name>srt_item_id 9</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>CvnItemBean_ENTITY_ID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>1040</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>sv</name>
     <type>SelectValues</type>
     <description/>
@@ -2739,70 +2553,24 @@
     <fields>
       <field>
         <name>givenName</name>
-        <rename/>
       </field>
       <field>
         <name>signature</name>
-        <rename/>
-      </field>
-      <field>
-        <name>value</name>
-        <rename/>
-      </field>
-      <field>
-        <name>descr_6</name>
-        <rename/>
-      </field>
-      <field>
-        <name>number</name>
-        <rename/>
-      </field>
-      <field>
-        <name>initialPage</name>
-        <rename/>
-      </field>
-      <field>
-        <name>finalPage</name>
-        <rename/>
       </field>
       <field>
         <name>operation</name>
-        <rename/>
       </field>
       <field>
         <name>version</name>
-        <rename/>
       </field>
       <field>
-        <name>descr</name>
-        <rename/>
+        <name>descr_1</name>
+        <rename>role</rename>
       </field>
       <field>
-        <name>value_1</name>
-        <rename>date</rename>
-      </field>
-      <field>
-        <name>isbn</name>
-        <rename/>
+        <name>code_1</name>
       </field>
       <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>date</name>
-        <rename>date</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -2813,8 +2581,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>1040</yloc>
+      <xloc>464</xloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2845,7 +2613,7 @@
     </remotesteps>
     <GUI>
       <xloc>1904</xloc>
-      <yloc>1168</yloc>
+      <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3160,205 +2928,6 @@ FROM ${Table_Input_1}
     <GUI>
       <xloc>48</xloc>
       <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ti_date</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Database_CVN</connection>
-    <sql>SELECT *
-FROM ${Table_Input_9}
-
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>ENTITY_ID</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>ti_page 2</origin>
-        <comments>ENTITY_ID</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>version</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>ti_page 2</origin>
-        <comments>version</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>operation</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>ti_page 2</origin>
-        <comments>operation</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>code</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>ti_page 2</origin>
-        <comments>code</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>value</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>ti_page 2</origin>
-        <comments>value</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>CvnItemBean_ENTITY_ID</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>ti_page 2</origin>
-        <comments>CvnItemBean_ENTITY_ID</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>descr</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>ti_page 2</origin>
-        <comments>descr</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Europe/Berlin</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>48</xloc>
-      <yloc>1040</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

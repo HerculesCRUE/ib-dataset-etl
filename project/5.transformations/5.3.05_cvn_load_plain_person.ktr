@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>5.3.7_load_plain_person</name>
+    <name>5.3.05_cvn_load_plain_person</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -474,7 +474,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/03/30 17:04:13.081</modified_date>
+    <modified_date>2021/04/08 15:15:33.172</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -764,16 +764,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_final</from>
-      <to>ris_clean_fields</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ris_clean_fields</from>
-      <to>Sort rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Sort rows</from>
       <to>grp_entity_group</to>
       <enabled>Y</enabled>
@@ -788,7 +778,54 @@
       <to>gsi_sysdate</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>sv_final</from>
+      <to>Sort rows</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>signature</name>
+        <ascending>N</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>928</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>ac</name>
     <type>Constant</type>
@@ -950,30 +987,6 @@
       </field>
       <field>
         <name>nickname</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>firstName</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>surname</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1395,13 +1408,13 @@
     <give_back_row>N</give_back_row>
     <group>
       <field>
-        <name>name</name>
+        <name>signature</name>
       </field>
     </group>
     <fields>
       <field>
-        <aggregate>signature</aggregate>
-        <subject>signature</subject>
+        <aggregate>name</aggregate>
+        <subject>name</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
@@ -1420,6 +1433,12 @@
       <field>
         <aggregate>role</aggregate>
         <subject>role</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>surname</aggregate>
+        <subject>surname</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
@@ -1602,6 +1621,11 @@
       </value>
       <value>
         <name>name</name>
+        <rename>signature</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>firstName</name>
         <rename>name</rename>
         <update>Y</update>
       </value>
@@ -2004,45 +2028,6 @@
     </remotesteps>
     <GUI>
       <xloc>368</xloc>
-      <yloc>928</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ris_clean_fields</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>name</in_stream_name>
-        <out_stream_name/>
-        <use_regex>yes</use_regex>
-        <replace_string>[\p{P}\p{S}]</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2586,6 +2571,10 @@
       <field>
         <name>descr_1</name>
         <rename>role</rename>
+      </field>
+      <field>
+        <name>firstFamilyName</name>
+        <rename>surname</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -4430,48 +4419,6 @@ FROM ${Table_Input_8}
     <GUI>
       <xloc>48</xloc>
       <yloc>528</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>name</name>
-        <ascending>N</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
