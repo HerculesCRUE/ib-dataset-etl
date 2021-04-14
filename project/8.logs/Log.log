@@ -1,313 +1,124 @@
-2021/04/09 12:20:02 - pre_loading_data - Using run configuration [Pentaho local]
-2021/04/09 12:24:49 - load_plain - Using run configuration [Pentaho local]
-2021/04/09 12:27:10 - load_link - Using run configuration [Pentaho local]
-2021/04/09 12:29:18 - ti_main_entity 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Unexpected error
-2021/04/09 12:29:18 - sv_main_entity.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Couldn't find field 'dateTimeValue' in row!
-2021/04/09 12:29:18 - ti_main_entity 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : org.pentaho.di.core.exception.KettleDatabaseException: 
-2021/04/09 12:29:18 - ti_main_entity 2.0 - An error occurred executing SQL: 
-2021/04/09 12:29:18 - ti_main_entity 2.0 - SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-
-2021/04/09 12:29:18 - ti_main_entity 2.0 - (conn=557) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.pentaho.di.core.database.Database.openQuery(Database.java:1772)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInput.doQuery(TableInput.java:236)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInput.processRow(TableInput.java:140)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:62)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at java.lang.Thread.run(Unknown Source)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - Caused by: java.sql.SQLSyntaxErrorException: (conn=557) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.get(ExceptionMapper.java:243)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.getException(ExceptionMapper.java:164)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeExceptionEpilogue(MariaDbStatement.java:258)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeInternal(MariaDbStatement.java:349)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeQuery(MariaDbStatement.java:595)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.pentaho.di.core.database.Database.openQuery(Database.java:1761)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	... 4 more
-2021/04/09 12:29:18 - ti_main_entity 2.0 - Caused by: java.sql.SQLException: Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readErrorPacket(AbstractQueryProtocol.java:1598)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readPacket(AbstractQueryProtocol.java:1460)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.getResult(AbstractQueryProtocol.java:1423)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.executeQuery(AbstractQueryProtocol.java:178)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeInternal(MariaDbStatement.java:343)
-2021/04/09 12:29:18 - ti_main_entity 2.0 - 	... 6 more
-2021/04/09 12:29:18 - 5.4.11_cvn_load_link_awarded_degree - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
-2021/04/09 12:29:19 - grp 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Unexpected error
-2021/04/09 12:29:19 - grp 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : org.pentaho.di.core.exception.KettleStepException: 
-2021/04/09 12:29:19 - grp 2.0 - Unable to get queryfields for SQL: 
-2021/04/09 12:29:19 - grp 2.0 - SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-
-2021/04/09 12:29:19 - grp 2.0 - 
-2021/04/09 12:29:19 - grp 2.0 - Couldn't get field info from [SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-]
-2021/04/09 12:29:19 - grp 2.0 - 
-2021/04/09 12:29:19 - grp 2.0 - (conn=558) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:19 - grp 2.0 - 
-2021/04/09 12:29:19 - grp 2.0 - 
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInputMeta.getFields(TableInputMeta.java:275)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getThisStepFields(TransMeta.java:2054)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1872)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getPrevStepFields(TransMeta.java:1951)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getPrevStepFields(TransMeta.java:1921)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getPrevStepFields(TransMeta.java:1904)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.steps.groupby.GroupBy.processRow(GroupBy.java:114)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:62)
-2021/04/09 12:29:19 - grp 2.0 - 	at java.lang.Thread.run(Unknown Source)
-2021/04/09 12:29:19 - grp 2.0 - Caused by: org.pentaho.di.core.exception.KettleDatabaseException: 
-2021/04/09 12:29:19 - grp 2.0 - Couldn't get field info from [SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-]
-2021/04/09 12:29:19 - grp 2.0 - 
-2021/04/09 12:29:19 - grp 2.0 - (conn=558) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:19 - grp 2.0 - 
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFieldsFallback(Database.java:2569)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFields(Database.java:2416)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInputMeta.getFields(TableInputMeta.java:267)
-2021/04/09 12:29:19 - grp 2.0 - 	... 10 more
-2021/04/09 12:29:19 - grp 2.0 - Caused by: java.sql.SQLSyntaxErrorException: (conn=558) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.get(ExceptionMapper.java:243)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.getException(ExceptionMapper.java:164)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeExceptionEpilogue(MariaDbStatement.java:258)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeInternal(ClientSidePreparedStatement.java:225)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.execute(ClientSidePreparedStatement.java:145)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeQuery(ClientSidePreparedStatement.java:159)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFieldsFallback(Database.java:2550)
-2021/04/09 12:29:19 - grp 2.0 - 	... 12 more
-2021/04/09 12:29:19 - grp 2.0 - Caused by: java.sql.SQLException: Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readErrorPacket(AbstractQueryProtocol.java:1598)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readPacket(AbstractQueryProtocol.java:1460)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.getResult(AbstractQueryProtocol.java:1423)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.executeQuery(AbstractQueryProtocol.java:240)
-2021/04/09 12:29:19 - grp 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeInternal(ClientSidePreparedStatement.java:216)
-2021/04/09 12:29:19 - grp 2.0 - 	... 15 more
-2021/04/09 12:29:19 - Merge join 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Unexpected error
-2021/04/09 12:29:19 - Merge join 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : org.pentaho.di.core.exception.KettleStepException: 
-2021/04/09 12:29:19 - Merge join 2.0 - Unable to get queryfields for SQL: 
-2021/04/09 12:29:19 - Merge join 2.0 - SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-
-2021/04/09 12:29:19 - Merge join 2.0 - 
-2021/04/09 12:29:19 - Merge join 2.0 - Couldn't get field info from [SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-]
-2021/04/09 12:29:19 - Merge join 2.0 - 
-2021/04/09 12:29:19 - Merge join 2.0 - (conn=559) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:19 - Merge join 2.0 - 
-2021/04/09 12:29:19 - Merge join 2.0 - 
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInputMeta.getFields(TableInputMeta.java:275)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getThisStepFields(TransMeta.java:2054)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1872)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1769)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1732)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1716)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.steps.mergejoin.MergeJoin.processRow(MergeJoin.java:107)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:62)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at java.lang.Thread.run(Unknown Source)
-2021/04/09 12:29:19 - Merge join 2.0 - Caused by: org.pentaho.di.core.exception.KettleDatabaseException: 
-2021/04/09 12:29:19 - Merge join 2.0 - Couldn't get field info from [SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-]
-2021/04/09 12:29:19 - Merge join 2.0 - 
-2021/04/09 12:29:19 - Merge join 2.0 - (conn=559) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:19 - Merge join 2.0 - 
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFieldsFallback(Database.java:2569)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFields(Database.java:2416)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInputMeta.getFields(TableInputMeta.java:267)
-2021/04/09 12:29:19 - Merge join 2.0 - 	... 11 more
-2021/04/09 12:29:19 - Merge join 2.0 - Caused by: java.sql.SQLSyntaxErrorException: (conn=559) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.get(ExceptionMapper.java:243)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.getException(ExceptionMapper.java:164)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeExceptionEpilogue(MariaDbStatement.java:258)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeInternal(ClientSidePreparedStatement.java:225)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.execute(ClientSidePreparedStatement.java:145)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeQuery(ClientSidePreparedStatement.java:159)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFieldsFallback(Database.java:2550)
-2021/04/09 12:29:19 - Merge join 2.0 - 	... 13 more
-2021/04/09 12:29:19 - Merge join 2.0 - Caused by: java.sql.SQLException: Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readErrorPacket(AbstractQueryProtocol.java:1598)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readPacket(AbstractQueryProtocol.java:1460)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.getResult(AbstractQueryProtocol.java:1423)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.executeQuery(AbstractQueryProtocol.java:240)
-2021/04/09 12:29:19 - Merge join 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeInternal(ClientSidePreparedStatement.java:216)
-2021/04/09 12:29:19 - Merge join 2.0 - 	... 16 more
-2021/04/09 12:29:20 - 5.4.11_cvn_load_link_awarded_degree - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
-2021/04/09 12:29:21 - abrt_entity_load_fail - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : ERROR: load AWARDED_DEGREE_LINK entity fail
-2021/04/09 12:29:26 - finalize_succeeded - Using run configuration [Pentaho local]
-2021/04/09 12:30:17 - load_link_project_contract - Using run configuration [Pentaho local]
-2021/04/09 12:30:17 - load_link_project_contract - Running transformation using the Kettle execution engine
-2021/04/09 12:30:21 - load_link_employment_contract - Using run configuration [Pentaho local]
-2021/04/09 12:30:21 - load_link_employment_contract - Running transformation using the Kettle execution engine
-2021/04/09 12:30:25 - load_link_awarded_degree_cvn - Using run configuration [Pentaho local]
-2021/04/09 12:30:25 - load_link_awarded_degree_cvn - Running transformation using the Kettle execution engine
-2021/04/09 12:30:25 - sv_main_entity.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Couldn't find field 'dateTimeValue' in row!
-2021/04/09 12:30:25 - 5.4.11_cvn_load_link_awarded_degree - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
-2021/04/09 12:30:25 - ti_main_entity 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Unexpected error
-2021/04/09 12:30:25 - ti_main_entity 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : org.pentaho.di.core.exception.KettleDatabaseException: 
-2021/04/09 12:30:25 - ti_main_entity 2.0 - An error occurred executing SQL: 
-2021/04/09 12:30:25 - ti_main_entity 2.0 - SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-
-2021/04/09 12:30:25 - ti_main_entity 2.0 - (conn=566) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.pentaho.di.core.database.Database.openQuery(Database.java:1772)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInput.doQuery(TableInput.java:236)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInput.processRow(TableInput.java:140)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:62)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at java.lang.Thread.run(Unknown Source)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - Caused by: java.sql.SQLSyntaxErrorException: (conn=566) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.get(ExceptionMapper.java:243)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.getException(ExceptionMapper.java:164)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeExceptionEpilogue(MariaDbStatement.java:258)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeInternal(MariaDbStatement.java:349)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeQuery(MariaDbStatement.java:595)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.pentaho.di.core.database.Database.openQuery(Database.java:1761)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	... 4 more
-2021/04/09 12:30:25 - ti_main_entity 2.0 - Caused by: java.sql.SQLException: Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readErrorPacket(AbstractQueryProtocol.java:1598)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readPacket(AbstractQueryProtocol.java:1460)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.getResult(AbstractQueryProtocol.java:1423)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.executeQuery(AbstractQueryProtocol.java:178)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeInternal(MariaDbStatement.java:343)
-2021/04/09 12:30:25 - ti_main_entity 2.0 - 	... 6 more
-2021/04/09 12:30:25 - grp 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Unexpected error
-2021/04/09 12:30:25 - grp 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : org.pentaho.di.core.exception.KettleStepException: 
-2021/04/09 12:30:25 - grp 2.0 - Unable to get queryfields for SQL: 
-2021/04/09 12:30:25 - grp 2.0 - SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-
-2021/04/09 12:30:25 - grp 2.0 - 
-2021/04/09 12:30:25 - grp 2.0 - Couldn't get field info from [SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-]
-2021/04/09 12:30:25 - grp 2.0 - 
-2021/04/09 12:30:25 - grp 2.0 - (conn=569) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - grp 2.0 - 
-2021/04/09 12:30:25 - grp 2.0 - 
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInputMeta.getFields(TableInputMeta.java:275)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getThisStepFields(TransMeta.java:2054)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1872)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getPrevStepFields(TransMeta.java:1951)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getPrevStepFields(TransMeta.java:1921)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.TransMeta.getPrevStepFields(TransMeta.java:1904)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.steps.groupby.GroupBy.processRow(GroupBy.java:114)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:62)
-2021/04/09 12:30:25 - grp 2.0 - 	at java.lang.Thread.run(Unknown Source)
-2021/04/09 12:30:25 - grp 2.0 - Caused by: org.pentaho.di.core.exception.KettleDatabaseException: 
-2021/04/09 12:30:25 - grp 2.0 - Couldn't get field info from [SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-]
-2021/04/09 12:30:25 - grp 2.0 - 
-2021/04/09 12:30:25 - grp 2.0 - (conn=569) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - grp 2.0 - 
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFieldsFallback(Database.java:2569)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFields(Database.java:2416)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInputMeta.getFields(TableInputMeta.java:267)
-2021/04/09 12:30:25 - grp 2.0 - 	... 10 more
-2021/04/09 12:30:25 - grp 2.0 - Caused by: java.sql.SQLSyntaxErrorException: (conn=569) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.get(ExceptionMapper.java:243)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.getException(ExceptionMapper.java:164)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeExceptionEpilogue(MariaDbStatement.java:258)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeInternal(ClientSidePreparedStatement.java:225)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.execute(ClientSidePreparedStatement.java:145)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeQuery(ClientSidePreparedStatement.java:159)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFieldsFallback(Database.java:2550)
-2021/04/09 12:30:25 - grp 2.0 - 	... 12 more
-2021/04/09 12:30:25 - grp 2.0 - Caused by: java.sql.SQLException: Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readErrorPacket(AbstractQueryProtocol.java:1598)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readPacket(AbstractQueryProtocol.java:1460)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.getResult(AbstractQueryProtocol.java:1423)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.executeQuery(AbstractQueryProtocol.java:240)
-2021/04/09 12:30:25 - grp 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeInternal(ClientSidePreparedStatement.java:216)
-2021/04/09 12:30:25 - grp 2.0 - 	... 15 more
-2021/04/09 12:30:25 - Merge join 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Unexpected error
-2021/04/09 12:30:25 - Merge join 2.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : org.pentaho.di.core.exception.KettleStepException: 
-2021/04/09 12:30:25 - Merge join 2.0 - Unable to get queryfields for SQL: 
-2021/04/09 12:30:25 - Merge join 2.0 - SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-
-2021/04/09 12:30:25 - Merge join 2.0 - 
-2021/04/09 12:30:25 - Merge join 2.0 - Couldn't get field info from [SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-]
-2021/04/09 12:30:25 - Merge join 2.0 - 
-2021/04/09 12:30:25 - Merge join 2.0 - (conn=570) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - Merge join 2.0 - 
-2021/04/09 12:30:25 - Merge join 2.0 - 
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInputMeta.getFields(TableInputMeta.java:275)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getThisStepFields(TransMeta.java:2054)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1872)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1835)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1769)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1732)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.TransMeta.getStepFields(TransMeta.java:1716)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.steps.mergejoin.MergeJoin.processRow(MergeJoin.java:107)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:62)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at java.lang.Thread.run(Unknown Source)
-2021/04/09 12:30:25 - Merge join 2.0 - Caused by: org.pentaho.di.core.exception.KettleDatabaseException: 
-2021/04/09 12:30:25 - Merge join 2.0 - Couldn't get field info from [SELECT P.id, P.title, CV.title, CV.id as idDegree FROM Cvn_AcademicDegree P, Cvn_BachelorsDegree CV
-WHERE P.title  LIKE CONCAT('%',CV.title,'%');
-]
-2021/04/09 12:30:25 - Merge join 2.0 - 
-2021/04/09 12:30:25 - Merge join 2.0 - (conn=570) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - Merge join 2.0 - 
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFieldsFallback(Database.java:2569)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFields(Database.java:2416)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.trans.steps.tableinput.TableInputMeta.getFields(TableInputMeta.java:267)
-2021/04/09 12:30:25 - Merge join 2.0 - 	... 11 more
-2021/04/09 12:30:25 - Merge join 2.0 - Caused by: java.sql.SQLSyntaxErrorException: (conn=570) Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.get(ExceptionMapper.java:243)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.util.exceptions.ExceptionMapper.getException(ExceptionMapper.java:164)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.MariaDbStatement.executeExceptionEpilogue(MariaDbStatement.java:258)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeInternal(ClientSidePreparedStatement.java:225)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.execute(ClientSidePreparedStatement.java:145)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeQuery(ClientSidePreparedStatement.java:159)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.pentaho.di.core.database.Database.getQueryFieldsFallback(Database.java:2550)
-2021/04/09 12:30:25 - Merge join 2.0 - 	... 13 more
-2021/04/09 12:30:25 - Merge join 2.0 - Caused by: java.sql.SQLException: Table 'etl.Cvn_BachelorsDegree' doesn't exist
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readErrorPacket(AbstractQueryProtocol.java:1598)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readPacket(AbstractQueryProtocol.java:1460)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.getResult(AbstractQueryProtocol.java:1423)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.executeQuery(AbstractQueryProtocol.java:240)
-2021/04/09 12:30:25 - Merge join 2.0 - 	at org.mariadb.jdbc.ClientSidePreparedStatement.executeInternal(ClientSidePreparedStatement.java:216)
-2021/04/09 12:30:25 - Merge join 2.0 - 	... 16 more
-2021/04/09 12:30:26 - 5.4.11_cvn_load_link_awarded_degree - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
-2021/04/09 12:30:27 - control_error - Using run configuration [Pentaho local]
-2021/04/09 12:30:27 - control_error - Running transformation using the Kettle execution engine
-2021/04/09 12:33:03 - load_link_project_contract - Using run configuration [Pentaho local]
-2021/04/09 12:33:03 - load_link_project_contract - Running transformation using the Kettle execution engine
-2021/04/09 12:33:07 - load_link_employment_contract - Using run configuration [Pentaho local]
-2021/04/09 12:33:07 - load_link_employment_contract - Running transformation using the Kettle execution engine
-2021/04/09 12:33:11 - load_link_awarded_degree_cvn - Using run configuration [Pentaho local]
-2021/04/09 12:33:11 - load_link_awarded_degree_cvn - Running transformation using the Kettle execution engine
-2021/04/09 12:33:15 - load_link_phd_supervising_relationship_cvn - Using run configuration [Pentaho local]
-2021/04/09 12:33:15 - load_link_phd_supervising_relationship_cvn - Running transformation using the Kettle execution engine
-2021/04/09 12:33:19 - load_link_researcher_position_cvn - Using run configuration [Pentaho local]
-2021/04/09 12:33:19 - load_link_researcher_position_cvn - Running transformation using the Kettle execution engine
-2021/04/09 12:33:33 - load_link_accreditation - Using run configuration [Pentaho local]
-2021/04/09 12:33:33 - load_link_accreditation - Running transformation using the Kettle execution engine
-2021/04/09 12:33:37 - load_link_project - Using run configuration [Pentaho local]
-2021/04/09 12:33:37 - load_link_project - Running transformation using the Kettle execution engine
-2021/04/09 12:33:42 - load_link_project_cvn - Using run configuration [Pentaho local]
-2021/04/09 12:33:42 - load_link_project_cvn - Running transformation using the Kettle execution engine
-2021/04/09 12:33:46 - load_link_publication_cvn - Using run configuration [Pentaho local]
-2021/04/09 12:33:46 - load_link_publication_cvn - Running transformation using the Kettle execution engine
-2021/04/09 12:33:50 - load_link_patente - Using run configuration [Pentaho local]
-2021/04/09 12:33:50 - load_link_patente - Running transformation using the Kettle execution engine
-2021/04/09 12:33:55 - load_link_patent_cvn - Using run configuration [Pentaho local]
-2021/04/09 12:33:55 - load_link_patent_cvn - Running transformation using the Kettle execution engine
-2021/04/09 12:33:59 - load_link_articulo - Using run configuration [Pentaho local]
-2021/04/09 12:33:59 - load_link_articulo - Running transformation using the Kettle execution engine
-2021/04/09 12:34:09 - load_link_libro - Using run configuration [Pentaho local]
-2021/04/09 12:34:09 - load_link_libro - Running transformation using the Kettle execution engine
-2021/04/09 12:34:13 - load_link_book_cvn - Using run configuration [Pentaho local]
-2021/04/09 12:34:13 - load_link_book_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:09:46 - pre_loading_data - Using run configuration [Pentaho local]
+2021/04/14 17:14:32 - load_plain - Using run configuration [Pentaho local]
+2021/04/14 17:17:33 - load_link - Using run configuration [Pentaho local]
+2021/04/14 17:20:02 - sv_autor_articulo.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Couldn't find field 'ScientificDomain' in row!
+2021/04/14 17:20:02 - 5.2.33_load_link_researcher_position - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
+2021/04/14 17:20:02 - 5.2.33_load_link_researcher_position - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
+2021/04/14 17:20:03 - abrt_entity_load_fail - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : ERROR: load RESEARCHER entity fail
+2021/04/14 17:20:08 - finalize_succeeded - Using run configuration [Pentaho local]
+2021/04/14 17:21:31 - load_link_editor - Using run configuration [Pentaho local]
+2021/04/14 17:21:31 - load_link_editor - Running transformation using the Kettle execution engine
+2021/04/14 17:21:35 - load_link_member - Using run configuration [Pentaho local]
+2021/04/14 17:21:35 - load_link_member - Running transformation using the Kettle execution engine
+2021/04/14 17:21:39 - load_link_supervisor - Using run configuration [Pentaho local]
+2021/04/14 17:21:39 - load_link_supervisor - Running transformation using the Kettle execution engine
+2021/04/14 17:21:43 - load_link_researcher - Using run configuration [Pentaho local]
+2021/04/14 17:21:43 - load_link_researcher - Running transformation using the Kettle execution engine
+2021/04/14 17:21:47 - load_link_principal_investigator_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:21:47 - load_link_principal_investigator_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:21:51 - load_link_supervisee_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:21:51 - load_link_supervisee_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:22:07 - load_link_accreditation - Using run configuration [Pentaho local]
+2021/04/14 17:22:07 - load_link_accreditation - Running transformation using the Kettle execution engine
+2021/04/14 17:22:11 - load_link_project - Using run configuration [Pentaho local]
+2021/04/14 17:22:11 - load_link_project - Running transformation using the Kettle execution engine
+2021/04/14 17:22:16 - load_link_project_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:22:16 - load_link_project_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:22:20 - load_link_publication_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:22:20 - load_link_publication_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:22:24 - load_link_patente - Using run configuration [Pentaho local]
+2021/04/14 17:22:24 - load_link_patente - Running transformation using the Kettle execution engine
+2021/04/14 17:22:29 - load_link_patent_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:22:29 - load_link_patent_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:22:33 - load_link_articulo - Using run configuration [Pentaho local]
+2021/04/14 17:22:33 - load_link_articulo - Running transformation using the Kettle execution engine
+2021/04/14 17:22:44 - load_link_libro - Using run configuration [Pentaho local]
+2021/04/14 17:22:44 - load_link_libro - Running transformation using the Kettle execution engine
+2021/04/14 17:22:49 - load_link_book_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:22:49 - load_link_book_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:22:53 - load_link_doctoral_thesis - Using run configuration [Pentaho local]
+2021/04/14 17:22:53 - load_link_doctoral_thesis - Running transformation using the Kettle execution engine
+2021/04/14 17:22:57 - load_link_doctora_thesis_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:22:57 - load_link_doctora_thesis_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:23:01 - load_link_dossier - Using run configuration [Pentaho local]
+2021/04/14 17:23:01 - load_link_dossier - Running transformation using the Kettle execution engine
+2021/04/14 17:23:05 - load_link_research_group - Using run configuration [Pentaho local]
+2021/04/14 17:23:05 - load_link_research_group - Running transformation using the Kettle execution engine
+2021/04/14 17:23:09 - load_link_research_group_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:23:09 - load_link_research_group_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:23:13 - load_link_university - Using run configuration [Pentaho local]
+2021/04/14 17:23:13 - load_link_university - Running transformation using the Kettle execution engine
+2021/04/14 17:23:17 - load_link_funding_org_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:23:17 - load_link_funding_org_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:23:21 - load_link_person_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:23:21 - load_link_person_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:23:25 - load_link_conference - Using run configuration [Pentaho local]
+2021/04/14 17:23:25 - load_link_conference - Running transformation using the Kettle execution engine
+2021/04/14 17:23:30 - load_link_conference_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:23:30 - load_link_conference_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:23:34 - load_link_exhibit - Using run configuration [Pentaho local]
+2021/04/14 17:23:34 - load_link_exhibit - Running transformation using the Kettle execution engine
+2021/04/14 17:23:38 - load_link_internship - Using run configuration [Pentaho local]
+2021/04/14 17:23:38 - load_link_internship - Running transformation using the Kettle execution engine
+2021/04/14 17:23:42 - load_plain_activity_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:23:42 - load_plain_activity_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:23:47 - load_link_editor - Using run configuration [Pentaho local]
+2021/04/14 17:23:47 - load_link_editor - Running transformation using the Kettle execution engine
+2021/04/14 17:23:51 - load_link_member - Using run configuration [Pentaho local]
+2021/04/14 17:23:51 - load_link_member - Running transformation using the Kettle execution engine
+2021/04/14 17:23:55 - load_link_supervisor - Using run configuration [Pentaho local]
+2021/04/14 17:23:55 - load_link_supervisor - Running transformation using the Kettle execution engine
+2021/04/14 17:23:59 - load_link_researcher - Using run configuration [Pentaho local]
+2021/04/14 17:23:59 - load_link_researcher - Running transformation using the Kettle execution engine
+2021/04/14 17:24:03 - load_link_principal_investigator_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:24:03 - load_link_principal_investigator_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:24:07 - load_link_supervisee_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:24:07 - load_link_supervisee_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:24:11 - load_link_project_contract - Using run configuration [Pentaho local]
+2021/04/14 17:24:11 - load_link_project_contract - Running transformation using the Kettle execution engine
+2021/04/14 17:24:15 - load_link_employment_contract - Using run configuration [Pentaho local]
+2021/04/14 17:24:15 - load_link_employment_contract - Running transformation using the Kettle execution engine
+2021/04/14 17:24:19 - load_link_awarded_degree_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:24:19 - load_link_awarded_degree_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:24:23 - load_link_phd_supervising_relationship_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:24:23 - load_link_phd_supervising_relationship_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:24:28 - load_link_researcher_position_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:24:28 - load_link_researcher_position_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:24:32 - load_link_researcher_position - Using run configuration [Pentaho local]
+2021/04/14 17:24:32 - load_link_researcher_position - Running transformation using the Kettle execution engine
+2021/04/14 17:24:32 - sv_autor_articulo.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Couldn't find field 'ScientificDomain' in row!
+2021/04/14 17:24:32 - 5.2.33_load_link_researcher_position - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
+2021/04/14 17:24:32 - 5.2.33_load_link_researcher_position - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
+2021/04/14 17:24:33 - control_error - Using run configuration [Pentaho local]
+2021/04/14 17:24:33 - control_error - Running transformation using the Kettle execution engine
+2021/04/14 17:24:37 - load_link_funding_program_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:24:37 - load_link_funding_program_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:25:09 - load_link_project_contract - Using run configuration [Pentaho local]
+2021/04/14 17:25:09 - load_link_project_contract - Running transformation using the Kettle execution engine
+2021/04/14 17:25:13 - load_link_employment_contract - Using run configuration [Pentaho local]
+2021/04/14 17:25:13 - load_link_employment_contract - Running transformation using the Kettle execution engine
+2021/04/14 17:25:17 - load_link_awarded_degree_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:25:17 - load_link_awarded_degree_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:25:21 - load_link_phd_supervising_relationship_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:25:21 - load_link_phd_supervising_relationship_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:25:26 - load_link_researcher_position_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:25:26 - load_link_researcher_position_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:25:30 - load_link_researcher_position - Using run configuration [Pentaho local]
+2021/04/14 17:25:30 - load_link_researcher_position - Running transformation using the Kettle execution engine
+2021/04/14 17:25:30 - sv_autor_articulo.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Couldn't find field 'ScientificDomain' in row!
+2021/04/14 17:25:30 - 5.2.33_load_link_researcher_position - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
+2021/04/14 17:25:31 - 5.2.33_load_link_researcher_position - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!
+2021/04/14 17:25:31 - control_error - Using run configuration [Pentaho local]
+2021/04/14 17:25:31 - control_error - Running transformation using the Kettle execution engine
+2021/04/14 17:29:08 - load_link_project_contract - Using run configuration [Pentaho local]
+2021/04/14 17:29:08 - load_link_project_contract - Running transformation using the Kettle execution engine
+2021/04/14 17:29:12 - load_link_employment_contract - Using run configuration [Pentaho local]
+2021/04/14 17:29:12 - load_link_employment_contract - Running transformation using the Kettle execution engine
+2021/04/14 17:29:16 - load_link_awarded_degree_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:29:16 - load_link_awarded_degree_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:29:20 - load_link_phd_supervising_relationship_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:29:20 - load_link_phd_supervising_relationship_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:29:25 - load_link_researcher_position_cvn - Using run configuration [Pentaho local]
+2021/04/14 17:29:25 - load_link_researcher_position_cvn - Running transformation using the Kettle execution engine
+2021/04/14 17:29:29 - load_link_researcher_position - Using run configuration [Pentaho local]
+2021/04/14 17:29:29 - load_link_researcher_position - Running transformation using the Kettle execution engine

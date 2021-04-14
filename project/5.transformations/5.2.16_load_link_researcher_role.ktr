@@ -18,6 +18,11 @@
         <default_value>Person</default_value>
         <description/>
       </parameter>
+      <parameter>
+        <name>TableSourceName_3</name>
+        <default_value>ResearcherPosition</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -439,7 +444,7 @@
     <created_user>-</created_user>
     <created_date>2020/11/05 14:55:32.651</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/03/16 12:29:40.665</modified_date>
+    <modified_date>2021/04/14 16:20:16.504</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -498,16 +503,6 @@
   </connection>
   <order>
     <hop>
-      <from>ac_pojo</from>
-      <to>mjsv_pojo_build</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>grp_articulo_id</from>
-      <to>gv_parent_entity</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>mj_editor_person</from>
       <to>grp_articulo_id</to>
       <enabled>Y</enabled>
@@ -528,12 +523,12 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_autor_articulo</from>
+      <from>sv_fields 2</from>
       <to>srt_person_id</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_editor</from>
+      <from>sv_fields</from>
       <to>srt_editor_id</to>
       <enabled>Y</enabled>
     </hop>
@@ -543,18 +538,58 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ti_role</from>
-      <to>sv_editor</to>
+      <from>ti_entity</from>
+      <to>sv_fields</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ti_person</from>
-      <to>sv_autor_articulo</to>
+      <from>ti_entity 2</from>
+      <to>sv_fields 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>gv_parent_entity</from>
       <to>ac_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_person_id 2</from>
+      <to>mj_editor_person 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_fields 3</from>
+      <to>srt_person_id 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ti_entity 3</from>
+      <to>sv_fields 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>grp_articulo_id</from>
+      <to>srt_person_id 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_person_id 2 2</from>
+      <to>mj_editor_person 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>mj_editor_person 2</from>
+      <to>gv_parent_entity</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ac_pojo</from>
+      <to>If field value is null</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>If field value is null</from>
+      <to>mjsv_pojo_build</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -618,6 +653,30 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>classname_3</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Relationship</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fieldname_3</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>relatedBy</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -628,8 +687,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>996</xloc>
-      <yloc>263</yloc>
+      <xloc>1040</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -719,8 +778,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>868</xloc>
-      <yloc>263</yloc>
+      <xloc>912</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -767,8 +826,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1364</xloc>
-      <yloc>263</yloc>
+      <xloc>1632</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -832,6 +891,7 @@
 parent_id  = idRole;
 child_id_1 = idPerson;
 //child_id_2 = idTercero;
+child_id_3 = idRelationship;
 
 json = {};
 split_child_1 = [];
@@ -839,6 +899,8 @@ split_child_2 = [];
 
 Child_1 = [];
 Child_2 = []; 
+Child_3 = []; 
+
 
 
 //splitting the data
@@ -888,9 +950,32 @@ json.ids = Child_2;
  // JSON Stringify the data object
 JsonOutput_2 = JSON.stringify(json);
 
+//splitting the data
+split_child_3   = child_id_3.split('|');
+
+json.className = classname_3;
+json.fieldName = fieldname_3;
 
 
-var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ']}}}';
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_3)){
+	Child_3 = []
+	} else {
+		for(i=0; i&lt;split_child_3.length; i++){
+    		child=split_child_3[i];
+    		Child_3.push(child);
+		}
+	}
+
+json.ids = Child_3;
+
+ // JSON Stringify the data object
+JsonOutput_3 = JSON.stringify(json);
+
+
+
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":['
+ + JsonOutput_1 + ',' + JsonOutput_2 + ',' + JsonOutput_3 + ']}}}';
 </jsScript_script>
       </jsScript>
     </jsScripts>
@@ -913,8 +998,8 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1140</xloc>
-      <yloc>263</yloc>
+      <xloc>1408</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1003,7 +1088,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </GUI>
   </step>
   <step>
-    <name>sv_autor_articulo</name>
+    <name>sv_fields 2</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1020,30 +1105,39 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </field>
       <field>
         <name>version</name>
+        <rename/>
       </field>
       <field>
         <name>idEjecucion</name>
+        <rename/>
       </field>
       <field>
         <name>operation</name>
+        <rename/>
       </field>
       <field>
         <name>fechaCreacion</name>
+        <rename/>
       </field>
       <field>
         <name>fechaModificacion</name>
+        <rename/>
       </field>
       <field>
         <name>persCentCodigo</name>
+        <rename/>
       </field>
       <field>
         <name>cedNombre</name>
+        <rename/>
       </field>
       <field>
         <name>persDeptCodigo</name>
+        <rename/>
       </field>
       <field>
         <name>depNombre</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1062,7 +1156,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </GUI>
   </step>
   <step>
-    <name>sv_editor</name>
+    <name>sv_fields</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1079,18 +1173,23 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </field>
       <field>
         <name>version</name>
+        <rename/>
       </field>
       <field>
         <name>operation</name>
+        <rename/>
       </field>
       <field>
         <name>fechaCreacion</name>
+        <rename/>
       </field>
       <field>
         <name>fechaModificacion</name>
+        <rename/>
       </field>
       <field>
         <name>idEjecucion</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1134,13 +1233,13 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1268</xloc>
-      <yloc>263</yloc>
+      <xloc>1536</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ti_person</name>
+    <name>ti_entity 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1169,7 +1268,7 @@ where version = ${version}
         <name>id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1192,7 +1291,7 @@ where version = ${version}
         <name>version</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1215,7 +1314,7 @@ where version = ${version}
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1238,7 +1337,7 @@ where version = ${version}
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1261,7 +1360,7 @@ where version = ${version}
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1284,7 +1383,7 @@ where version = ${version}
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1307,7 +1406,7 @@ where version = ${version}
         <name>persCentCodigo</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>persCentCodigo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1330,7 +1429,7 @@ where version = ${version}
         <name>cedNombre</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>cedNombre</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1353,7 +1452,7 @@ where version = ${version}
         <name>persDeptCodigo</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>persDeptCodigo</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1376,7 +1475,7 @@ where version = ${version}
         <name>depNombre</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_autor_articulo</origin>
+        <origin>ti_person</origin>
         <comments>depNombre</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1409,7 +1508,7 @@ where version = ${version}
     </GUI>
   </step>
   <step>
-    <name>ti_role</name>
+    <name>ti_entity</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1438,7 +1537,7 @@ where version = ${version}
         <name>id</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_editor_role</origin>
+        <origin>ti_role</origin>
         <comments>id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1461,7 +1560,7 @@ where version = ${version}
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ti_editor_role</origin>
+        <origin>ti_role</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1484,7 +1583,7 @@ where version = ${version}
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_editor_role</origin>
+        <origin>ti_role</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1507,7 +1606,7 @@ where version = ${version}
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_editor_role</origin>
+        <origin>ti_role</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1530,7 +1629,7 @@ where version = ${version}
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_editor_role</origin>
+        <origin>ti_role</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1553,9 +1652,32 @@ where version = ${version}
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_editor_role</origin>
+        <origin>ti_role</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>idProject</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_role</origin>
+        <comments>idProject</comments>
+        <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -1582,6 +1704,482 @@ where version = ${version}
     <GUI>
       <xloc>84</xloc>
       <yloc>103</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>mj_editor_person 2</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>srt_person_id 2 2</step1>
+    <step2>srt_person_id 2</step2>
+    <keys_1>
+      <key>idRole</key>
+    </keys_1>
+    <keys_2>
+      <key>idRelationship</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>srt_person_id 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>idRelationship</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_fields 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+        <rename>idRelationship</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>idRelationship</name>
+        <rename>idRelationship</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ti_entity 3</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Database_Target</connection>
+    <sql>SELECT
+  *
+FROM ${TableSourceName_3}
+where version = ${version}
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>ti_entity 3</origin>
+        <comments>id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>version</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>ti_entity 3</origin>
+        <comments>version</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>idEjecucion</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>ti_entity 3</origin>
+        <comments>idEjecucion</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>operation</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>ti_entity 3</origin>
+        <comments>operation</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fechaCreacion</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>ti_entity 3</origin>
+        <comments>fechaCreacion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fechaModificacion</name>
+        <length>0</length>
+        <precision>-1</precision>
+        <origin>ti_entity 3</origin>
+        <comments>fechaModificacion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>persCentCodigo</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>ti_entity 3</origin>
+        <comments>persCentCodigo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>cedNombre</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_entity 3</origin>
+        <comments>cedNombre</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>persDeptCodigo</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>ti_entity 3</origin>
+        <comments>persDeptCodigo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>depNombre</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>ti_entity 3</origin>
+        <comments>depNombre</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Europe/Berlin</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>srt_person_id 2 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>idRole</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>If field value is null</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>idRelationship</name>
+        <value/>
+        <mask/>
+        <set_empty_string>Y</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1216</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

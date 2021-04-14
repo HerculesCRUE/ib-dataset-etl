@@ -479,7 +479,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/08 15:12:21.815</modified_date>
+    <modified_date>2021/04/13 11:07:51.251</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -794,13 +794,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_final</from>
-      <to>Group by</to>
+      <from>Group by</from>
+      <to>ac</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Group by</from>
-      <to>ac</to>
+      <from>sv_final</from>
+      <to>srt</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt</from>
+      <to>Group by</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -825,7 +830,7 @@
     <give_back_row>N</give_back_row>
     <group>
       <field>
-        <name>ENTITY_ID</name>
+        <name>title</name>
       </field>
     </group>
     <fields>
@@ -838,12 +843,6 @@
       <field>
         <aggregate>operation</aggregate>
         <subject>operation</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>title</aggregate>
-        <subject>title</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
@@ -863,7 +862,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
+      <xloc>784</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1372,6 +1371,22 @@
               <name>constant</name>
               <type>String</type>
               <text>020.010.010.030</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>code_2</leftvalue>
+            <function>CONTAINS</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>030.010.000.020</text>
               <length>-1</length>
               <precision>-1</precision>
               <isnull>N</isnull>
@@ -4591,6 +4606,48 @@ FROM ${Table_Input_8}
     <GUI>
       <xloc>48</xloc>
       <yloc>528</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>srt</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>title</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
