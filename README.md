@@ -81,7 +81,7 @@ En el ejemplo se utilizarán las siguientes variables.
 | `TopicKafkaPojos`    | Topic de los pojos de kafka.         | general-data|
 | `TopicKafkaPojos`    | Topic de los pojos de kafka con relaciones.        | general-link-data                                                 |
 | `KeyKafka`           | Identificador del topic de kafka.    | general-data-pojo-client-0 |
-| `EndPointUrl`           | EndPoint de control de cargas.    | http://management-system:8080/etl-notifications                                   |
+| `EndPointUrl`          | EndPoint de control de cargas.    | http://management-system:8080/etl-notifications                                   |
 
 ## Ejecución
 
