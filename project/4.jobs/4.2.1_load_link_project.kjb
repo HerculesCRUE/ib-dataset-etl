@@ -7,7 +7,7 @@
   <created_user>-</created_user>
   <created_date>2020/11/20 14:17:35.957</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2021/04/05 11:07:02.012</modified_date>
+  <modified_date>2021/04/15 12:39:49.984</modified_date>
   <parameters>
     </parameters>
   <slaveservers>
@@ -423,7 +423,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>svar_proyecto</name>
+      <name>svar_project</name>
       <description/>
       <type>SET_VARIABLES</type>
       <attributes/>
@@ -519,7 +519,7 @@
     </hop>
     <hop>
       <from>load_link_project</from>
-      <to>svar_proyecto</to>
+      <to>svar_project</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -527,7 +527,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>svar_proyecto</from>
+      <from>svar_project</from>
       <to>control_error</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
