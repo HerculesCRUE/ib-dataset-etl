@@ -385,7 +385,7 @@ Algunos ejemplos de ítems de CVN:
     - Tipo de docencia
     - Titulación universitaria
 
-Los ítems se identifican a través de códigos con el siguiente formato XXX.XXX.XXX.XXX, por lo que para identificar los distintos ítems y su significado será necesario mapear dichos códigos y obtener su significado. [Ref](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/docs/Manual%20de%20Especificaciones%20T%C3%A9cnicas%20v1.4.3_v1.1.pdf)
+Los ítems se identifican a través de códigos con el siguiente formato XXX.XXX.XXX.XXX, por lo que para identificar los distintos ítems y su significado será necesario mapear dichos códigos y obtener su significado, [Ref](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/docs/Manual%20de%20Especificaciones%20T%C3%A9cnicas%20v1.4.3_v1.1.pdf).
 
 Para realizar este proceso de mapeo se ha elaborado una [plantilla en formato Excel](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/docs/cvn_codes.xls), la cual se carga y se lee dentro del proceso de ETL. 
 
