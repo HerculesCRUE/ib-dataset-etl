@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>5.3.06_cvn_load_plain_funding_organization</name>
+    <name>5.3.21_cvn_load_plain_organization</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -479,7 +479,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/19 16:10:45.211</modified_date>
+    <modified_date>2021/04/19 16:32:24.012</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -799,16 +799,61 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_final</from>
-      <to>srt_item_id 9 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>srt_item_id 9 2</from>
       <to>grp_entity_group</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>sv_final</from>
+      <to>String operations</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>String operations</from>
+      <to>srt_item_id 9 2</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>String operations</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>title</in_stream_name>
+        <out_stream_name/>
+        <trim_type/>
+        <lower_upper>upper</lower_upper>
+        <padding_type/>
+        <pad_char/>
+        <pad_len/>
+        <init_cap/>
+        <mask_xml/>
+        <digits/>
+        <remove_special_characters/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>704</xloc>
+      <yloc>1056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>ac</name>
     <type>Constant</type>
@@ -843,7 +888,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
+      <xloc>992</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1038,7 +1083,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1456</xloc>
+      <xloc>1536</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1073,7 +1118,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>1088</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1159,7 +1204,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
+      <xloc>1200</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1341,7 +1386,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1357,7 +1402,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Value mapper</send_true_to>
+    <send_true_to/>
     <send_false_to/>
     <compare>
       <condition>
@@ -1366,18 +1411,9 @@
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>descr</leftvalue>
-            <function>CONTAINS</function>
+            <leftvalue>code_3</leftvalue>
+            <function>IS NOT NULL</function>
             <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>financiadora</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
           </condition>
         </conditions>
       </condition>
@@ -1473,7 +1509,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>896</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1504,7 +1540,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1216</xloc>
+      <xloc>1296</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1543,7 +1579,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1328</xloc>
+      <xloc>1408</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1582,7 +1618,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
       <yloc>1296</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1603,7 +1639,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>etl</schema>
-      <table>Cvn_FundingOrganization</table>
+      <table>Cvn_Organization</table>
       <key>
         <name>id</name>
         <field>id</field>
@@ -1680,7 +1716,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1664</xloc>
+      <xloc>1744</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1770,7 +1806,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1568</xloc>
+      <xloc>1648</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1818,7 +1854,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
       <yloc>1408</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2153,7 +2189,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1744</xloc>
+      <xloc>1824</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2573,7 +2609,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>800</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2727,6 +2763,9 @@
       <field>
         <name>descr_6</name>
       </field>
+      <field>
+        <name>descr_3</name>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
@@ -2769,7 +2808,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1920</xloc>
       <yloc>1184</yloc>
       <draw>Y</draw>
     </GUI>
