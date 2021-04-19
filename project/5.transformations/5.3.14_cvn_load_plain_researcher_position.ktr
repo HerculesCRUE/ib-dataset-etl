@@ -474,7 +474,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/08 14:07:52.127</modified_date>
+    <modified_date>2021/04/19 16:20:57.344</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -754,11 +754,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>grp_entity_group</from>
-      <to>ac</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>cf</from>
       <to>gsi_sysdate</to>
       <enabled>Y</enabled>
@@ -788,7 +783,98 @@
       <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>grp_entity_group</from>
+      <to>grp</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>grp</from>
+      <to>ac</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>Sort rows</send_true_to>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>code_1</leftvalue>
+            <function>CONTAINS</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>050.010.000.080</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>code_1</leftvalue>
+            <function>CONTAINS</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>050.020.020.250</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>code_1</leftvalue>
+            <function>CONTAINS</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>050.020.010.140</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>928</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Sort rows</name>
     <type>SortRows</type>
@@ -816,6 +902,14 @@
         <collator_strength>0</collator_strength>
         <presorted>N</presorted>
       </field>
+      <field>
+        <name>organization</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -826,7 +920,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>672</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -865,7 +959,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>976</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -978,6 +1072,18 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -988,7 +1094,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1520</xloc>
+      <xloc>1568</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1023,7 +1129,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
+      <xloc>1088</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1109,7 +1215,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
+      <xloc>1184</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1291,7 +1397,83 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1904</xloc>
+      <xloc>1952</xloc>
+      <yloc>928</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>grp</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>givenName</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>signature</aggregate>
+        <subject>signature</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>operation</aggregate>
+        <subject>operation</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>version</aggregate>
+        <subject>version</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>role</aggregate>
+        <subject>role</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>givenName</aggregate>
+        <subject>givenName</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>organization</aggregate>
+        <subject>organization</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1318,6 +1500,9 @@
     <group>
       <field>
         <name>givenName</name>
+      </field>
+      <field>
+        <name>organization</name>
       </field>
     </group>
     <fields>
@@ -1392,7 +1577,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1248</xloc>
+      <xloc>1296</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1431,7 +1616,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1392</xloc>
+      <xloc>1440</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1470,7 +1655,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1904</xloc>
+      <xloc>1952</xloc>
       <yloc>1168</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1543,6 +1728,11 @@
         <rename>role</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>organization</name>
+        <rename>organization</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -1553,7 +1743,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1728</xloc>
+      <xloc>1776</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1601,6 +1791,10 @@
         <name>ordinal</name>
         <element>ordinal</element>
       </field>
+      <field>
+        <name>date</name>
+        <element>dateTimeInterval</element>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1611,7 +1805,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1632</xloc>
+      <xloc>1680</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1659,7 +1853,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1904</xloc>
+      <xloc>1952</xloc>
       <yloc>1280</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1960,7 +2154,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1808</xloc>
+      <xloc>1856</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2424,19 +2618,15 @@
     <fields>
       <field>
         <name>givenName</name>
-        <rename/>
       </field>
       <field>
         <name>signature</name>
-        <rename/>
       </field>
       <field>
         <name>operation</name>
-        <rename/>
       </field>
       <field>
         <name>version</name>
-        <rename/>
       </field>
       <field>
         <name>descr_1</name>
@@ -2444,7 +2634,10 @@
       </field>
       <field>
         <name>code_1</name>
-        <rename/>
+      </field>
+      <field>
+        <name>entity</name>
+        <rename>organization</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -2488,7 +2681,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1904</xloc>
+      <xloc>1952</xloc>
       <yloc>1056</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4289,87 +4482,6 @@ FROM ${Table_Input_8}
     <GUI>
       <xloc>48</xloc>
       <yloc>528</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>Sort rows</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>code_1</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>050.010.000.080</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>OR</operator>
-            <leftvalue>code_1</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>050.020.020.250</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>OR</operator>
-            <leftvalue>code_1</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>050.020.010.140</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>592</xloc>
-      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

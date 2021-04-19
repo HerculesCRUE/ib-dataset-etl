@@ -66,7 +66,7 @@ Lista de Jobs del ETL
 
 Lista de Transformaciones del ETL
 
-| Transformacion     | Descripción                                             |
+| Transformación     | Descripción                                             |
 | -------------- | ------------------------------------------------------------ |
 | Control DB Source          |Control conexión con base de datos origen |
 | Control DB Target       |Control conexión con base de datos destino |

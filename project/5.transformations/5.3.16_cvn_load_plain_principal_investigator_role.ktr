@@ -474,7 +474,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/09 11:59:06.471</modified_date>
+    <modified_date>2021/04/19 16:22:39.501</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -1085,6 +1085,18 @@
       </field>
       <field>
         <name>keyword</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>dateTimeInterval</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1729,6 +1741,10 @@
       <field>
         <name>keyword</name>
         <element>keyword</element>
+      </field>
+      <field>
+        <name>dateTimeInterval</name>
+        <element>dateTimeInterval</element>
       </field>
     </fields>
     <attributes/>
