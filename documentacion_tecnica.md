@@ -389,7 +389,7 @@ Los ítems se identifican a través de códigos con el siguiente formato XXX.XXX
 
 Para realizar este proceso de mapeo se ha elaborado una [plantilla en formato Excel](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/docs/cvn_codes.xls), la cual se carga y se lee dentro del proceso de ETL. 
 
-La plantilla tiene el siguiente formato (se muestra extracto para los ejemplos anteriores)
+La plantilla tiene el siguiente formato (se muestra extracto para los ejemplos anteriores):
 
 | code     | description                                             |
 | -------------- | ------------------------------------------------------------ |
