@@ -452,7 +452,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/14 17:08:57.540</modified_date>
+    <modified_date>2021/04/20 18:02:20.689</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -674,6 +674,11 @@
     <hop>
       <from>sv_fields_res_accred</from>
       <to>sv 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv 2</from>
+      <to>Dummy (do nothing)</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1840,7 +1845,7 @@
     </GUI>
   </step>
   <step>
-    <name>sv_fields_res_accred</name>
+    <name>sv</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1861,8 +1866,7 @@
         <name>idPersona</name>
       </field>
       <field>
-        <name>tinaCodigo</name>
-        <rename>idResearchAccreditation</rename>
+        <name>idResearchAccreditation</name>
       </field>
       <field>
         <name>tinaFecha</name>
@@ -1878,6 +1882,144 @@
         <length>-2</length>
         <precision>-2</precision>
         <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>version</name>
+        <rename/>
+      </field>
+      <field>
+        <name>operation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>idPersona</name>
+        <rename/>
+      </field>
+      <field>
+        <name>idResearchAccreditation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>tinaFecha</name>
+        <rename/>
+      </field>
+      <field>
+        <name>tinaTitulo</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>tinaFecha</name>
+        <rename>tinaFecha</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_fields_res_accred</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>version</name>
+        <rename/>
+      </field>
+      <field>
+        <name>operation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>idPersona</name>
+        <rename/>
+      </field>
+      <field>
+        <name>tinaCodigo</name>
+        <rename>idResearchAccreditation</rename>
+      </field>
+      <field>
+        <name>tinaFecha</name>
+        <rename/>
+      </field>
+      <field>
+        <name>tinaTitulo</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>tinaFecha</name>
+        <rename>tinaFecha</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy/MM/dd</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -1917,15 +2059,12 @@
     <fields>
       <field>
         <name>version</name>
-        <rename/>
       </field>
       <field>
         <name>operation</name>
-        <rename/>
       </field>
       <field>
         <name>idPersona</name>
-        <rename/>
       </field>
       <field>
         <name>tinaCodigo</name>
@@ -1933,11 +2072,9 @@
       </field>
       <field>
         <name>tinaFecha</name>
-        <rename/>
       </field>
       <field>
         <name>tinaTitulo</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -2016,14 +2153,7 @@
     </partitioning>
     <connection>Database_Source</connection>
     <sql>SELECT
-  ENTITY_ID
-, version
-, operation
-, idPersona
-, tinaCodigo
-, STR_TO_DATE(tinaFecha, '%Y/%m/%d') as tinaFecha
-, tinaTitulo
-, tineCentCodigo
+  *
 FROM ${TABLE_NAME_1}
 where version=${version}
 limit ${limit}
@@ -2151,10 +2281,10 @@ limit ${limit}
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Date</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
         <name>tinaFecha</name>
-        <length>-1</length>
+        <length>255</length>
         <precision>-1</precision>
         <origin>ti_res_accred</origin>
         <comments>tinaFecha</comments>
@@ -2477,144 +2607,6 @@ limit ${limit}
     <GUI>
       <xloc>64</xloc>
       <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>sv</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>version</name>
-        <rename/>
-      </field>
-      <field>
-        <name>operation</name>
-        <rename/>
-      </field>
-      <field>
-        <name>idPersona</name>
-        <rename/>
-      </field>
-      <field>
-        <name>idResearchAccreditation</name>
-        <rename/>
-      </field>
-      <field>
-        <name>tinaFecha</name>
-        <rename/>
-      </field>
-      <field>
-        <name>tinaTitulo</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>tinaFecha</name>
-        <rename>tinaFecha</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>sv 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>version</name>
-        <rename/>
-      </field>
-      <field>
-        <name>operation</name>
-        <rename/>
-      </field>
-      <field>
-        <name>idPersona</name>
-        <rename/>
-      </field>
-      <field>
-        <name>idResearchAccreditation</name>
-        <rename/>
-      </field>
-      <field>
-        <name>tinaFecha</name>
-        <rename/>
-      </field>
-      <field>
-        <name>tinaTitulo</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>tinaFecha</name>
-        <rename>tinaFecha</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy/MM/dd</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
