@@ -4,7 +4,8 @@
 
 | Entregable     | Proyecto ETL                                                 |
 | -------------- | ------------------------------------------------------------ |
-| Fecha          | 23/04/2021                                                   |
+| Fecha          | 27/04/2021                                                   |
+| Revisado por   | Paloma Terán Pérez                                           |
 | Proyecto       | [ASIO](https://www.um.es/web/hercules/proyectos/asio) (Arquitectura Semántica e Infraestructura Ontológica) en el marco de la iniciativa [Hércules](https://www.um.es/web/hercules/) para la Semántica de Datos de Investigación de Universidades que forma parte de [CRUE-TIC](https://www.crue.org/proyecto/hercules/) |
 | Módulo         | Proyecto ETL                                                 |
 | Tipo           | Software                                                     |
@@ -19,9 +20,7 @@ Para la incorporación del proyecto ETL se precisa realizar la siguiente serie de
 
 ## Base de datos
 
-Se precisa importar el database de la ETL contenido en el Git con el nombre dump_etl. Se deberá importar en el mismo servidor dónde se encuentra alojado el database de los importadores. 
-
-Este nuevo database creará las tablas de control utilizadas por la ETL.
+Se debe importar el database de la ETL contenido en el Git con el nombre dump_etl en el mismo servidor dónde se encuentra alojado el database de los importadores. Este nuevo database sirve para crear las tablas de control utilizadas por la ETL.
 
 - ControlEjecucion
 - ControlEjecucionEstado
@@ -30,7 +29,7 @@ Este nuevo database creará las tablas de control utilizadas por la ETL.
 - ControlTipoError
 - ControlVersion
 
-También creará en el mismo data base, las tablas del DWH. 
+También crea en el mismo data base, las tablas del DWH. 
 
 - Articulo
 - Factura
@@ -50,13 +49,13 @@ También creará en el mismo data base, las tablas del DWH.
 
 ## Fichero kettle.properties
 
-Se modificará fichero de parámetros kettle.properties, ubicado en la ruta del docker, se configurarán los parámetros del proyecto utilizados en la ETL. 
+Se debe modificar el fichero de parámetros kettle.properties, ubicado en la ruta del docker, para configurar los parámetros del proyecto utilizados en la ETL. 
 
-Se especificará el nombre de la variable y el valor, estructurándose de la siguiente forma:
+En este fichero se especifica el nombre de la variable y su valor, estructurándose de la siguiente forma:
 
 [Nombre variable]=[Valor variable]
 
-En el ejemplo se utilizarán las siguientes variables.
+En el ejemplo se utilizan las siguientes variables.
 
 
 
@@ -85,9 +84,9 @@ En el ejemplo se utilizarán las siguientes variables.
 
 ## Ejecución
 
-Una vez configurados los pasos anteriores. Se realizará la llamada en cada importación de datos, dicha llamada tendrá¡ el formato
+Una vez configurados los pasos anteriores. Se realiza la llamada en cada importación de datos, dicha llamada tiene el formato
 
     http://localhost:8080/kettle/runJob/?job=main&version=[Identificador de la versión]
 
-El Identificador de la versión serÃ­a variable, con formato integer. Este identifica la versión que ha cargado la información en la base de datos Source.
+El Identificador de la versión es variable, con formato integer. Este identifica la versión que ha cargado la información en la base de datos Source.
 
