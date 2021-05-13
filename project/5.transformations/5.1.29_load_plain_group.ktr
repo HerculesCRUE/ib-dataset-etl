@@ -452,7 +452,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/03/23 09:00:52.471</modified_date>
+    <modified_date>2021/04/22 13:18:30.010</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -2087,7 +2087,7 @@
       </field>
       <field>
         <name>date</name>
-        <element>date</element>
+        <element>dateTimeInterval</element>
       </field>
       <field>
         <name>locatedIn</name>
@@ -2433,18 +2433,23 @@
     <fields>
       <field>
         <name>ENTITY_ID</name>
+        <rename/>
       </field>
       <field>
         <name>version</name>
+        <rename/>
       </field>
       <field>
         <name>operation</name>
+        <rename/>
       </field>
       <field>
         <name>date</name>
+        <rename/>
       </field>
       <field>
         <name>locatedIn</name>
+        <rename/>
       </field>
       <field>
         <name>reisTitulo</name>
@@ -2460,45 +2465,59 @@
       </field>
       <field>
         <name>hasContactInfo</name>
+        <rename/>
       </field>
       <field>
         <name>hasKnowledgeArea</name>
+        <rename/>
       </field>
       <field>
         <name>provides</name>
+        <rename/>
       </field>
       <field>
         <name>hasAccreditation</name>
+        <rename/>
       </field>
       <field>
         <name>predecessorOrganization</name>
+        <rename/>
       </field>
       <field>
         <name>hasRole</name>
+        <rename/>
       </field>
       <field>
         <name>abbreviation</name>
+        <rename/>
       </field>
       <field>
         <name>hasPart</name>
+        <rename/>
       </field>
       <field>
         <name>participates</name>
+        <rename/>
       </field>
       <field>
         <name>identifier</name>
+        <rename/>
       </field>
       <field>
         <name>sucessorOrganization</name>
+        <rename/>
       </field>
       <field>
         <name>hasReservable</name>
+        <rename/>
       </field>
       <field>
         <name>relatedBy</name>
+        <rename/>
       </field>
       <field>
         <name>keyword</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -2507,7 +2526,7 @@
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <conversion_mask>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -2547,15 +2566,19 @@
     <fields>
       <field>
         <name>ENTITY_ID</name>
+        <rename/>
       </field>
       <field>
         <name>version</name>
+        <rename/>
       </field>
       <field>
         <name>operation</name>
+        <rename/>
       </field>
       <field>
         <name>congFecha</name>
+        <rename/>
       </field>
       <field>
         <name>congLugar</name>
@@ -2567,51 +2590,67 @@
       </field>
       <field>
         <name>description</name>
+        <rename/>
       </field>
       <field>
         <name>homepage</name>
+        <rename/>
       </field>
       <field>
         <name>hasContactInfo</name>
+        <rename/>
       </field>
       <field>
         <name>hasKnowledgeArea</name>
+        <rename/>
       </field>
       <field>
         <name>provides</name>
+        <rename/>
       </field>
       <field>
         <name>hasAccreditation</name>
+        <rename/>
       </field>
       <field>
         <name>predecessorOrganization</name>
+        <rename/>
       </field>
       <field>
         <name>hasRole</name>
+        <rename/>
       </field>
       <field>
         <name>abbreviation</name>
+        <rename/>
       </field>
       <field>
         <name>hasPart</name>
+        <rename/>
       </field>
       <field>
         <name>participates</name>
+        <rename/>
       </field>
       <field>
         <name>identifier</name>
+        <rename/>
       </field>
       <field>
         <name>sucessorOrganization</name>
+        <rename/>
       </field>
       <field>
         <name>hasReservable</name>
+        <rename/>
       </field>
       <field>
         <name>relatedBy</name>
+        <rename/>
       </field>
       <field>
         <name>keyword</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -2620,7 +2659,7 @@
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <conversion_mask>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>

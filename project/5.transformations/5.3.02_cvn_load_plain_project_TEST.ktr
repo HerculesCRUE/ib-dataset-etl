@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>5.3.13_cvn_load_plain_conference</name>
+    <name>5.3.02_cvn_load_plain_project_TEST</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -56,6 +56,11 @@
       <parameter>
         <name>Table_Input_9</name>
         <default_value>9_DateDayMonthYear</default_value>
+        <description/>
+      </parameter>
+      <parameter>
+        <name>entity</name>
+        <default_value>46</default_value>
         <description/>
       </parameter>
     </parameters>
@@ -479,7 +484,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/22 17:22:51.604</modified_date>
+    <modified_date>2021/04/26 18:27:34.383</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -513,6 +518,57 @@
       <attribute>
         <code>PORT_NUMBER</code>
         <attribute>${PortCVN}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Database_Master</name>
+    <server>${HostnameMaster}</server>
+    <type>MARIADB</type>
+    <access>Native</access>
+    <database>${DatabaseMaster}</database>
+    <port>${PortMaster}</port>
+    <username>${UserMaster}</username>
+    <password>${PwdMaster}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${PortMaster}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -664,11 +720,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ac_pojo</from>
-      <to>jsono_pojo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>cf_pojo</from>
       <to>sv_output</to>
       <enabled>Y</enabled>
@@ -749,8 +800,23 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>as_entity_id</from>
-      <to>cf</to>
+      <from>gv_id_ejecucion</from>
+      <to>iu_target</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dblkp</from>
+      <to>gsi_sysdate</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>fr_filter_public</from>
+      <to>sv_final</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_final</from>
+      <to>grp_entity_group</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -759,8 +825,23 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>as_entity_id</from>
+      <to>cf</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>cf</from>
+      <to>dblkp</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>ti_date</from>
       <to>srt_item_id 9</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>mj_item_ids 7</from>
+      <to>mj_item_ids 8</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -769,8 +850,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>mj_item_ids 7</from>
-      <to>mj_item_ids 8</to>
+      <from>mj_item_ids 8</from>
+      <to>fr_filter_public</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_final 2</from>
+      <to>grp_entity_group 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -780,135 +866,105 @@
     </hop>
     <hop>
       <from>fr_filter_public 2</from>
-      <to>sv_final</to>
+      <to>sv_final 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_final</from>
-      <to>Filter rows</to>
+      <from>grp_entity_group</from>
+      <to>Dummy (do nothing)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
-      <to>Group by</to>
+      <from>grp_entity_group 2</from>
+      <to>Dummy (do nothing)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Group by</from>
+      <from>Dummy (do nothing)</from>
       <to>ac</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ac 2</from>
-      <to>as_entity_id 2</to>
+      <from>Microsoft Excel input</from>
+      <to>Filter rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>as_entity_id 2</from>
-      <to>cf 2</to>
+      <from>Group by</from>
+      <to>Set variables</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_final</from>
-      <to>Filter rows 2</to>
+      <from>Filter rows</from>
+      <to>sv_final 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows 2</from>
-      <to>Select values</to>
+      <from>sv_final 3</from>
+      <to>Group by</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
-      <to>srt_item_id 9 2 2</to>
+      <from>Block this step until steps finish</from>
+      <to>Get variables</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>srt_item_id 9 2 2</from>
-      <to>Group by 2</to>
+      <from>ac_pojo</from>
+      <to>Block this step until steps finish</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get variables</from>
+      <to>jsono_pojo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>sv_final 3 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Group by 2</from>
-      <to>ac 2</to>
+      <to>mjsv_pojo_build</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>cf</from>
-      <to>srt_item_id 9 2</to>
+      <from>sv_final 3 2</from>
+      <to>Concat fields</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>cf 2</from>
-      <to>srt_item_id 9 2 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_item_id 9 2</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_item_id 9 2 3</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>gv_id_ejecucion</from>
-      <to>iu_target</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sv_final</from>
-      <to>Filter rows 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows 3</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_item_id 9 2 2 2</from>
-      <to>Group by 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 2</from>
-      <to>srt_item_id 9 2 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join</from>
-      <to>Group by 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Group by 2 2</from>
-      <to>Merge join 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join 2</from>
-      <to>Group by 3 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Group by 3</from>
-      <to>srt_item_id 9 2 4</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>srt_item_id 9 2 4</from>
-      <to>Merge join 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Group by 3 2</from>
-      <to>gsi_sysdate</to>
+      <from>Concat fields</from>
+      <to>Group by 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Dummy (do nothing)</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>1072</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Filter rows</name>
     <type>FilterRows</type>
@@ -920,18 +976,18 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Group by</send_true_to>
+    <send_true_to>sv_final 3 2</send_true_to>
     <send_false_to/>
     <compare>
       <condition>
         <negated>N</negated>
-        <leftvalue>code_6</leftvalue>
-        <function>CONTAINS</function>
+        <leftvalue>Entity_Num</leftvalue>
+        <function>=</function>
         <rightvalue/>
         <value>
           <name>constant</name>
           <type>String</type>
-          <text>060.010.020.100</text>
+          <text>46</text>
           <length>-1</length>
           <precision>-1</precision>
           <isnull>N</isnull>
@@ -948,14 +1004,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>944</yloc>
+      <xloc>592</xloc>
+      <yloc>1296</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Filter rows 2</name>
-    <type>FilterRows</type>
+    <name>Get variables</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -964,62 +1020,20 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Select values</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>code_6</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>060.010.020.030</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>OR</operator>
-            <leftvalue>code_6</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>060.010.020.230</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>OR</operator>
-            <leftvalue>code_6</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>060.010.020.370</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
+    <fields>
+      <field>
+        <name>entity_name</name>
+        <variable>${entity_name}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1029,52 +1043,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
-      <yloc>1056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows 3</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>Select values 2</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>code_6</leftvalue>
-        <function>CONTAINS</function>
-        <rightvalue/>
-        <value>
-          <name>constant</name>
-          <type>String</type>
-          <text>060.010.020.180</text>
-          <length>-1</length>
-          <precision>-1</precision>
-          <isnull>N</isnull>
-          <mask/>
-        </value>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>1184</yloc>
+      <xloc>1824</xloc>
+      <yloc>1008</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1099,393 +1069,16 @@
     <give_back_row>N</give_back_row>
     <group>
       <field>
-        <name>ENTITY_ID</name>
+        <name>Entity_Num</name>
       </field>
     </group>
     <fields>
       <field>
-        <aggregate>title</aggregate>
-        <subject>title</subject>
+        <aggregate>Entity_Name</aggregate>
+        <subject>Entity_Name</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
-      <field>
-        <aggregate>operation</aggregate>
-        <subject>operation</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>version</aggregate>
-        <subject>version</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>date</aggregate>
-        <subject>date</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>880</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Group by 2</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>ENTITY_ID</name>
-      </field>
-      <field>
-        <name>publication</name>
-      </field>
-    </group>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1024</xloc>
-      <yloc>1056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Group by 2 2</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>ENTITY_ID</name>
-      </field>
-      <field>
-        <name>locality</name>
-      </field>
-    </group>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1104</xloc>
-      <yloc>1184</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Group by 3</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>ENTITY_ID</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>version</aggregate>
-        <subject>version</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>operation</aggregate>
-        <subject>operation</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>title</aggregate>
-        <subject>title</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>date</aggregate>
-        <subject>date</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>id</aggregate>
-        <subject>id</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>publication</aggregate>
-        <subject>publication</subject>
-        <type>CONCAT_STRING</type>
-        <valuefield>|</valuefield>
-      </field>
-      <field>
-        <aggregate>idPublication</aggregate>
-        <subject>id_1</subject>
-        <type>CONCAT_STRING</type>
-        <valuefield>|</valuefield>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1648</xloc>
-      <yloc>1056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Group by 3 2</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>ENTITY_ID</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>version</aggregate>
-        <subject>version</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>operation</aggregate>
-        <subject>operation</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>title</aggregate>
-        <subject>title</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>date</aggregate>
-        <subject>date</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>id</aggregate>
-        <subject>id</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>publication</aggregate>
-        <subject>publication</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>idPublication</aggregate>
-        <subject>idPublication</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-      <field>
-        <aggregate>locality</aggregate>
-        <subject>locality</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield/>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1776</xloc>
-      <yloc>1184</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>srt_item_id 9 2</step1>
-    <step2>srt_item_id 9 2 3</step2>
-    <keys_1>
-      <key>ENTITY_ID</key>
-    </keys_1>
-    <keys_2>
-      <key>ENTITY_ID</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1536</xloc>
-      <yloc>1056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>srt_item_id 9 2 4</step1>
-    <step2>Group by 2 2</step2>
-    <keys_1>
-      <key>ENTITY_ID</key>
-    </keys_1>
-    <keys_2>
-      <key>ENTITY_ID</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1648</xloc>
-      <yloc>1184</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>ENTITY_ID</name>
-      </field>
-      <field>
-        <name>title</name>
-        <rename>publication</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1497,13 +1090,143 @@
     </remotesteps>
     <GUI>
       <xloc>816</xloc>
-      <yloc>1056</yloc>
+      <yloc>1296</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
+    <name>Microsoft Excel input</name>
+    <type>ExcelInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <header>Y</header>
+    <noempty>Y</noempty>
+    <stoponempty>N</stoponempty>
+    <filefield/>
+    <sheetfield/>
+    <sheetrownumfield/>
+    <rownumfield/>
+    <sheetfield/>
+    <filefield/>
+    <limit>0</limit>
+    <encoding/>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <accept_filenames>N</accept_filenames>
+    <accept_field/>
+    <accept_stepname/>
+    <file>
+      <name>C:\Users\igancedo\Desktop\TEMPLATE_2.xls</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>Entity_Num</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Entity_Name</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Entity_Property_Num</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Entity_Property</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Entity_Property_Type</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+    </fields>
+    <sheets>
+    </sheets>
+    <strict_types>N</strict_types>
+    <error_ignored>N</error_ignored>
+    <error_line_skipped>N</error_line_skipped>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+    <spreadsheet_type>JXL</spreadsheet_type>
+    <password>Encrypted </password>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>1296</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set variables</name>
+    <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1514,14 +1237,13 @@
     </partitioning>
     <fields>
       <field>
-        <name>ENTITY_ID</name>
+        <field_name>Entity_Name</field_name>
+        <variable_name>entity_name</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
       </field>
-      <field>
-        <name>title</name>
-        <rename>locality</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
     </fields>
+    <use_formatting>Y</use_formatting>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1531,8 +1253,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>1184</yloc>
+      <xloc>944</xloc>
+      <yloc>1296</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1570,47 +1292,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ac 2</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>cvn</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>cvn</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1120</xloc>
-      <yloc>1056</yloc>
+      <xloc>912</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1687,13 +1370,37 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>entity_name</name>
+        <name>date</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Conference</nullif>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>summary</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>doi</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1711,7 +1418,7 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>description</name>
+        <name>abbreviation</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1723,7 +1430,19 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>abbreviation</name>
+        <name>placeOfPublication</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>modality</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1747,7 +1466,67 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>locatedIn</name>
+        <name>ProjectClassification</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>description</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>foreseenJustificationDate</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>needsEthicalValidation</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>title</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>dateEnd</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1768,8 +1547,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2064</xloc>
-      <yloc>1056</yloc>
+      <xloc>1600</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1803,43 +1582,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>as_entity_id 2</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>seq</valuename>
-    <use_database>N</use_database>
-    <connection/>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1216</xloc>
-      <yloc>1056</yloc>
+      <xloc>1008</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1870,7 +1614,7 @@
     <file>
       <name/>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>txt</extention>
       <append>N</append>
       <split>N</split>
@@ -1924,94 +1668,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>cf 2</name>
-    <type>ConcatFields</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>_</separator>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name/>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>cvn</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>seq</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <ConcatFields>
-      <targetFieldName>id</targetFieldName>
-      <targetFieldLength>0</targetFieldLength>
-      <removeSelectedFields>N</removeSelectedFields>
-    </ConcatFields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1312</xloc>
-      <yloc>1056</yloc>
+      <xloc>1120</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2192,13 +1850,61 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2368</xloc>
-      <yloc>1056</yloc>
+      <xloc>2080</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>fr_filter_public 2</name>
+    <name>dblkp</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Database_Master</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>master</schema>
+      <table>Universities</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>university</name>
+        <field>name</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id</name>
+        <rename>univ_code</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1200</xloc>
+      <yloc>1072</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>fr_filter_public</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -2216,13 +1922,134 @@
         <conditions>
           <condition>
             <negated>N</negated>
-            <leftvalue>code</leftvalue>
+            <operator>AND</operator>
+            <conditions>
+              <condition>
+                <negated>N</negated>
+                <leftvalue>code</leftvalue>
+                <function>CONTAINS</function>
+                <rightvalue/>
+                <value>
+                  <name>constant</name>
+                  <type>String</type>
+                  <text>050.020.010.000</text>
+                  <length>-1</length>
+                  <precision>-1</precision>
+                  <isnull>N</isnull>
+                  <mask/>
+                </value>
+              </condition>
+            </conditions>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <conditions>
+              <condition>
+                <negated>N</negated>
+                <leftvalue>code_6</leftvalue>
+                <function>CONTAINS</function>
+                <rightvalue/>
+                <value>
+                  <name>constant</name>
+                  <type>String</type>
+                  <text>050.020.010.010</text>
+                  <length>-1</length>
+                  <precision>-1</precision>
+                  <isnull>N</isnull>
+                  <mask/>
+                </value>
+              </condition>
+            </conditions>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>992</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>fr_filter_public 2</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>sv_final 2</send_true_to>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <conditions>
+              <condition>
+                <negated>N</negated>
+                <operator>OR</operator>
+                <leftvalue>code</leftvalue>
+                <function>CONTAINS</function>
+                <rightvalue/>
+                <value>
+                  <name>constant</name>
+                  <type>String</type>
+                  <text>050.020.020.000</text>
+                  <length>-1</length>
+                  <precision>-1</precision>
+                  <isnull>N</isnull>
+                  <mask/>
+                </value>
+              </condition>
+            </conditions>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <conditions>
+              <condition>
+                <negated>N</negated>
+                <operator>OR</operator>
+                <leftvalue>code_6</leftvalue>
+                <function>CONTAINS</function>
+                <rightvalue/>
+                <value>
+                  <name>constant</name>
+                  <type>String</type>
+                  <text>050.020.020.010</text>
+                  <length>-1</length>
+                  <precision>-1</precision>
+                  <isnull>N</isnull>
+                  <mask/>
+                </value>
+              </condition>
+            </conditions>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <leftvalue>code_3</leftvalue>
             <function>CONTAINS</function>
             <rightvalue/>
             <value>
               <name>constant</name>
               <type>String</type>
-              <text>060.010.020.000</text>
+              <text>050.020.020.370</text>
               <length>-1</length>
               <precision>-1</precision>
               <isnull>N</isnull>
@@ -2241,8 +2068,154 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>1056</yloc>
+      <xloc>512</xloc>
+      <yloc>1152</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>grp_entity_group</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>ENTITY_ID</name>
+      </field>
+      <field>
+        <name>title</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>givenName</aggregate>
+        <subject>signature</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
+      </field>
+      <field>
+        <aggregate>operation</aggregate>
+        <subject>operation</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>version</aggregate>
+        <subject>version</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>university</aggregate>
+        <subject>university</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>dateStart</aggregate>
+        <subject>dateStart</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>992</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>grp_entity_group 2</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>ENTITY_ID</name>
+      </field>
+      <field>
+        <name>title</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>givenName</aggregate>
+        <subject>signature</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
+      </field>
+      <field>
+        <aggregate>operation</aggregate>
+        <subject>operation</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>version</aggregate>
+        <subject>version</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>university</aggregate>
+        <subject>university</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>dateStart</aggregate>
+        <subject>dateStart</subject>
+        <type>LAST_INCL_NULL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>1152</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2272,8 +2245,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1776</xloc>
-      <yloc>1056</yloc>
+      <xloc>1280</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2311,8 +2284,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1856</xloc>
-      <yloc>1056</yloc>
+      <xloc>1392</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2350,8 +2323,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2368</xloc>
-      <yloc>1296</yloc>
+      <xloc>2192</xloc>
+      <yloc>1184</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2371,7 +2344,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>etl</schema>
-      <table>Cvn_Conference</table>
+      <table>Cvn_Project</table>
       <key>
         <name>id</name>
         <field>id</field>
@@ -2384,13 +2357,13 @@
         <update>Y</update>
       </value>
       <value>
-        <name>operation</name>
-        <rename>operation</rename>
+        <name>version</name>
+        <rename>version</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>version</name>
-        <rename>version</rename>
+        <name>operation</name>
+        <rename>operation</rename>
         <update>Y</update>
       </value>
       <value>
@@ -2409,18 +2382,23 @@
         <update>Y</update>
       </value>
       <value>
-        <name>title</name>
+        <name>nombre</name>
         <rename>title</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>idPublication</name>
-        <rename>idPublication</rename>
+        <name>authors</name>
+        <rename>givenName</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>publication</name>
-        <rename>publication</rename>
+        <name>university</name>
+        <rename>univ_code</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>fechaInicio</name>
+        <rename>dateStart</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -2433,8 +2411,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1968</xloc>
-      <yloc>1056</yloc>
+      <xloc>1504</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2470,44 +2448,56 @@
     </file>
     <fields>
       <field>
+        <name>entity_name</name>
+        <element>@class</element>
+      </field>
+      <field>
         <name>id</name>
         <element>id</element>
       </field>
       <field>
-        <name>entity_name</name>
-        <element>@class</element>
+        <name>modality</name>
+        <element>modality</element>
       </field>
       <field>
         <name>title</name>
         <element>title</element>
       </field>
       <field>
-        <name>description</name>
-        <element>description</element>
+        <name>needsEthicalValidation</name>
+        <element>needsEthicalValidation</element>
       </field>
       <field>
-        <name>date</name>
-        <element>dateTimeInterval</element>
+        <name>dateStart</name>
+        <element>dateStart</element>
       </field>
       <field>
-        <name>locality</name>
-        <element>locality</element>
+        <name>foreseenJustificationDate</name>
+        <element>foreseenJustificationDate</element>
+      </field>
+      <field>
+        <name>dateEnd</name>
+        <element>dateEnd</element>
       </field>
       <field>
         <name>abbreviation</name>
         <element>abbreviation</element>
       </field>
       <field>
-        <name>keyword</name>
-        <element>keyword</element>
+        <name>description</name>
+        <element>description</element>
       </field>
       <field>
         <name>lang</name>
         <element>lang</element>
       </field>
       <field>
-        <name>locatedIn</name>
-        <element>locatedIn</element>
+        <name>ProjectClassification</name>
+        <element>projectClassification</element>
+      </field>
+      <field>
+        <name>keyword</name>
+        <element>keyword</element>
       </field>
     </fields>
     <attributes/>
@@ -2519,8 +2509,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2176</xloc>
-      <yloc>1056</yloc>
+      <xloc>1888</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2567,8 +2557,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2368</xloc>
-      <yloc>1440</yloc>
+      <xloc>2192</xloc>
+      <yloc>1296</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2902,8 +2892,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2272</xloc>
-      <yloc>1056</yloc>
+      <xloc>1984</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3286,224 +3276,6 @@
     </GUI>
   </step>
   <step>
-    <name>srt_item_id 9 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>ENTITY_ID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1408</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>srt_item_id 9 2 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>ENTITY_ID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>publication</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>928</xloc>
-      <yloc>1056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>srt_item_id 9 2 2 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>ENTITY_ID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>976</xloc>
-      <yloc>1184</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>srt_item_id 9 2 3</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>ENTITY_ID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1408</xloc>
-      <yloc>1056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>srt_item_id 9 2 4</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>ENTITY_ID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1648</xloc>
-      <yloc>1120</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>sv</name>
     <type>SelectValues</type>
     <description/>
@@ -3625,49 +3397,58 @@
     </partitioning>
     <fields>
       <field>
+        <name>DTYPE</name>
+      </field>
+      <field>
         <name>ENTITY_ID</name>
-        <rename/>
+      </field>
+      <field>
+        <name>version</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>code</name>
+      </field>
+      <field>
+        <name>descr</name>
       </field>
       <field>
         <name>value</name>
         <rename>title</rename>
       </field>
       <field>
-        <name>code_6</name>
-        <rename/>
-      </field>
-      <field>
         <name>descr_6</name>
-        <rename/>
       </field>
       <field>
-        <name>operation</name>
-        <rename/>
+        <name>entity</name>
       </field>
       <field>
-        <name>version</name>
-        <rename/>
+        <name>signature</name>
       </field>
       <field>
-        <name>descr</name>
-        <rename/>
+        <name>finalPage</name>
+      </field>
+      <field>
+        <name>initialPage</name>
+      </field>
+      <field>
+        <name>entity</name>
+        <rename>university</rename>
       </field>
       <field>
         <name>value_1</name>
-        <rename>date</rename>
-      </field>
-      <field>
-        <name>descr_8</name>
-        <rename/>
+        <rename>dateStart</rename>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
-        <name>date</name>
-        <rename>date</rename>
+        <name>dateStart</name>
+        <rename>dateStart</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</conversion_mask>
+        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -3688,8 +3469,132 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>1056</yloc>
+      <xloc>640</xloc>
+      <yloc>992</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_final 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>DTYPE</name>
+      </field>
+      <field>
+        <name>ENTITY_ID</name>
+      </field>
+      <field>
+        <name>version</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>code</name>
+      </field>
+      <field>
+        <name>descr</name>
+      </field>
+      <field>
+        <name>value</name>
+        <rename>title</rename>
+      </field>
+      <field>
+        <name>descr_6</name>
+      </field>
+      <field>
+        <name>entity</name>
+      </field>
+      <field>
+        <name>signature</name>
+      </field>
+      <field>
+        <name>finalPage</name>
+      </field>
+      <field>
+        <name>initialPage</name>
+      </field>
+      <field>
+        <name>entity</name>
+        <rename>university</rename>
+      </field>
+      <field>
+        <name>value_1</name>
+        <rename>dateStart</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>dateStart</name>
+        <rename>dateStart</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>1152</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_final 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Entity_Num</name>
+      </field>
+      <field>
+        <name>Entity_Name</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>704</xloc>
+      <yloc>1296</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3719,8 +3624,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2368</xloc>
-      <yloc>1184</yloc>
+      <xloc>2192</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -5719,6 +5624,261 @@ FROM ${Table_Input_8}
     <GUI>
       <xloc>48</xloc>
       <yloc>528</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Block this step until steps finish</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <steps>
+      <step>
+        <name>Set variables</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1696</xloc>
+      <yloc>1008</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_final 3 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Entity_Name</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Entity_Property_Num</name>
+        <rename>key</rename>
+      </field>
+      <field>
+        <name>Entity_Property</name>
+        <rename>value</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>1392</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>mjsv_pojo_build</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+json = {};
+val = [];
+
+//splitting the data
+val   = value.split('|');
+
+Child_1 =  [];
+
+for(i=0; i&lt;val.length; i++){
+      child=val[i];
+      //Child_1.push(child);
+      json.val[i] = val[i];
+      
+		}
+
+
+
+
+ // JSON Stringify the data object
+JsonOutput_1 = JSON.stringify(json);
+
+
+var pojo = JsonOutput_1
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>pojo</name>
+        <rename>pojo</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1136</xloc>
+      <yloc>1392</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Group by 2</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>Entity_Name</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>value</aggregate>
+        <subject>value</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>1392</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Concat fields</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+    </fields>
+    <ConcatFields>
+      <targetFieldName/>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>1392</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

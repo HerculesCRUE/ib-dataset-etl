@@ -474,7 +474,7 @@
     <created_user>-</created_user>
     <created_date>2021/03/24 16:35:40.664</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/19 16:37:20.209</modified_date>
+    <modified_date>2021/04/22 17:48:28.754</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -1156,6 +1156,66 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>summary</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>pageStart</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>pageEnd</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>doi</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>title</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1508,6 +1568,26 @@
       <field>
         <name>dateTimeValue</name>
         <element>dateTimeValue</element>
+      </field>
+      <field>
+        <name>summary</name>
+        <element>summary</element>
+      </field>
+      <field>
+        <name>pageStart</name>
+        <element>pageStart</element>
+      </field>
+      <field>
+        <name>pageEnd</name>
+        <element>pageEnd</element>
+      </field>
+      <field>
+        <name>doi</name>
+        <element>doi</element>
+      </field>
+      <field>
+        <name>title</name>
+        <element>title</element>
       </field>
     </fields>
     <attributes/>

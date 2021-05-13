@@ -452,7 +452,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/20 18:02:20.689</modified_date>
+    <modified_date>2021/04/22 12:35:49.907</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -1858,21 +1858,27 @@
     <fields>
       <field>
         <name>version</name>
+        <rename/>
       </field>
       <field>
         <name>operation</name>
+        <rename/>
       </field>
       <field>
         <name>idPersona</name>
+        <rename/>
       </field>
       <field>
         <name>idResearchAccreditation</name>
+        <rename/>
       </field>
       <field>
         <name>tinaFecha</name>
+        <rename/>
       </field>
       <field>
         <name>tinaTitulo</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1881,7 +1887,7 @@
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <conversion_mask>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -1950,7 +1956,7 @@
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <conversion_mask>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -1990,15 +1996,12 @@
     <fields>
       <field>
         <name>version</name>
-        <rename/>
       </field>
       <field>
         <name>operation</name>
-        <rename/>
       </field>
       <field>
         <name>idPersona</name>
-        <rename/>
       </field>
       <field>
         <name>tinaCodigo</name>
@@ -2006,11 +2009,9 @@
       </field>
       <field>
         <name>tinaFecha</name>
-        <rename/>
       </field>
       <field>
         <name>tinaTitulo</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>

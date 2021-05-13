@@ -457,7 +457,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/30 12:55:56.274</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/03/23 08:57:24.212</modified_date>
+    <modified_date>2021/04/22 17:07:02.771</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -622,18 +622,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>srt_entity_id</from>
-      <to>grp_entity_id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>gsi_sysdate</from>
       <to>gv_execution_id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>grp_entity_id</from>
-      <to>gsi_sysdate</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -722,11 +712,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>grp_entity_book_section</from>
-      <to>gsi_sysdate_book_stn 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>gsi_sysdate_book_stn 2</from>
       <to>gv_exec_book_stn 2</to>
       <enabled>Y</enabled>
@@ -752,11 +737,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ris_book_section</from>
-      <to>sv_book_section</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>ris_pojo_bsec</from>
       <to>cf_pojo_bsec</to>
       <enabled>Y</enabled>
@@ -777,8 +757,73 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv_book_section</from>
+      <from>Add constants</from>
+      <to>Concat fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>srt_entity_id</from>
+      <to>Add constants</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Concat fields</from>
+      <to>grp_entity_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>grp_entity_id</from>
+      <to>Null if</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Null if</from>
+      <to>sv_date</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_date</from>
+      <to>sv_date_format</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_date_format</from>
+      <to>gsi_sysdate</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_date 2</from>
+      <to>sv_date_format 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Null if 2</from>
+      <to>sv_date 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ris_book_section</from>
+      <to>Add constants 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constants 2</from>
+      <to>Concat fields 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Concat fields 2</from>
       <to>srt_book_section_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>grp_entity_book_section</from>
+      <to>Null if 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_date_format 2</from>
+      <to>gsi_sysdate_book_stn 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -984,7 +1029,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
+      <xloc>1472</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1350,8 +1395,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
-      <yloc>1040</yloc>
+      <xloc>1216</xloc>
+      <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1618,7 +1663,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1328</xloc>
+      <xloc>1856</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1982,8 +2027,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1360</xloc>
-      <yloc>1040</yloc>
+      <xloc>1600</xloc>
+      <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2107,8 +2152,8 @@
         <valuefield/>
       </field>
       <field>
-        <aggregate>anioPublicacion</aggregate>
-        <subject>anioPublicacion</subject>
+        <aggregate>dateTimeValue</aggregate>
+        <subject>dateTimeValue</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
@@ -2182,7 +2227,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
+      <xloc>592</xloc>
       <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2191,7 +2236,7 @@
     <name>grp_entity_id</name>
     <type>GroupBy</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -2225,8 +2270,8 @@
         <valuefield/>
       </field>
       <field>
-        <aggregate>anioPublicacion</aggregate>
-        <subject>anioPublicacion</subject>
+        <aggregate>dateTimeValue</aggregate>
+        <subject>dateTimeValue</subject>
         <type>LAST_INCL_NULL</type>
         <valuefield/>
       </field>
@@ -2288,7 +2333,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
+      <xloc>688</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2319,7 +2364,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>1152</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2381,8 +2426,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>912</yloc>
+      <xloc>880</xloc>
+      <yloc>896</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2459,8 +2504,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
-      <yloc>912</yloc>
+      <xloc>1056</xloc>
+      <yloc>896</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2498,7 +2543,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>1312</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2537,7 +2582,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
+      <xloc>2144</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2615,8 +2660,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1680</xloc>
-      <yloc>1040</yloc>
+      <xloc>1920</xloc>
+      <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2685,7 +2730,7 @@
       </value>
       <value>
         <name>Año</name>
-        <rename>anioPublicacion</rename>
+        <rename>dateTimeValue</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -2698,7 +2743,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>1312</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2869,8 +2914,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
-      <yloc>1040</yloc>
+      <xloc>1056</xloc>
+      <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2918,8 +2963,8 @@
         <element>title</element>
       </field>
       <field>
-        <name>anioPublicacion</name>
-        <element>date</element>
+        <name>dateTimeValue</name>
+        <element>dateTimeValue</element>
       </field>
       <field>
         <name>placeOfPublication</name>
@@ -2967,7 +3012,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1072</xloc>
+      <xloc>1600</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3114,8 +3159,8 @@
         <element>startPage</element>
       </field>
       <field>
-        <name>anioPublicacion</name>
-        <element>date</element>
+        <name>dateTimeValue</name>
+        <element>dateTimeValue</element>
       </field>
       <field>
         <name>endPage</name>
@@ -3147,8 +3192,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1104</xloc>
-      <yloc>1040</yloc>
+      <xloc>1344</xloc>
+      <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3195,7 +3240,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1744</xloc>
+      <xloc>2288</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3291,8 +3336,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
-      <yloc>1040</yloc>
+      <xloc>2080</xloc>
+      <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3375,7 +3420,7 @@
     <name>ris_book_section</name>
     <type>ReplaceString</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -3441,7 +3486,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
+      <xloc>160</xloc>
       <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3579,7 +3624,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1200</xloc>
+      <xloc>1728</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3705,8 +3750,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1232</xloc>
-      <yloc>1040</yloc>
+      <xloc>1472</xloc>
+      <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3889,79 +3934,6 @@
     </GUI>
   </step>
   <step>
-    <name>sv_book_section</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>ENTITY_ID</name>
-      </field>
-      <field>
-        <name>version</name>
-      </field>
-      <field>
-        <name>operation</name>
-      </field>
-      <field>
-        <name>anioPublicacion</name>
-      </field>
-      <field>
-        <name>cmn</name>
-      </field>
-      <field>
-        <name>coautoria</name>
-      </field>
-      <field>
-        <name>depositoLegal</name>
-      </field>
-      <field>
-        <name>editorial</name>
-      </field>
-      <field>
-        <name>isbn</name>
-      </field>
-      <field>
-        <name>numCapitulos</name>
-      </field>
-      <field>
-        <name>numPaginas</name>
-      </field>
-      <field>
-        <name>numeroPagina</name>
-      </field>
-      <field>
-        <name>numeroPrologo</name>
-      </field>
-      <field>
-        <name>participacion</name>
-      </field>
-      <field>
-        <name>titulo</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>784</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>sv_entity_input</name>
     <type>SelectValues</type>
     <description/>
@@ -4068,7 +4040,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1472</xloc>
+      <xloc>2000</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4130,8 +4102,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1520</xloc>
-      <yloc>1040</yloc>
+      <xloc>1760</xloc>
+      <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -5116,6 +5088,754 @@ limit ${limit}
     </remotesteps>
     <GUI>
       <xloc>96</xloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Concat fields</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>-</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>anioPublicacion</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>month</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>day</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>dateTimeValue</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>day</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>01</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>month</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>01</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_date</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>isbn</name>
+        <rename/>
+      </field>
+      <field>
+        <name>version</name>
+        <rename/>
+      </field>
+      <field>
+        <name>operation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>dateTimeValue</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cmn</name>
+        <rename/>
+      </field>
+      <field>
+        <name>coautoria</name>
+        <rename/>
+      </field>
+      <field>
+        <name>depositoLegal</name>
+        <rename/>
+      </field>
+      <field>
+        <name>editorial</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numCapitulos</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numPaginas</name>
+        <rename/>
+      </field>
+      <field>
+        <name>participacion</name>
+        <rename/>
+      </field>
+      <field>
+        <name>titulo</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>dateTimeValue</name>
+        <rename>dateTimeValue</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Null if</name>
+    <type>NullIf</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>dateTimeValue</name>
+        <value>-01-01</value>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_date_format</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>isbn</name>
+        <rename/>
+      </field>
+      <field>
+        <name>version</name>
+        <rename/>
+      </field>
+      <field>
+        <name>operation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>dateTimeValue</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cmn</name>
+        <rename/>
+      </field>
+      <field>
+        <name>coautoria</name>
+        <rename/>
+      </field>
+      <field>
+        <name>depositoLegal</name>
+        <rename/>
+      </field>
+      <field>
+        <name>editorial</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numCapitulos</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numPaginas</name>
+        <rename/>
+      </field>
+      <field>
+        <name>participacion</name>
+        <rename/>
+      </field>
+      <field>
+        <name>titulo</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>dateTimeValue</name>
+        <rename>dateTimeValue</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1040</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add constants 2</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>day</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>01</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>month</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>01</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_date 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>isbn</name>
+        <rename/>
+      </field>
+      <field>
+        <name>version</name>
+        <rename/>
+      </field>
+      <field>
+        <name>operation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>dateTimeValue</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cmn</name>
+        <rename/>
+      </field>
+      <field>
+        <name>coautoria</name>
+        <rename/>
+      </field>
+      <field>
+        <name>depositoLegal</name>
+        <rename/>
+      </field>
+      <field>
+        <name>editorial</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numCapitulos</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numPaginas</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numeroPagina</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numeroPrologo</name>
+        <rename/>
+      </field>
+      <field>
+        <name>participacion</name>
+        <rename/>
+      </field>
+      <field>
+        <name>titulo</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>dateTimeValue</name>
+        <rename>dateTimeValue</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Null if 2</name>
+    <type>NullIf</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>dateTimeValue</name>
+        <value>-01-01</value>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_date_format 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>isbn</name>
+        <rename/>
+      </field>
+      <field>
+        <name>version</name>
+        <rename/>
+      </field>
+      <field>
+        <name>operation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>dateTimeValue</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cmn</name>
+        <rename/>
+      </field>
+      <field>
+        <name>coautoria</name>
+        <rename/>
+      </field>
+      <field>
+        <name>depositoLegal</name>
+        <rename/>
+      </field>
+      <field>
+        <name>editorial</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numCapitulos</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numPaginas</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numeroPagina</name>
+        <rename/>
+      </field>
+      <field>
+        <name>numeroPrologo</name>
+        <rename/>
+      </field>
+      <field>
+        <name>participacion</name>
+        <rename/>
+      </field>
+      <field>
+        <name>titulo</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>dateTimeValue</name>
+        <rename>dateTimeValue</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Concat fields 2</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>-</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>anioPublicacion</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>month</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>day</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>dateTimeValue</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
       <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>

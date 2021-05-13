@@ -8,6 +8,11 @@
     <trans_status>0</trans_status>
     <directory>/5.transformations</directory>
     <parameters>
+      <parameter>
+        <name>TABLE_NAME</name>
+        <default_value>Congreso</default_value>
+        <description/>
+      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -442,7 +447,7 @@
     <created_user>-</created_user>
     <created_date>2020/04/29 10:17:38.451</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/03/23 09:01:57.452</modified_date>
+    <modified_date>2021/04/22 12:25:28.135</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -1444,7 +1449,7 @@
     <fields>
       <field>
         <name>date</name>
-        <element>date</element>
+        <element>dateTimeInterval</element>
       </field>
       <field>
         <name>nombre_objeto</name>
@@ -1816,30 +1821,39 @@
     <fields>
       <field>
         <name>version</name>
+        <rename/>
       </field>
       <field>
         <name>operation</name>
+        <rename/>
       </field>
       <field>
         <name>congNumero</name>
+        <rename/>
       </field>
       <field>
         <name>congresoInternacional</name>
+        <rename/>
       </field>
       <field>
         <name>fechaCelebracion</name>
+        <rename/>
       </field>
       <field>
         <name>lugarCelebracion</name>
+        <rename/>
       </field>
       <field>
         <name>tipoParticipacion</name>
+        <rename/>
       </field>
       <field>
         <name>tituloCongreso</name>
+        <rename/>
       </field>
       <field>
         <name>tituloContribucion</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1848,7 +1862,7 @@
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <conversion_mask>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -1928,7 +1942,7 @@
 , tipoParticipacion
 , tituloCongreso
 , tituloContribucion
-FROM Congreso
+FROM ${TABLE_NAME}
 where version=${version}
 limit ${limit}
 
