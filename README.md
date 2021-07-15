@@ -4,15 +4,15 @@
 
 | Entregable     | Proyecto ETL                                                 |
 | -------------- | ------------------------------------------------------------ |
-| Fecha          | 27/04/2021                                                   |
-| Revisado por   | Paloma Terán Pérez                                           |
+| Fecha          | 15/07/2021                                                   |
+| Revisado por   | Ignacio Gancedo Navarro                                      |
 | Proyecto       | [ASIO](https://www.um.es/web/hercules/proyectos/asio) (Arquitectura Semántica e Infraestructura Ontológica) en el marco de la iniciativa [Hércules](https://www.um.es/web/hercules/) para la Semántica de Datos de Investigación de Universidades que forma parte de [CRUE-TIC](https://www.crue.org/proyecto/hercules/) |
 | Módulo         | Proyecto ETL                                                 |
 | Tipo           | Software                                                     |
 | Objetivo       | Una vez se hayan cargado todos los datos de una de las fuentes, el módulo ETL será el encargado de leer los datos de la base de datos intermedia y transformarlos en la estructura de datos definida por la ontología (POJOs). |
 | Estado         | **100%**                                                     |
 | Próximos pasos | Desarrollar la ETL hasta transformarlos en los POJO's definidos por la ontología |
-| Documentación  | [Manual de despliegue](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/manual_despliegue.md)<br/>[Documentación técnica](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/documentacion_tecnica.md)<br/>[Validaciones](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/validaciones.md) |
+| Documentación  | [Manual de despliegue](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/manual_despliegue.md)<br/>[Documentación técnica](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/documentacion_tecnica.md)<br/>[Manual de usuario](https://github.com/HerculesCRUE/ib-dataset-etl/blob/master/manual_usuario.md) |
 
 # Proyecto ETL
 

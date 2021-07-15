@@ -444,8 +444,8 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-    <created_user>-</created_user>
-    <created_date>2020/04/30 12:55:56.274</created_date>
+    <created_user/>
+    <created_date>2021/07/13 09:48:56.223</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/03/30 12:50:53.587</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
@@ -1310,6 +1310,10 @@
       <field>
         <name>code</name>
         <element>abbreviation</element>
+      </field>
+      <field>
+        <name>version</name>
+        <element>jobExecutionId</element>
       </field>
     </fields>
     <attributes/>

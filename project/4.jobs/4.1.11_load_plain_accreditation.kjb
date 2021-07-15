@@ -5,10 +5,10 @@
   <job_version/>
   <job_status>0</job_status>
   <directory>/4.jobs</directory>
-  <created_user>-</created_user>
-  <created_date>2020/11/20 13:41:15.532</created_date>
+  <created_user/>
+  <created_date>2021/07/13 09:51:18.320</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2021/01/19 12:03:13.997</modified_date>
+  <modified_date>2021/07/09 16:17:41.118</modified_date>
   <parameters>
     <parameter>
       <name>entity_name</name>
@@ -506,8 +506,8 @@
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>

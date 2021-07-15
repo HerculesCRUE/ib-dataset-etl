@@ -441,10 +441,10 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-    <created_user>-</created_user>
-    <created_date>2020/11/05 14:55:32.651</created_date>
+    <created_user/>
+    <created_date>2021/07/13 09:51:11.539</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/19 11:26:36.285</modified_date>
+    <modified_date>2021/07/15 09:50:30.990</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -644,7 +644,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>FundingOrganization</nullif>
+        <nullif>Organization</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1289,7 +1289,7 @@ JsonOutput_10 = JSON.stringify(json);
 
 
 
-var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_2 + ',' + JsonOutput_3 + ',' + JsonOutput_4 + ',' + JsonOutput_5 + 
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id + '","jobExecutionId":"'+ version +'","linkedTo":[' + JsonOutput_2 + ',' + JsonOutput_3 + ',' + JsonOutput_4 + ',' + JsonOutput_5 + 
 ',' + JsonOutput_6 + ',' + JsonOutput_7 + ',' + JsonOutput_8 + ',' + JsonOutput_9 + ',' + JsonOutput_10 + ']}}}';
 </jsScript_script>
       </jsScript>
@@ -1493,7 +1493,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     <sql>SELECT
   *
 FROM ${TableSourceName_1}
-</sql>
+where version=${version}</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1507,7 +1507,7 @@ FROM ${TableSourceName_1}
         <name>id</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>id</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1530,7 +1530,7 @@ FROM ${TableSourceName_1}
         <name>version</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1553,7 +1553,7 @@ FROM ${TableSourceName_1}
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1576,7 +1576,7 @@ FROM ${TableSourceName_1}
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1599,7 +1599,7 @@ FROM ${TableSourceName_1}
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1622,7 +1622,7 @@ FROM ${TableSourceName_1}
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1643,9 +1643,9 @@ FROM ${TableSourceName_1}
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>title</name>
-        <length>255</length>
+        <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>title</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1668,7 +1668,7 @@ FROM ${TableSourceName_1}
         <name>abbreviation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>abbreviation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1691,7 +1691,7 @@ FROM ${TableSourceName_1}
         <name>date</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>date</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1712,9 +1712,9 @@ FROM ${TableSourceName_1}
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>description</name>
-        <length>255</length>
+        <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>description</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1737,7 +1737,7 @@ FROM ${TableSourceName_1}
         <name>homepage</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>homepage</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1760,7 +1760,7 @@ FROM ${TableSourceName_1}
         <name>isStartup</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>isStartup</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1783,7 +1783,7 @@ FROM ${TableSourceName_1}
         <name>keyword</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>keyword</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1806,7 +1806,7 @@ FROM ${TableSourceName_1}
         <name>publicCompany</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>publicCompany</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>

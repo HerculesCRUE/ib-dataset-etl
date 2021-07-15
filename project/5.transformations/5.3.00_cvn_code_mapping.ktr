@@ -616,10 +616,10 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-    <created_user>-</created_user>
-    <created_date>2021/03/23 12:24:46.768</created_date>
+    <created_user/>
+    <created_date>2021/07/13 09:50:15.847</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/04/06 16:39:49.899</modified_date>
+    <modified_date>2021/07/09 18:36:43.680</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -653,6 +653,57 @@
       <attribute>
         <code>PORT_NUMBER</code>
         <attribute>${PortCVN}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Database_Source</name>
+    <server>${HostnameSource}</server>
+    <type>MARIADB</type>
+    <access>Native</access>
+    <database>${DatabaseSource}</database>
+    <port>${PortSource}</port>
+    <username>${UserSource}</username>
+    <password>${PwdSource}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${PortSource}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -1133,11 +1184,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ris 2 2 2 3 2 3</from>
-      <to>iu_ent 2 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Merge join 9 2 2 2 2 2 2</from>
       <to>Replace in string 2</to>
       <enabled>Y</enabled>
@@ -1157,7 +1203,80 @@
       <to>srt_code_cvn_8 2 3 2 2 2 2 2 2</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>ris 2 2 2 3 2 3</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>iu_ent 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>CSV file input</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>${param_path}/.cvn/cvn_codes_2.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>code</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>descr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>,</decimal>
+        <group>.</group>
+        <length>74</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>48</xloc>
+      <yloc>1408</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Merge join</name>
     <type>MergeJoin</type>
@@ -2110,6 +2229,78 @@
     </GUI>
   </step>
   <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>ENTITY_ID</name>
+      </field>
+      <field>
+        <name>version</name>
+      </field>
+      <field>
+        <name>operation</name>
+      </field>
+      <field>
+        <name>code</name>
+      </field>
+      <field>
+        <name>value</name>
+      </field>
+      <field>
+        <name>code_1</name>
+      </field>
+      <field>
+        <name>descr</name>
+      </field>
+      <field>
+        <name>CvnItemBean_ENTITY_ID</name>
+      </field>
+      <field>
+        <name>cvnDateYear_ENTITY_ID</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>value</name>
+        <rename>value</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy/MM/dd HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1104</xloc>
+      <yloc>2144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>iu_author</name>
     <type>InsertUpdate</type>
     <description/>
@@ -2494,7 +2685,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1072</xloc>
+      <xloc>1280</xloc>
       <yloc>2144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2989,9 +3180,21 @@
       <field>
         <in_stream_name>descr</in_stream_name>
         <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>\</replace_string>
+        <replace_by_string>-</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>descr</in_stream_name>
+        <out_stream_name/>
         <use_regex>yes</use_regex>
-        <replace_string>[^0-9A-Za-zÁÉÍÓÚáéíóúÑñ ]</replace_string>
-        <replace_by_string/>
+        <replace_string>[\p{P}\p{S}]</replace_string>
+        <replace_by_string> </replace_by_string>
         <set_empty_string>N</set_empty_string>
         <replace_field_by_string/>
         <whole_word>no</whole_word>
@@ -3029,8 +3232,20 @@
         <in_stream_name>descr</in_stream_name>
         <out_stream_name/>
         <use_regex>no</use_regex>
-        <replace_string>/</replace_string>
+        <replace_string>\</replace_string>
         <replace_by_string>-</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>descr</in_stream_name>
+        <out_stream_name/>
+        <use_regex>yes</use_regex>
+        <replace_string>[\p{P}\p{S}]</replace_string>
+        <replace_by_string> </replace_by_string>
         <set_empty_string>N</set_empty_string>
         <replace_field_by_string/>
         <whole_word>no</whole_word>
@@ -3166,6 +3381,18 @@
         <case_sensitive>no</case_sensitive>
         <is_unicode>no</is_unicode>
       </field>
+      <field>
+        <in_stream_name>descr</in_stream_name>
+        <out_stream_name/>
+        <use_regex>yes</use_regex>
+        <replace_string>[\p{P}\p{S}]</replace_string>
+        <replace_by_string> </replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -3196,9 +3423,9 @@
       <field>
         <in_stream_name>descr</in_stream_name>
         <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>/</replace_string>
-        <replace_by_string>-</replace_by_string>
+        <use_regex>yes</use_regex>
+        <replace_string>[\p{P}\p{S}]</replace_string>
+        <replace_by_string> </replace_by_string>
         <set_empty_string>N</set_empty_string>
         <replace_field_by_string/>
         <whole_word>no</whole_word>
@@ -4656,7 +4883,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_1}
 
@@ -4674,7 +4901,7 @@ FROM ${Table_Input_1}
         <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_author 2</origin>
+        <origin>ti_author</origin>
         <comments>ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -4697,7 +4924,7 @@ FROM ${Table_Input_1}
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ti_author 2</origin>
+        <origin>ti_author</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -4720,7 +4947,7 @@ FROM ${Table_Input_1}
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_author 2</origin>
+        <origin>ti_author</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -4743,7 +4970,7 @@ FROM ${Table_Input_1}
         <name>code</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_author 2</origin>
+        <origin>ti_author</origin>
         <comments>code</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -4766,7 +4993,7 @@ FROM ${Table_Input_1}
         <name>givenName</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_author 2</origin>
+        <origin>ti_author</origin>
         <comments>givenName</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -4789,7 +5016,7 @@ FROM ${Table_Input_1}
         <name>signature</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_author 2</origin>
+        <origin>ti_author</origin>
         <comments>signature</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -4812,7 +5039,7 @@ FROM ${Table_Input_1}
         <name>signatureOrder</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_author 2</origin>
+        <origin>ti_author</origin>
         <comments>signatureOrder</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -4835,7 +5062,7 @@ FROM ${Table_Input_1}
         <name>cvnFamilyNameBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_author 2</origin>
+        <origin>ti_author</origin>
         <comments>cvnFamilyNameBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -4878,7 +5105,7 @@ FROM ${Table_Input_1}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_14}
 </sql>
@@ -4895,7 +5122,7 @@ FROM ${Table_Input_14}
         <name>ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_string 2</origin>
+        <origin>ti_dates</origin>
         <comments>ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -4918,7 +5145,7 @@ FROM ${Table_Input_14}
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>ti_string 2</origin>
+        <origin>ti_dates</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -4941,7 +5168,7 @@ FROM ${Table_Input_14}
         <name>operation</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_string 2</origin>
+        <origin>ti_dates</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -4964,7 +5191,7 @@ FROM ${Table_Input_14}
         <name>code</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_string 2</origin>
+        <origin>ti_dates</origin>
         <comments>code</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -4987,7 +5214,7 @@ FROM ${Table_Input_14}
         <name>value</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>ti_string 2</origin>
+        <origin>ti_dates</origin>
         <comments>value</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -5030,7 +5257,7 @@ FROM ${Table_Input_14}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_16}
 </sql>
@@ -5182,7 +5409,7 @@ FROM ${Table_Input_16}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_7}
 </sql>
@@ -5357,7 +5584,7 @@ FROM ${Table_Input_7}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_6}
 
@@ -5556,7 +5783,7 @@ FROM ${Table_Input_6}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_5}
 
@@ -5732,7 +5959,7 @@ FROM ${Table_Input_5}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_4}
 
@@ -5885,7 +6112,7 @@ FROM ${Table_Input_4}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_11}
 
@@ -6061,7 +6288,7 @@ FROM ${Table_Input_11}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Rel_1}
 
@@ -6079,7 +6306,7 @@ FROM ${Table_Rel_1}
         <name>CvnItemBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_1 2 3 2</origin>
+        <origin>ti_rel_author</origin>
         <comments>CvnItemBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6102,7 +6329,7 @@ FROM ${Table_Rel_1}
         <name>cvnAuthorBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_1 2 3 2</origin>
+        <origin>ti_rel_author</origin>
         <comments>cvnAuthorBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6145,7 +6372,7 @@ FROM ${Table_Rel_1}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Rel_3}
 
@@ -6163,7 +6390,7 @@ FROM ${Table_Rel_3}
         <name>CvnItemBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_string 2</origin>
+        <origin>ti_rel_dates</origin>
         <comments>CvnItemBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6186,7 +6413,7 @@ FROM ${Table_Rel_3}
         <name>cvnDateDayMonthYear_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_string 2</origin>
+        <origin>ti_rel_dates</origin>
         <comments>cvnDateDayMonthYear_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6229,7 +6456,7 @@ FROM ${Table_Rel_3}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Rel_5}
 
@@ -6313,7 +6540,7 @@ FROM ${Table_Rel_5}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Rel_8}
 
@@ -6331,7 +6558,7 @@ FROM ${Table_Rel_8}
         <name>CvnItemBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_volume 2</origin>
+        <origin>ti_rel_entity</origin>
         <comments>CvnItemBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6354,7 +6581,7 @@ FROM ${Table_Rel_8}
         <name>cvnEntityBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_volume 2</origin>
+        <origin>ti_rel_entity</origin>
         <comments>cvnEntityBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6397,7 +6624,7 @@ FROM ${Table_Rel_8}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Rel_9}
 
@@ -6415,7 +6642,7 @@ FROM ${Table_Rel_9}
         <name>CvnItemBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_external 2</origin>
+        <origin>ti_rel_external</origin>
         <comments>CvnItemBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6438,7 +6665,7 @@ FROM ${Table_Rel_9}
         <name>cvnExternalPKBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_external 2</origin>
+        <origin>ti_rel_external</origin>
         <comments>cvnExternalPKBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6481,7 +6708,7 @@ FROM ${Table_Rel_9}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Rel_12}
 
@@ -6499,7 +6726,7 @@ FROM ${Table_Rel_12}
         <name>CvnItemBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_title 3</origin>
+        <origin>ti_rel_page</origin>
         <comments>CvnItemBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6522,7 +6749,7 @@ FROM ${Table_Rel_12}
         <name>cvnPageBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_title 3</origin>
+        <origin>ti_rel_page</origin>
         <comments>cvnPageBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6565,7 +6792,7 @@ FROM ${Table_Rel_12}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Rel_16}
 
@@ -6583,7 +6810,7 @@ FROM ${Table_Rel_16}
         <name>CvnItemBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_entity 2</origin>
+        <origin>ti_rel_string</origin>
         <comments>CvnItemBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6606,7 +6833,7 @@ FROM ${Table_Rel_16}
         <name>cvnString_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_entity 2</origin>
+        <origin>ti_rel_string</origin>
         <comments>cvnString_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6649,7 +6876,7 @@ FROM ${Table_Rel_16}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Rel_17}
 
@@ -6667,7 +6894,7 @@ FROM ${Table_Rel_17}
         <name>CvnItemBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_author 2</origin>
+        <origin>ti_rel_title</origin>
         <comments>CvnItemBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6690,7 +6917,7 @@ FROM ${Table_Rel_17}
         <name>cvnTitleBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_author 2</origin>
+        <origin>ti_rel_title</origin>
         <comments>cvnTitleBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6733,7 +6960,7 @@ FROM ${Table_Rel_17}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Rel_18}
 
@@ -6751,7 +6978,7 @@ FROM ${Table_Rel_18}
         <name>CvnItemBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_external 2</origin>
+        <origin>ti_rel_volume</origin>
         <comments>CvnItemBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6774,7 +7001,7 @@ FROM ${Table_Rel_18}
         <name>cvnVolumeBean_ENTITY_ID</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_rel_external 2</origin>
+        <origin>ti_rel_volume</origin>
         <comments>cvnVolumeBean_ENTITY_ID</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -6817,7 +7044,7 @@ FROM ${Table_Rel_18}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_3}
 </sql>
@@ -6969,7 +7196,7 @@ FROM ${Table_Input_3}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_2}
 
@@ -7145,7 +7372,7 @@ FROM ${Table_Input_2}
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Database_CVN</connection>
+    <connection>Database_Source</connection>
     <sql>SELECT *
 FROM ${Table_Input_10}
 
@@ -7307,69 +7534,6 @@ FROM ${Table_Input_10}
     <GUI>
       <xloc>208</xloc>
       <yloc>1152</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>CSV file input</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>${param_path}/.cvn/cvn_codes_2.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
-    <fields>
-      <field>
-        <name>code</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>descr</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>74</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>48</xloc>
-      <yloc>1408</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -1,4 +1,41 @@
-2021/05/12 17:56:23 - pre_loading_data - Using run configuration [Pentaho local]
-2021/05/12 18:00:45 - load_plain - Using run configuration [Pentaho local]
-2021/05/12 18:05:12 - load_link - Using run configuration [Pentaho local]
-2021/05/12 18:08:10 - finalize_succeeded - Using run configuration [Pentaho local]
+2021/07/15 13:50:27 - pre_loading_data - Using run configuration [Pentaho local]
+2021/07/15 13:52:44 - load_plain - Using run configuration [Pentaho local]
+2021/07/15 13:52:48 - rest_call_endpoint.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Because of an error, this step can't continue: 
+2021/07/15 13:52:48 - rest_call_endpoint.0 - Can not result from [http://localhost:9321/etl-notifications/START-PLAIN-OBJECTS]
+2021/07/15 13:52:48 - rest_call_endpoint.0 - java.net.ConnectException: Connection refused: connect
+2021/07/15 13:52:48 - rest_call_endpoint.0 - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : org.pentaho.di.core.exception.KettleException: 
+2021/07/15 13:52:48 - rest_call_endpoint.0 - Can not result from [http://localhost:9321/etl-notifications/START-PLAIN-OBJECTS]
+2021/07/15 13:52:48 - rest_call_endpoint.0 - java.net.ConnectException: Connection refused: connect
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.pentaho.di.trans.steps.rest.Rest.callRest(Rest.java:277)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.pentaho.di.trans.steps.rest.Rest.processRow(Rest.java:474)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.pentaho.di.trans.step.RunThread.run(RunThread.java:62)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at java.lang.Thread.run(Unknown Source)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - Caused by: com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at com.sun.jersey.api.client.Client.handle(Client.java:652)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at com.sun.jersey.api.client.WebResource$Builder.get(WebResource.java:509)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.pentaho.di.trans.steps.rest.Rest.callRest(Rest.java:187)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	... 3 more
+2021/07/15 13:52:48 - rest_call_endpoint.0 - Caused by: java.net.ConnectException: Connection refused: connect
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at java.net.PlainSocketImpl.connect(Unknown Source)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at java.net.SocksSocketImpl.connect(Unknown Source)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at java.net.Socket.connect(Unknown Source)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:326)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173)
+2021/07/15 13:52:48 - rest_call_endpoint.0 - 	... 8 more
+2021/07/15 13:52:48 - call_start_plain_load - ERROR (version 9.1.0.0-324, build 9.1.0.0-324 from 2020-09-07 05.09.05 by buildguy) : Errors detected!

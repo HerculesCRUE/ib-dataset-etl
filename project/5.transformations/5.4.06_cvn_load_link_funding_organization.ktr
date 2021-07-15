@@ -441,10 +441,10 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-    <created_user>-</created_user>
-    <created_date>2020/11/05 14:55:32.651</created_date>
+    <created_user/>
+    <created_date>2021/07/13 09:50:34.831</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/03/31 18:06:46.072</modified_date>
+    <modified_date>2021/07/15 09:48:12.251</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -537,7 +537,114 @@
       <to>ac_pojo</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>ac_pojo 2</from>
+      <to>mjsv_pojo_build 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>mjsv_pojo_build 2</from>
+      <to>sv_output 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv_output 2</from>
+      <to>kafp_output 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ac_pojo</from>
+      <to>ac_pojo 2</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Replace in string</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>title</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>Ã³</replace_string>
+        <replace_by_string>o</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>title</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>Ã</replace_string>
+        <replace_by_string>i</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>title</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>Ã©</replace_string>
+        <replace_by_string>e</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>title</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>Ã“</replace_string>
+        <replace_by_string>O</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>title</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>Ã </replace_string>
+        <replace_by_string>A</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>ac_pojo</name>
     <type>Constant</type>
@@ -1202,7 +1309,7 @@ JsonOutput_10 = JSON.stringify(json);
 
 
 
-var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_2 + ',' + JsonOutput_3 + ',' + JsonOutput_4 + ',' + JsonOutput_5 + 
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id + '","jobExecutionId":"'+ version +'","linkedTo":[' + JsonOutput_2 + ',' + JsonOutput_3 + ',' + JsonOutput_4 + ',' + JsonOutput_5 + 
 ',' + JsonOutput_6 + ',' + JsonOutput_7 + ',' + JsonOutput_8 + ',' + JsonOutput_9 + ',' + JsonOutput_10 + ']}}}';
 </jsScript_script>
       </jsScript>
@@ -1274,37 +1381,6 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </GUI>
   </step>
   <step>
-    <name>sv_output</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>pojo</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>864</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>sv</name>
     <type>SelectValues</type>
     <description/>
@@ -1318,59 +1394,45 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     <fields>
       <field>
         <name>id</name>
-        <rename/>
       </field>
       <field>
         <name>version</name>
-        <rename/>
       </field>
       <field>
         <name>fechaCreacion</name>
-        <rename/>
       </field>
       <field>
         <name>fechaModificacion</name>
-        <rename/>
       </field>
       <field>
         <name>operation</name>
-        <rename/>
       </field>
       <field>
         <name>idEjecucion</name>
-        <rename/>
       </field>
       <field>
         <name>title</name>
-        <rename/>
       </field>
       <field>
         <name>abbreviation</name>
-        <rename/>
       </field>
       <field>
         <name>date</name>
-        <rename/>
       </field>
       <field>
         <name>description</name>
-        <rename/>
       </field>
       <field>
         <name>homepage</name>
-        <rename/>
       </field>
       <field>
         <name>isStartup</name>
-        <rename/>
       </field>
       <field>
         <name>keyword</name>
-        <rename/>
       </field>
       <field>
         <name>publicCompany</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1406,6 +1468,37 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     </GUI>
   </step>
   <step>
+    <name>sv_output</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>pojo</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>ti_fund</name>
     <type>TableInput</type>
     <description/>
@@ -1420,7 +1513,7 @@ var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"
     <sql>SELECT
   *
 FROM ${TableSourceName_1}
-</sql>
+where version=${version}</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1434,7 +1527,7 @@ FROM ${TableSourceName_1}
         <name>id</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>id</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1457,7 +1550,7 @@ FROM ${TableSourceName_1}
         <name>version</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1480,7 +1573,7 @@ FROM ${TableSourceName_1}
         <name>fechaCreacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>fechaCreacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1503,7 +1596,7 @@ FROM ${TableSourceName_1}
         <name>fechaModificacion</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>fechaModificacion</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1526,7 +1619,7 @@ FROM ${TableSourceName_1}
         <name>operation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>operation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1549,7 +1642,7 @@ FROM ${TableSourceName_1}
         <name>idEjecucion</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>idEjecucion</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1570,9 +1663,9 @@ FROM ${TableSourceName_1}
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>title</name>
-        <length>255</length>
+        <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>title</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1595,7 +1688,7 @@ FROM ${TableSourceName_1}
         <name>abbreviation</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>abbreviation</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1618,7 +1711,7 @@ FROM ${TableSourceName_1}
         <name>date</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>date</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1639,9 +1732,9 @@ FROM ${TableSourceName_1}
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>description</name>
-        <length>255</length>
+        <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>description</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1664,7 +1757,7 @@ FROM ${TableSourceName_1}
         <name>homepage</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>homepage</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1687,7 +1780,7 @@ FROM ${TableSourceName_1}
         <name>isStartup</name>
         <length>50</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>isStartup</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1708,9 +1801,9 @@ FROM ${TableSourceName_1}
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>keyword</name>
-        <length>255</length>
+        <length>0</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>keyword</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1733,7 +1826,7 @@ FROM ${TableSourceName_1}
         <name>publicCompany</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>ti_thesis</origin>
+        <origin>ti_fund</origin>
         <comments>publicCompany</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1766,10 +1859,10 @@ FROM ${TableSourceName_1}
     </GUI>
   </step>
   <step>
-    <name>Replace in string</name>
-    <type>ReplaceString</type>
+    <name>ac_pojo 2</name>
+    <type>Constant</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1778,64 +1871,16 @@ FROM ${TableSourceName_1}
     </partitioning>
     <fields>
       <field>
-        <in_stream_name>title</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã³</replace_string>
-        <replace_by_string>o</replace_by_string>
+        <name>parent_entity2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Organization</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>title</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã</replace_string>
-        <replace_by_string>i</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>title</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã©</replace_string>
-        <replace_by_string>e</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>title</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã“</replace_string>
-        <replace_by_string>O</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>title</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>Ã </replace_string>
-        <replace_by_string>A</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
       </field>
     </fields>
     <attributes/>
@@ -1847,8 +1892,405 @@ FROM ${TableSourceName_1}
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>384</yloc>
+      <xloc>578</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>kafp_output 2</name>
+    <type>KafkaProducerOutput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connectionType>DIRECT</connectionType>
+    <directBootstrapServers>${HostnameKafka}:${PortKafka}</directBootstrapServers>
+    <clusterName>localhost:29092</clusterName>
+    <topic>${TopicKafkaNestedObjects}</topic>
+    <clientId>0</clientId>
+    <keyField>KeyKafka</keyField>
+    <messageField>pojo</messageField>
+    <advancedConfig>
+      <option property="compression.type" value="none"/>
+      <option property="ssl.key.password" value=""/>
+      <option property="ssl.keystore.location" value=""/>
+      <option property="ssl.keystore.password" value=""/>
+      <option property="ssl.truststore.location" value=""/>
+      <option property="ssl.truststore.password" value=""/>
+    </advancedConfig>
+    <attributes>
+      <group>
+        <name>sparkTuningParameters</name>
+        <attribute>
+          <key>typeJan</key>
+          <value>kssddfaaaa</value>
+        </attribute>
+      </group>
+    </attributes>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1040</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>mjsv_pojo_build 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+//Variables
+parent_id  = id;
+
+
+json = {};
+
+Child_1 = [];
+Child_2 = [];
+Child_3 = [];
+Child_4 = [];
+Child_5 = [];
+Child_6 = [];
+Child_7 = [];
+Child_8 = [];
+Child_10= [];
+Child_11 = [];
+Child_12 = [];
+Child_13 = [];
+Child_14 = [];
+Child_15 = [];
+Child_16 = [];
+
+//splitting the data
+//split_child_2  =  child_id_2.split('|');
+split_child_1   = [];
+
+json.className = classname_1;
+json.fieldName = fieldname_1;
+
+if (isEmpty(split_child_1)){
+	Child_1 = []
+	} else {
+		for(i=0; i&lt;split_child_1.length; i++){
+    		child=split_child_1[i];
+    		Child_1.push(child);
+		}
+	}
+
+
+
+//if( isEmpty(Child_2), Child_2 = [], json.ids = Child_2);
+
+json.ids = Child_1;
+
+ // JSON Stringify the data object
+JsonOutput_1 = JSON.stringify(json);
+
+//splitting the data
+//split_child_2  =  child_id_2.split('|');
+split_child_2   = [];
+
+json.className = classname_2;
+json.fieldName = fieldname_2;
+
+if (isEmpty(split_child_2)){
+	Child_2 = []
+	} else {
+		for(i=0; i&lt;split_child_2.length; i++){
+    		child=split_child_2[i];
+    		Child_2.push(child);
+		}
+	}
+
+
+
+//if( isEmpty(Child_2), Child_2 = [], json.ids = Child_2);
+
+json.ids = Child_2;
+
+ // JSON Stringify the data object
+JsonOutput_2 = JSON.stringify(json);
+
+
+//splitting the data
+split_child_3   = [];
+
+json.className = classname_3;
+json.fieldName = fieldname_3;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_3)){
+	Child_3 = []
+	} else {
+		for(i=0; i&lt;split_child_3.length; i++){
+    		child=split_child_3[i];
+    		Child_3.push(child);
+		}
+	}
+
+json.ids = Child_3;
+
+
+ // JSON Stringify the data object
+JsonOutput_3 = JSON.stringify(json);
+
+
+//splitting the data
+split_child_4   =  [];
+
+json.className = classname_4;
+json.fieldName = fieldname_4;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_4)){
+	Child_4 = []
+	} else {
+		for(i=0; i&lt;split_child_4.length; i++){
+    		child=split_child_4[i];
+    		Child_4.push(child);
+		}
+	}
+
+json.ids = Child_4;
+
+
+ // JSON Stringify the data object
+JsonOutput_4 = JSON.stringify(json);
+
+
+//splitting the data
+split_child_5   = [];
+
+json.className = classname_5;
+json.fieldName = fieldname_5;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_5)){
+	Child_5 = []
+	} else {
+		for(i=0; i&lt;split_child_5.length; i++){
+    		child=split_child_5[i];
+    		Child_5.push(child);
+		}
+	}
+
+json.ids = Child_5;
+
+
+ // JSON Stringify the data object
+JsonOutput_5 = JSON.stringify(json);
+
+
+//splitting the data
+split_child_6   = [];
+
+json.className = classname_6;
+json.fieldName = fieldname_6;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_6)){
+	Child_6 = []
+	} else {
+		for(i=0; i&lt;split_child_6.length; i++){
+    		child=split_child_6[i];
+    		Child_6.push(child);
+		}
+	}
+
+json.ids = Child_6;
+
+
+ // JSON Stringify the data object
+JsonOutput_6 = JSON.stringify(json);
+
+
+
+
+
+//splitting the data
+split_child_7   = [];
+
+json.className = classname_7;
+json.fieldName = fieldname_7;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_7)){
+	Child_7 = []
+	} else {
+		for(i=0; i&lt;split_child_7.length; i++){
+    		child=split_child_7[i];
+    		Child_7.push(child);
+		}
+	}
+
+json.ids = Child_7;
+
+
+ // JSON Stringify the data object
+JsonOutput_7 = JSON.stringify(json);
+
+//splitting the data
+split_child_8   = [];
+
+json.className = classname_8;
+json.fieldName = fieldname_8;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_8)){
+	Child_8 = []
+	} else {
+		for(i=0; i&lt;split_child_8.length; i++){
+    		child=split_child_8[i];
+    		Child_8.push(child);
+		}
+	}
+
+json.ids = Child_8;
+
+
+ // JSON Stringify the data object
+JsonOutput_8 = JSON.stringify(json);
+
+//splitting the data
+split_child_9   = [];
+
+json.className = classname_9;
+json.fieldName = fieldname_9;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_9)){
+	Child_9 = []
+	} else {
+		for(i=0; i&lt;split_child_9.length; i++){
+    		child=split_child_9[i];
+    		Child_9.push(child);
+		}
+	}
+
+json.ids = Child_9;
+
+
+ // JSON Stringify the data object
+JsonOutput_9 = JSON.stringify(json);
+
+//splitting the data
+split_child_10   = [];
+
+json.className = classname_10;
+json.fieldName = fieldname_10;
+
+
+// Loop through the splitted data and build the child structure
+if (isEmpty(split_child_10)){
+	Child_10 = []
+	} else {
+		for(i=0; i&lt;split_child_10.length; i++){
+    		child=split_child_10[i];
+    		Child_10.push(child);
+		}
+	}
+
+json.ids = Child_10;
+
+
+ // JSON Stringify the data object
+JsonOutput_10 = JSON.stringify(json);
+
+
+
+
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity2 + '","id":"'+ parent_id + '","jobExecutionId":"'+ version +'","linkedTo":[' + JsonOutput_2 + ',' + JsonOutput_3 + ',' + JsonOutput_4 + ',' + JsonOutput_5 + 
+',' + JsonOutput_6 + ',' + JsonOutput_7 + ',' + JsonOutput_8 + ',' + JsonOutput_9 + ',' + JsonOutput_10 + ']}}}';
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>pojo</name>
+        <rename>pojo</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>722</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv_output 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>pojo</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>882</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

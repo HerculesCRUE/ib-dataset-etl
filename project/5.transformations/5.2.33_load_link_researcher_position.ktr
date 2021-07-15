@@ -441,8 +441,8 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-    <created_user>-</created_user>
-    <created_date>2020/11/05 14:55:32.651</created_date>
+    <created_user/>
+    <created_date>2021/07/13 09:49:39.131</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/05/10 11:40:04.466</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
@@ -1079,7 +1079,7 @@ JsonOutput_2 = JSON.stringify(json);
 
 
 
-var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ']}}}';
+var pojo = '{'+'"operation":"LINKED_' + operation + '","data":{"linkedModel": {"@class":"' + parent_entity + '","id":"'+ parent_id + '","jobExecutionId":"'+ version +'","linkedTo":[' + JsonOutput_1 + ',' + JsonOutput_2 + ']}}}';
 </jsScript_script>
       </jsScript>
     </jsScripts>
@@ -1416,6 +1416,8 @@ where version = ${version}
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1452,6 +1454,8 @@ where version = ${version}
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1488,6 +1492,8 @@ where version = ${version}
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>

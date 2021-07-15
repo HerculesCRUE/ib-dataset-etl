@@ -4,7 +4,7 @@
 
 | Entregable | Proyecto ETL                                                 |
 | ---------- | ------------------------------------------------------------ |
-| Fecha      | 23/04/2021                                                   |
+| Fecha      | 15/07/2021                                                   |
 | Proyecto   | [ASIO](https://www.um.es/web/hercules/proyectos/asio) (Arquitectura Semántica e Infraestructura Ontológica) en el marco de la iniciativa [Hércules](https://www.um.es/web/hercules/) para la Semántica de Datos de Investigación de Universidades que forma parte de [CRUE-TIC](https://www.crue.org/proyecto/hercules/) |
 | Módulo     | Proyecto ETL                                                 |
 | Tipo       | Manual de despliegue                                         |
@@ -185,7 +185,62 @@ Finalmente, crear otra variable con el nombre JAVA_HOME y el valor de la variabl
 
 ![](./images/env2.jpg)
 
+# Kettle.properties
 
+Cuando se ha completado el proceso de instalación, se puede abrir y utilizar Pentaho PDI, aunque previamente será necesario configurar el archivo kettle.properties que contiene una serie de parámetros de configuración que permiten la correcta ejecución del proyecto ASIO.
+
+Este fichero se crea por defecto en la ruta C:\Users\[nombre_usuario]\.kettle y debe modificarse con el siguiente contenido:
+
+```json
+
+#Path del proyecto
+	param_path=C:/.../project
+#Versión de la ETL.
+    Version=1.0
+    VersionDescripcion=Proyecto ETL Version 1.0. Aplicacion ETL: Pentaho 	Data Integration. Version de la aplicacion:9.0
+#Base de datos Jobs: Source
+    HostnameSource=127.0.0.1
+    DatabaseSource=app
+    PortSource=3306
+    UserSource=root
+    PwdSource=root
+#Base de datos ETL
+    HostnameTarget=127.0.0.1
+    DatabaseTarget=etl
+    PortTarget=3306
+    UserTarget=root
+    PwdTarget=root
+#Base de datos Master
+    HostnameMaster=127.0.0.1
+    DatabaseMaster=master
+    PortMaster=3306
+    UserMaster=root
+	PwdMaster=root
+#Base de datos CVN
+    HostnameCVN=127.0.0.1
+    DatabaseCVN=cvn
+    PortCVN=3306
+    UserCVN=root
+    PwdCVN=root
+#Base de datos CERIF
+    HostnameCERIF=127.0.0.1
+    DatabaseCERIF=cerif
+    PortCERIF=3306
+    UserCERIF=root
+    PwdCERIF=root
+#Configuración Kafka
+    HostnameKafka=127.0.0.1
+    PortKafka=29092
+    TopicKafkaErrores=general-errores
+#TopicKafkaErrores=general-errores
+    TopicKafkaNestedObjects=general-link-data
+    TopicKafkaPojos=general-data
+    KeyKafka=general-data-pojo-client-0
+#URLs endpoints (DEV y PRO)
+	EndPointUrl=http://localhost:9321/etl-notifications
+```
+
+NOTA: el parámetro param_path debe modificarse para incluir la ruta donde esté ubicada la carpeta raíz que contiene el proyecto ("project")
 
 # Comprobación mensajes Kafka
 
